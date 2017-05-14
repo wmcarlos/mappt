@@ -1,11 +1,24 @@
   <!--Pie de Pagina-->
-   <div id="pie">
-                <p id="contenido_pie">
-					Carretera Nacional Acarigua – Caracas, frente a la Estación Terminal de Ferrocarril Acarigua-Araure, Sector El Algodonal del Municipio Autónomo Araure. Estado Portuguesa.<br />
-					 <a href="#">Email: contacto@transporteatc.org.ve</a><br />
-           <a href="#">Todos los Derechos Reservados Paa .</a><br />
-                </p>
-   </div>
+<div id="pie">
+    
+      <ol class="style-footer">
+        <li><a href=""><img src="img/icono_agropatria.png"></a></li>
+        <li><a href=""><img src="img/icono_inti.png"></a></li>
+        <li><a href=""><img src="img/inder.png"></a></li>
+        <li><a href=""><img src="img/inia.png"></a></li>
+      </ol>
+    
+  </div>
 </div>
 </body>
 </html>
+<style type="text/css">
+	.style-footer{
+		list-style: none;
+	}
+	.style-footer li{
+		display: inline;
+		margin-left: 10px;
+	}
+
+</style>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>..::Pronutrico - <?php print $title; ?>::..</title>
+<title>..::MAPPT - <?php print $title; ?>::..</title>
 <link href='img/favicon.ico' rel='shortcut icon' type='image/x-icon'/>
 <link href='img/favicon.ico' rel='icon' type='image/x-icon'/>
 <link href="css/global.css" rel="stylesheet" type="text/css" />
