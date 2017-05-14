@@ -4,12 +4,18 @@ class clsTsector extends clsDatos{
 private $acId;
 private $acNombre;
 private $acId_parroquia;
+private $estado;
+private $municipio;
+private $parroquia;
 
 //constructor de la clase		
 public function __construct(){
 $this->acId = "";
 $this->acNombre = "";
 $this->acId_parroquia = "";
+$this->estado = "";
+$this->municipio = "";
+$this->parroquia = "";
 }
 
 //metodo magico set
@@ -23,12 +29,25 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tsector where(id = '$this->acId')");
+$this->ejecutar("select 
+	ts.id,
+	ts.nombre,
+	ts.id_parroquia,
+	tm.id as municipio,
+	tp.id as estado
+from 
+tsector as ts 
+	inner join tparroquia as tp on (tp.id = ts.id_parroquia)
+	inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+	inner join testado as te on (te.id = tm.id_estado)
+ where(ts.id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
 $this->acNombre=$laRow['nombre'];
-$this->acId_parroquia=$laRow['id_parroquia'];		
+$this->acId_parroquia=$laRow['id_parroquia'];
+$this->municipio = $laRow['municipio'];
+$this->estado = $laRow['estado'];	
 $llEnc=true;
 }
 return $llEnc;
@@ -37,7 +56,18 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tsector where((id like '%$valor%') or (nombre like '%$valor%') or (id_parroquia like '%$valor%'))");
+$lrTb=$this->ejecutar("select
+ts.id,
+ts.nombre,
+ts.id_parroquia,
+tp.nombre as parroquia,
+tm.nombre as municipio,
+te.nombre as estado
+from tsector as ts
+inner join tparroquia as tp on (tp.id = ts.id_parroquia)
+inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+inner join testado as te on (te.id = tm.id_estado)
+where((ts.id like '%$valor%') or (ts.nombre like '%$valor%') or (ts.id_parroquia like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -46,17 +76,19 @@ $this->acId_parroquia=$laRow['id_parroquia'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>id_parroquia</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Estado al que Pertenece</td>
+				<td style='font-weight:bold; font-size:20px;'>Municipio al que Pertenece</td>
+				<td style='font-weight:bold; font-size:20px;'>Parroquia al que Pertenece</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acId."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acId_parroquia."</td>
+					<td>".$this->acNombre."</td>
+					<td>".$laRow['estado']."</td>
+					<td>".$laRow['municipio']."</td>
+					<td>".$laRow['parroquia']."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

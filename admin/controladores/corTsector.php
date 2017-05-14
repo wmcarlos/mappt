@@ -26,8 +26,10 @@ switch($lcOperacion){
 	
 		if($lobjTsector->buscar()){
 			$lcId=$lobjTsector->acId;
-$lcNombre=$lobjTsector->acNombre;
-$lcId_parroquia=$lobjTsector->acId_parroquia; 
+			$lcNombre=$lobjTsector->acNombre;
+			$lcId_parroquia=$lobjTsector->acId_parroquia;
+			$municipio = $lobjTsector->municipio;
+			$estado = $lobjTsector->estado;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
