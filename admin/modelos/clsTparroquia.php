@@ -4,12 +4,14 @@ class clsTparroquia extends clsDatos{
 private $acId;
 private $acNombre;
 private $acId_municipio;
+private $estado;
 
 //constructor de la clase		
 public function __construct(){
 $this->acId = "";
 $this->acNombre = "";
 $this->acId_municipio = "";
+$this->estado = "";
 }
 
 //metodo magico set
@@ -23,12 +25,21 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tparroquia where(id = '$this->acId')");
+$this->ejecutar("select 
+tp.id,
+tp.nombre,
+tp.id_municipio,
+te.id as id_estado
+from tparroquia as tp
+inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+inner join testado as te on (te.id = tm.id_estado)
+where(tp.id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
 $this->acNombre=$laRow['nombre'];
-$this->acId_municipio=$laRow['id_municipio'];		
+$this->acId_municipio=$laRow['id_municipio'];
+$this->estado = $laRow['id_estado'];		
 $llEnc=true;
 }
 return $llEnc;
@@ -37,7 +48,15 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tparroquia where((id like '%$valor%') or (nombre like '%$valor%') or (id_municipio like '%$valor%'))");
+$lrTb=$this->ejecutar("select 
+tp.id,
+tp.nombre,
+tm.nombre as municipio,
+tp.nombre as estado
+from tparroquia as tp
+inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+inner join testado as te on (te.id = tm.id_estado)
+where((tp.id like '%$valor%') or (tp.nombre like '%$valor%') or (tp.id_municipio like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -46,17 +65,17 @@ $this->acId_municipio=$laRow['id_municipio'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>id_municipio</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Estado al que Pertenece</td>
+				<td style='font-weight:bold; font-size:20px;'>Municipio al que Pertenece</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acId."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acId_municipio."</td>
+					<td>".$this->acNombre."</td>
+					<td>".$laRow['estado']."</td>
+					<td>".$laRow['municipio']."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

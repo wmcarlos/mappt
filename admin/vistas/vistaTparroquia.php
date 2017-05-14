@@ -7,6 +7,8 @@ $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
 $id = $objFunciones->ultimo_id_plus1('tparroquia','id');
+}else{
+	$municipio = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$estado);	
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -47,11 +49,21 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Nombre:</td>
-<td><input type='text' disabled='disabled' maxlength='4' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required],custom[onlyLetterSp],maxSize[4],minSize[30]'/></td>
+<td><input type='text' disabled='disabled' maxlength='30' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required],custom[onlyLetterSp],maxSize[30],minSize[4]'/></td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Estado al que Pertenece:</td>
+<td><select name='txtid_estado' operacion="listar_municipios" load_data="txtid_municipio" disabled='disabled' id='txtid_estado' class='validate[required] select_change'>
+	<option value=''>Seleccione</option>
+	<?php print $objFunciones->crear_combo("testado","id","nombre",$estado); ?>
+</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Municipio al que Pertenece:</td>
-<td><select name='txtid_municipio' disabled='disabled' id='txtid_municipio' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtid_municipio' disabled='disabled' id='txtid_municipio' class='validate[required]'>
+	<option value=''>Seleccione</option>
+	<?php print $municipio; ?>
+</select></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>

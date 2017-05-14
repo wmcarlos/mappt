@@ -12,8 +12,8 @@ print($obj->busqueda_ajax($datos));
 	$objFunciones = new clsFunciones();
 	//Otra Manera
 	switch($operacion){
-		case "listar_modelos":
-			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tmodelo","id_modelo","nombre_modelo","id_marca",$datos,"");
+		case "listar_municipios":
+			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$datos,"");
 		break;
 	}	
 }
