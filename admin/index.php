@@ -9,7 +9,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Entrar</title>
-<link href="vistas/css/global.css" rel="stylesheet" type="text/css" />
+<link href="../css/global.css" rel="stylesheet" type="text/css" />
 <script src="vistas/js/jquery.js"></script>
 </head>
 <body>
@@ -32,10 +32,10 @@
    </div>
    <!--Contenedor del Contenido Central-->
    <div id="contenido">
-        <div id="derecho">
+        <div id="derecho" style="width: 100%">
         <span id="fecha">Domingo, 10 de Noviembre del 2012</span>
 		    <!--Cuadros para Colocar Informacion-->
-        	<div class="cuadro">
+        	<div class="cuadro" style="width: 300px;margin:0px auto; padding-bottom: ">
             	<h1 class="titulo2">Iniciar Sesion</h1>
                 <p>
                     <table>
@@ -59,8 +59,11 @@
                     </table>
                 </p>
             </div>
+            <br>
+            <br>
         </div>
    </div>
+
    <!--Pie de Pagina-->
    <!--Pie de Pagina-->
    <div id="pie">

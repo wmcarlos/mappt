@@ -1,5 +1,5 @@
 @import "reset.css";
-body{font-size: 14px;font-family: "DejaVu Sans","Microsoft Sans Serif",verdana,sans-serif; background:url(../img/bg.png);}
+body{font-size: 14px;font-family: "DejaVu Sans","Microsoft Sans Serif",verdana,sans-serif; background-image: url("../img/FondoPaginaMaiz.jpg"); background-size: cover; background-repeat: no-repeat;  background-attachment: fixed;}
 div#contenedor{width:980px;height:auto;overflow:hidden;margin:0 auto 20px auto;border-radius:0 0 6px 6px;box-shadow:0 0 7px black;}
 div#cintillo{width:980px;height:52px;background:url(../img/cintillo.png) top center no-repeat;border-bottom:4px solid #d21913;}
 div#banner{width:980px;height:240px;position:relative;}
@@ -14,8 +14,8 @@ ul#jsddm li a.active {background-color: #005a8c;color: white;font-weight:bold;}
 ul#jsddm li ul {margin: 0;padding: 0;position: absolute;visibility: hidden;z-index: 1000;}
 ul#jsddm li:hover ul {visibility: visible;}
 ul#jsddm li ul li {display: inline;float: none;}
-ul#jsddm li ul li a {background-color: #883626;color: white;margin: 0;padding: 5px 10px;text-align:left;}
-ul#jsddm li ul li a:hover {background-color: #980000;}
+ul#jsddm li ul li a {background-color: #1E6D90;color: white;margin: 0;padding: 5px 10px;text-align:left;}
+ul#jsddm li ul li a:hover {background-color: #55B24F;}
 /*Fin Menu*/
 div#contenido{width:980px;height:auto;overflow:hidden;background:#FFF;padding:10px 10px 0 10px;font-size:16px;}
 div#pie{width:980px;height:auto;overflow:hidden;padding:20px 0;background: #2891bf; }
