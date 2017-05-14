@@ -59,3 +59,49 @@ div#formulario table tr td:first-child{font-weight:bold;color:#889800;}
 div#formulario table:first-child tr td input[type=text]{padding: 2px 5px;border-radius:3px;}
 div#formulario table:first-child tr td select{padding: 2px;border-radius:3px;width:164px;}
 div#formulario table{margin:0 auto;}
+#contenedor_resultados_busqueda{
+	background:-webkit-linear-gradient(#199611,#16800F) !important;
+	background:-moz-linear-gradient(#199611,#16800F) !important;
+	position: fixed !important;
+
+}
+#contenedor_resultados_busqueda form table tbody tr th{
+	color: #C6E4C4 !important;
+	border:none !important;
+}
+#contenedor_resultados_busqueda form table {
+	border:none !important;
+}
+#contenedor_resultados_busqueda form table tbody tr td .txtbuscador{
+	color: #C6E4C4 !important;
+}
+#contenedor_resultados_busqueda form table tbody tr td .txtbuscador::placeholder{
+	color: #C6E4C4 !important;
+}
+.datos_busqueda{
+	max-height: 400px !important;
+	overflow-y:auto !important;
+	background-color: white !important;
+}
+.datos_busqueda table{
+	border:none !important;
+}
+.tabla_datos_busqueda
+{
+	border:2px solid red !important;
+}
+.tabla_datos_busqueda tr td{
+	border:none !important;
+	padding: 10px !important;
+
+}
+.tabla_datos_busqueda tr:nth-child(2n){
+	background-color: #C6E4C4 !important;
+}
+.tabla_datos_busqueda tbody tr td{
+	text-transform: lowercase !important;
+	background-color: ##DBDEE1 !important;
+}
+#contenedor_resultados_busqueda form table.datos tr td{
+	border:none !important;
+}
