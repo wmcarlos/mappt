@@ -19,8 +19,17 @@
     </div>
 	<!--Estructura para el banner-->
     <div id="banner" style="height:auto;">
-    	<img src="vistas/img/banner.png" style='width:100%;'/>
+    	<img src="../img/banner.png" style='width:100%;'/>
     </div>
+    <div id="nav">
+        <ul id="jsddm" class="clearfix">
+            <li><a href="../" <?php if($v=="home"){print 'class="active"'; } ?>>Inicio</a></li>
+            <li><a href="../?v=about" <?php if($v=="about"){print 'class="active"'; } ?>>Quienes Somos</a></li>
+            <li><a href="../?v=history" <?php if($v=="history"){print 'class="active"'; } ?>>Reseña Historica</a></li>
+            <li><a href="../?v=news" <?php if($v=="news"){print 'class="active"'; } ?>>Noticias</a></li>
+            <li><a href="../?v=contacts" <?php if($v=="contacts"){print 'class="active"'; } ?>>Contactanos</a></li>
+        </ul>
+   </div>
    <!--Contenedor del Contenido Central-->
    <div id="contenido">
         <div id="derecho">

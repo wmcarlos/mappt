@@ -18,7 +18,7 @@ session_start();
     </div>
     <!--Estructura para el banner-->
     <div id="banner" style="height:auto;">
-        <img src="img/banner.png" style='width:100%;'/>
+        <img src="../../img/banner.png" style='width:100%;'/>
     </div>
 
 	<!--Menu de Navegacion-->
