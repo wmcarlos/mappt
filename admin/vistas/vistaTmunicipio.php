@@ -51,7 +51,10 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Estado al que Pertenece:</td>
-<td><select name='txtid_estado' disabled='disabled' id='txtid_estado' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtid_estado' disabled='disabled' id='txtid_estado' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("testado","id","nombre",$lcId_estado);?>
+</select></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
