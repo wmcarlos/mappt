@@ -79,4 +79,6 @@
 	.transaccion_mascara caption::before{
 		content: 'X';
 		float: right;
+		padding-right: 10px;
+		cursor: pointer;
 	}

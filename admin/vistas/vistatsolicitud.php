@@ -85,8 +85,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<tr>
 			<th>Nombre</th>
 			<th>Apellidos</th>
-			<th>Cedula</th>
-			<th>Hospital</th>
 			<th><input type="button" class="agregar" value="+"/></th>
 		</tr>
 	</thead>
@@ -98,16 +96,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 				<input type="text" name="nombres[]"  />	
 			</td>
 			<td><input type="text"  name="apellidos[]"/></td>
-			<td><input type="text" name="cedulas[]"/></td>
-			<td>
-				<select name="hopitales[]" >
-					<option value="">Ingrese el hospital</option>
-					<option value="1">San Carlos</option>
-					<option value="2">HPO</option>
-					<option value="3">Bicentenaria</option>
-					<option value="4">Santa Maria</option>
-				</select>
-			</td>
 			<td class="eliminar"><input type="button" value="-"></td>
 		</tr>
 		<!-- fin de código: fila base --> 
