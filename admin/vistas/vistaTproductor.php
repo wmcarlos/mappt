@@ -47,33 +47,44 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-<td>1 <input type='radio' name='txttipo' value='Natural'/> 2 <input type='radio' name='txttipo' value='Juridica'/> </td>
+<td colspan="4">Natural <input type='radio' name='txttipo' value='1'/> Juridica <input type='radio' name='txttipo' value='2'/> </td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
 <td><input type='text' disabled='disabled' maxlength='10' name='txtced_rif' value='<?php print($lcCed_rif);?>' id='txtced_rif' class='validate[required],custom[integer],maxSize[10],minSize[7]'/></td>
-</tr>
-<tr>
 <td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
 <td><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
 </tr>
 <tr>
+<td align='right'><span class='rojo'>*</span> Estado:</td>
+<td><select disabled='disabled' name='txtid_estado' id='txtid_estado' operacion="listar_municipios" load_data="txtid_municipio" class='validate[required] select_change'>
+		<option value="">Seleccione</option>
+		<?php print $objFunciones->crear_combo("testado","id","nombre",$estado); ?>
+	</select></td>
+<td align='right'><span class='rojo'>*</span> Municipio:</td>
+<td><select disabled='disabled' name='txtid_municipio' id='txtid_municipio' operacion="listar_parroquias" load_data="txtid_parroquia" class='validate[required] select_change'>
+		<option value="">Seleccione</option>
+	</select></td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Parroquia:</td>
+<td><select disabled='disabled' name='txtid_parroquia' id='txtid_parroquia' operacion="listar_sectores" load_data="txtid_sector" class='validate[required] select_change'>
+		<option value="">Seleccione</option>
+	</select></td>
 <td align='right'><span class='rojo'>*</span> Sector:</td>
-<td><select name='txtid_sector' disabled='disabled' id='txtid_sector' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select disabled='disabled' name='txtid_sector' id='txtid_sector' class='validate[required]'>
+		<option value="">Seleccione</option>
+	</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Dirección:</td>
 <td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
-</tr>
-<tr>
 <td align='right'><span class='rojo'>*</span> Telefono:</td>
 <td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Correo:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
-</tr>
-<tr>
 <td align='right'><span class='rojo'>*</span> Asociaciones:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtasociacionesjs' value='<?php print($lcAsociacionesjs);?>' id='txtasociacionesjs' class='validate[required]'/></td>
 </tr>

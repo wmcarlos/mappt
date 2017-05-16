@@ -18,6 +18,9 @@ print($obj->busqueda_ajax($datos));
 		case "listar_parroquias":
 			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$datos,"");
 		break;
+		case "listar_sectores":
+			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$datos,"");
+		break;
 	}	
 }
 ?>
