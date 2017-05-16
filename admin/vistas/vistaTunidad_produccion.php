@@ -7,6 +7,10 @@ $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
 $id = $objFunciones->ultimo_id_plus1('tunidad_produccion','id');
+}else{
+	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
+	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
+	$sectores = $objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$parroquia,$lcId_sector);
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -63,16 +67,19 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Municipio:</td>
 <td><select disabled='disabled' name='txtid_municipio' id='txtid_municipio' operacion="listar_parroquias" load_data="txtid_parroquia" class='validate[required] select_change'>
 		<option value="">Seleccione</option>
+		<?php print $municipios; ?>
 	</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Parroquia:</td>
 <td><select disabled='disabled' name='txtid_parroquia' id='txtid_parroquia' operacion="listar_sectores" load_data="txtid_sector" class='validate[required] select_change'>
 		<option value="">Seleccione</option>
+		<?php print $parroquias; ?>
 	</select></td>
 <td align='right'><span class='rojo'>*</span> Sector:</td>
 <td><select disabled='disabled' name='txtid_sector' id='txtid_sector' class='validate[required]'>
 		<option value="">Seleccione</option>
+		<?php print $sectores; ?>
 	</select></td>
 </tr>
 <tr>
@@ -97,23 +104,23 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Croquis:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtcroquisimg' value='<?php print($lcCroquisimg);?>' id='txtcroquisimg' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Tec. Apoyo Produccion Pecuaria:</td>
-<td>Si <input type='radio' name='txttap' value='1'/> No <input type='radio' name='txttap' value='2'/> </td>
+<td>Si <input type='radio' checked name='txttap' value='1'/> No <input type='radio' <?php if($lcTap == 2){ print "checked"; } ?> name='txttap' value='2'/> </td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Potreros:</td>
-<td>Si <input type='radio' name='txttap_potreros' value='1'/> No <input type='radio' name='txttap_potreros' value='2'/> </td>
+<td>Si <input type='radio' checked name='txttap_potreros' value='1'/> No <input type='radio' <?php if($lcTap_potreros == 2){ print "checked"; } ?> name='txttap_potreros' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Cantidad de Potreros:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txttap_cant_potreros' value='<?php print($lcTap_cant_potreros);?>' id='txttap_cant_potreros' class='validate[required],custom[integer]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Cerca:</td>
-<td>Convencional <input type='radio' name='txttap_tipo_cerca' value='1'/> Electrica <input type='radio' name='txttap_tipo_cerca' value='2'/> </td>
+<td>Convencional <input type='radio' checked name='txttap_tipo_cerca' value='1'/> Electrica <input type='radio' name='txttap_tipo_cerca' <?php if($lcTap_tipo_cerca == 2){ print "checked"; } ?> value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Carga Animal x Ha:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txttap_carga_animal_an_ha' value='<?php print($lcTap_carga_animal_an_ha);?>' id='txttap_carga_animal_an_ha' class='validate[required],custom[integer]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Pasto:</td>
-<td>Natural <input type='radio' name='txttap_tipo_pasto' value='1'/> Introducido <input type='radio' name='txttap_tipo_pasto' value='2'/> </td>
+<td>Natural <input type='radio' name='txttap_tipo_pasto' checked value='1'/> Introducido <input type='radio' <?php if($lcTap_tipo_pasto == 2) { print "checked"; } ?> name='txttap_tipo_pasto' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Especie de Pasto:</td>
 <td><input type='text' disabled='disabled' maxlength='30' name='txttap_especie_pasto' value='<?php print($lcTap_especie_pasto);?>' id='txttap_especie_pasto' class='validate[required],custom[onlyLetterSp],maxSize[30],minSize[5]'/></td>
 </tr>
@@ -125,7 +132,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Fertilizacion:</td>
-<td>Si <input type='radio' name='txttap_fertilizacion' value='1'/> No <input type='radio' name='txttap_fertilizacion' value='2'/> </td>
+<td>Si <input type='radio' checked name='txttap_fertilizacion' value='1'/> No <input type='radio' <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Maquinarias:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtmaquinariajs' value='<?php print($lcMaquinariajs);?>' id='txtmaquinariajs' class='validate[required]'/></td>
 </tr>

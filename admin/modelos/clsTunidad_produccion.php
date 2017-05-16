@@ -24,6 +24,9 @@ private $acTap_ultimo_mantenimiento;
 private $acTap_fertilizacion;
 private $acMaquinariajs;
 private $acImplementojs;
+private $estado;
+private $municipio;
+private $parroquia;
 
 //constructor de la clase		
 public function __construct(){
@@ -63,7 +66,18 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tunidad_produccion where(id = '$this->acId')");
+$this->ejecutar("select 
+up.*, 
+te.id as estado,
+tm.id as municipio,
+tp.id as parroquia,
+date_format(up.tap_ultimo_mantenimiento, '%d/%m/%Y') as tap_ultimo_mantenimiento
+from tunidad_produccion as up
+inner join tsector as ts on (ts.id = up.id_sector)
+inner join tparroquia as tp on (tp.id = ts.id_parroquia)
+inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+inner join testado as te on (te.id = tm.id_estado)
+where(up.id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -88,7 +102,10 @@ $this->acTap_superficie=$laRow['tap_superficie'];
 $this->acTap_ultimo_mantenimiento=$laRow['tap_ultimo_mantenimiento'];
 $this->acTap_fertilizacion=$laRow['tap_fertilizacion'];
 $this->acMaquinariajs=$laRow['maquinariajs'];
-$this->acImplementojs=$laRow['implementojs'];		
+$this->acImplementojs=$laRow['implementojs'];
+$this->estado = $laRow["estado"];
+$this->municipio = $laRow["municipio"];
+$this->parroquia = $laRow["parroquia"];
 $llEnc=true;
 }
 return $llEnc;
@@ -126,57 +143,21 @@ $this->acImplementojs=$laRow['implementojs'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>ced_rif_productor</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>id_sector</td>
-<td style='font-weight:bold; font-size:20px;'>direccion</td>
-<td style='font-weight:bold; font-size:20px;'>utm_norte</td>
-<td style='font-weight:bold; font-size:20px;'>utm_este</td>
-<td style='font-weight:bold; font-size:20px;'>superficie_total</td>
-<td style='font-weight:bold; font-size:20px;'>superficie_aprovechable</td>
-<td style='font-weight:bold; font-size:20px;'>superficie_aprovechada</td>
-<td style='font-weight:bold; font-size:20px;'>croquisimg</td>
-<td style='font-weight:bold; font-size:20px;'>tap</td>
-<td style='font-weight:bold; font-size:20px;'>tap_potreros</td>
-<td style='font-weight:bold; font-size:20px;'>tap_cant_potreros</td>
-<td style='font-weight:bold; font-size:20px;'>tap_tipo_cerca</td>
-<td style='font-weight:bold; font-size:20px;'>tap_carga_animal_an_ha</td>
-<td style='font-weight:bold; font-size:20px;'>tap_tipo_pasto</td>
-<td style='font-weight:bold; font-size:20px;'>tap_especie_pasto</td>
-<td style='font-weight:bold; font-size:20px;'>tap_superficie</td>
-<td style='font-weight:bold; font-size:20px;'>tap_ultimo_mantenimiento</td>
-<td style='font-weight:bold; font-size:20px;'>tap_fertilizacion</td>
-<td style='font-weight:bold; font-size:20px;'>maquinariajs</td>
-<td style='font-weight:bold; font-size:20px;'>implementojs</td>
-			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
+				<td style='font-weight:bold; font-size:20px;'>Productor</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Superficie Total</td>
+				<td style='font-weight:bold; font-size:20px;'>Superficie Aprovechable</td>
+				<td style='font-weight:bold; font-size:20px;'>Superficie Aprovechada</td>
+				<td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acId."</td>
-<td>".$this->acCed_rif_productor."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acId_sector."</td>
-<td>".$this->acDireccion."</td>
-<td>".$this->acUtm_norte."</td>
-<td>".$this->acUtm_este."</td>
-<td>".$this->acSuperficie_total."</td>
-<td>".$this->acSuperficie_aprovechable."</td>
-<td>".$this->acSuperficie_aprovechada."</td>
-<td>".$this->acCroquisimg."</td>
-<td>".$this->acTap."</td>
-<td>".$this->acTap_potreros."</td>
-<td>".$this->acTap_cant_potreros."</td>
-<td>".$this->acTap_tipo_cerca."</td>
-<td>".$this->acTap_carga_animal_an_ha."</td>
-<td>".$this->acTap_tipo_pasto."</td>
-<td>".$this->acTap_especie_pasto."</td>
-<td>".$this->acTap_superficie."</td>
-<td>".$this->acTap_ultimo_mantenimiento."</td>
-<td>".$this->acTap_fertilizacion."</td>
-<td>".$this->acMaquinariajs."</td>
-<td>".$this->acImplementojs."</td>
+				<td>".$this->acCed_rif_productor."</td>
+				<td>".$this->acNombre."</td>
+				<td>".$this->acSuperficie_total."</td>
+				<td>".$this->acSuperficie_aprovechable."</td>
+				<td>".$this->acSuperficie_aprovechada."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }
@@ -186,6 +167,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
+$this->acTap_ultimo_mantenimiento = $this->changedate($this->acTap_ultimo_mantenimiento);
 return $this->ejecutar("insert into tunidad_produccion(id,ced_rif_productor,nombre,id_sector,direccion,utm_norte,utm_este,superficie_total,superficie_aprovechable,superficie_aprovechada,croquisimg,tap,tap_potreros,tap_cant_potreros,tap_tipo_cerca,tap_carga_animal_an_ha,tap_tipo_pasto,tap_especie_pasto,tap_superficie,tap_ultimo_mantenimiento,tap_fertilizacion,maquinariajs,implementojs)values('$this->acId','$this->acCed_rif_productor','$this->acNombre','$this->acId_sector','$this->acDireccion','$this->acUtm_norte','$this->acUtm_este','$this->acSuperficie_total','$this->acSuperficie_aprovechable','$this->acSuperficie_aprovechada','$this->acCroquisimg','$this->acTap','$this->acTap_potreros','$this->acTap_cant_potreros','$this->acTap_tipo_cerca','$this->acTap_carga_animal_an_ha','$this->acTap_tipo_pasto','$this->acTap_especie_pasto','$this->acTap_superficie','$this->acTap_ultimo_mantenimiento','$this->acTap_fertilizacion','$this->acMaquinariajs','$this->acImplementojs')");
 }
         
@@ -194,6 +176,7 @@ return $this->ejecutar("insert into tunidad_produccion(id,ced_rif_productor,nomb
 //funcion modificar
 public function modificar($lcVarTem)
 {
+$this->acTap_ultimo_mantenimiento = $this->changedate($this->acTap_ultimo_mantenimiento);
 return $this->ejecutar("update tunidad_produccion set id = '$this->acId', ced_rif_productor = '$this->acCed_rif_productor', nombre = '$this->acNombre', id_sector = '$this->acId_sector', direccion = '$this->acDireccion', utm_norte = '$this->acUtm_norte', utm_este = '$this->acUtm_este', superficie_total = '$this->acSuperficie_total', superficie_aprovechable = '$this->acSuperficie_aprovechable', superficie_aprovechada = '$this->acSuperficie_aprovechada', croquisimg = '$this->acCroquisimg', tap = '$this->acTap', tap_potreros = '$this->acTap_potreros', tap_cant_potreros = '$this->acTap_cant_potreros', tap_tipo_cerca = '$this->acTap_tipo_cerca', tap_carga_animal_an_ha = '$this->acTap_carga_animal_an_ha', tap_tipo_pasto = '$this->acTap_tipo_pasto', tap_especie_pasto = '$this->acTap_especie_pasto', tap_superficie = '$this->acTap_superficie', tap_ultimo_mantenimiento = '$this->acTap_ultimo_mantenimiento', tap_fertilizacion = '$this->acTap_fertilizacion', maquinariajs = '$this->acMaquinariajs', implementojs = '$this->acImplementojs' where(id = '$this->acId')");
 }
  

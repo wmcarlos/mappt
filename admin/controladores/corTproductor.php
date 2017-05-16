@@ -32,14 +32,17 @@ switch($lcOperacion){
 	
 		if($lobjTproductor->buscar()){
 			$lcId=$lobjTproductor->acId;
-$lcTipo=$lobjTproductor->acTipo;
-$lcCed_rif=$lobjTproductor->acCed_rif;
-$lcNom_rso=$lobjTproductor->acNom_rso;
-$lcId_sector=$lobjTproductor->acId_sector;
-$lcDireccion=$lobjTproductor->acDireccion;
-$lcTelefono=$lobjTproductor->acTelefono;
-$lcCorreo=$lobjTproductor->acCorreo;
-$lcAsociacionesjs=$lobjTproductor->acAsociacionesjs; 
+			$lcTipo=$lobjTproductor->acTipo;
+			$lcCed_rif=$lobjTproductor->acCed_rif;
+			$lcNom_rso=$lobjTproductor->acNom_rso;
+			$lcId_sector=$lobjTproductor->acId_sector;
+			$lcDireccion=$lobjTproductor->acDireccion;
+			$lcTelefono=$lobjTproductor->acTelefono;
+			$lcCorreo=$lobjTproductor->acCorreo;
+			$lcAsociacionesjs=$lobjTproductor->acAsociacionesjs;
+			$estado = $lobjTproductor->estado;
+			$municipio = $lobjTproductor->municipio;
+			$parroquia = $lobjTproductor->parroquia;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

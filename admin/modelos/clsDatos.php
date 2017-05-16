@@ -10,5 +10,11 @@ class clsDatos
 
    protected function ejecutar($pcSql) { $this->conectar(); $this->result = mysql_query($pcSql) or die(" Error al Ejecutar la Consulta ".mysql_error()); return mysql_affected_rows(); }
    protected function arreglo(){ return mysql_fetch_array($this->result); }
+
+   public function changedate($date){
+   	$datea = explode("/", $date);
+   	$newformat = $datea[2]."/".$datea[1]."/".$datea[0];
+   	return $newformat;
+   }
 }
 ?>

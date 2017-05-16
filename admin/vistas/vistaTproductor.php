@@ -7,6 +7,10 @@ $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
 $id = $objFunciones->ultimo_id_plus1('tproductor','id');
+}else{
+	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
+	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
+	$sectores = $objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$parroquia,$lcId_sector);
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -47,7 +51,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-<td colspan="4">Natural <input type='radio' name='txttipo' value='1'/> Juridica <input type='radio' name='txttipo' value='2'/> </td>
+<td colspan="4">Natural <input type='radio' checked name='txttipo' value='1'/> Juridica <input type='radio' <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
@@ -64,16 +68,19 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Municipio:</td>
 <td><select disabled='disabled' name='txtid_municipio' id='txtid_municipio' operacion="listar_parroquias" load_data="txtid_parroquia" class='validate[required] select_change'>
 		<option value="">Seleccione</option>
+		<?php print $municipios; ?>
 	</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Parroquia:</td>
 <td><select disabled='disabled' name='txtid_parroquia' id='txtid_parroquia' operacion="listar_sectores" load_data="txtid_sector" class='validate[required] select_change'>
 		<option value="">Seleccione</option>
+		<?php print $parroquias; ?>
 	</select></td>
 <td align='right'><span class='rojo'>*</span> Sector:</td>
 <td><select disabled='disabled' name='txtid_sector' id='txtid_sector' class='validate[required]'>
 		<option value="">Seleccione</option>
+		<?php print $sectores; ?>
 	</select></td>
 </tr>
 <tr>

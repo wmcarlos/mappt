@@ -26,6 +26,7 @@ $lobjTunidad_produccion->acTap_fertilizacion=$_POST['txttap_fertilizacion'];
 $lobjTunidad_produccion->acMaquinariajs=$_POST['txtmaquinariajs'];
 $lobjTunidad_produccion->acImplementojs=$_POST['txtimplementojs'];
 $lcVarTem = $_POST["txtvar_tem"];
+
 $lcOperacion=$_REQUEST["txtoperacion"];
 
 
@@ -46,28 +47,31 @@ switch($lcOperacion){
 	
 		if($lobjTunidad_produccion->buscar()){
 			$lcId=$lobjTunidad_produccion->acId;
-$lcCed_rif_productor=$lobjTunidad_produccion->acCed_rif_productor;
-$lcNombre=$lobjTunidad_produccion->acNombre;
-$lcId_sector=$lobjTunidad_produccion->acId_sector;
-$lcDireccion=$lobjTunidad_produccion->acDireccion;
-$lcUtm_norte=$lobjTunidad_produccion->acUtm_norte;
-$lcUtm_este=$lobjTunidad_produccion->acUtm_este;
-$lcSuperficie_total=$lobjTunidad_produccion->acSuperficie_total;
-$lcSuperficie_aprovechable=$lobjTunidad_produccion->acSuperficie_aprovechable;
-$lcSuperficie_aprovechada=$lobjTunidad_produccion->acSuperficie_aprovechada;
-$lcCroquisimg=$lobjTunidad_produccion->acCroquisimg;
-$lcTap=$lobjTunidad_produccion->acTap;
-$lcTap_potreros=$lobjTunidad_produccion->acTap_potreros;
-$lcTap_cant_potreros=$lobjTunidad_produccion->acTap_cant_potreros;
-$lcTap_tipo_cerca=$lobjTunidad_produccion->acTap_tipo_cerca;
-$lcTap_carga_animal_an_ha=$lobjTunidad_produccion->acTap_carga_animal_an_ha;
-$lcTap_tipo_pasto=$lobjTunidad_produccion->acTap_tipo_pasto;
-$lcTap_especie_pasto=$lobjTunidad_produccion->acTap_especie_pasto;
-$lcTap_superficie=$lobjTunidad_produccion->acTap_superficie;
-$lcTap_ultimo_mantenimiento=$lobjTunidad_produccion->acTap_ultimo_mantenimiento;
-$lcTap_fertilizacion=$lobjTunidad_produccion->acTap_fertilizacion;
-$lcMaquinariajs=$lobjTunidad_produccion->acMaquinariajs;
-$lcImplementojs=$lobjTunidad_produccion->acImplementojs; 
+			$lcCed_rif_productor=$lobjTunidad_produccion->acCed_rif_productor;
+			$lcNombre=$lobjTunidad_produccion->acNombre;
+			$lcId_sector=$lobjTunidad_produccion->acId_sector;
+			$lcDireccion=$lobjTunidad_produccion->acDireccion;
+			$lcUtm_norte=$lobjTunidad_produccion->acUtm_norte;
+			$lcUtm_este=$lobjTunidad_produccion->acUtm_este;
+			$lcSuperficie_total=$lobjTunidad_produccion->acSuperficie_total;
+			$lcSuperficie_aprovechable=$lobjTunidad_produccion->acSuperficie_aprovechable;
+			$lcSuperficie_aprovechada=$lobjTunidad_produccion->acSuperficie_aprovechada;
+			$lcCroquisimg=$lobjTunidad_produccion->acCroquisimg;
+			$lcTap=$lobjTunidad_produccion->acTap;
+			$lcTap_potreros=$lobjTunidad_produccion->acTap_potreros;
+			$lcTap_cant_potreros=$lobjTunidad_produccion->acTap_cant_potreros;
+			$lcTap_tipo_cerca=$lobjTunidad_produccion->acTap_tipo_cerca;
+			$lcTap_carga_animal_an_ha=$lobjTunidad_produccion->acTap_carga_animal_an_ha;
+			$lcTap_tipo_pasto=$lobjTunidad_produccion->acTap_tipo_pasto;
+			$lcTap_especie_pasto=$lobjTunidad_produccion->acTap_especie_pasto;
+			$lcTap_superficie=$lobjTunidad_produccion->acTap_superficie;
+			$lcTap_ultimo_mantenimiento=$lobjTunidad_produccion->acTap_ultimo_mantenimiento;
+			$lcTap_fertilizacion=$lobjTunidad_produccion->acTap_fertilizacion;
+			$lcMaquinariajs=$lobjTunidad_produccion->acMaquinariajs;
+			$lcImplementojs=$lobjTunidad_produccion->acImplementojs; 
+			$estado = $lobjTunidad_produccion->estado;
+			$municipio = $lobjTunidad_produccion->municipio;
+			$parroquia = $lobjTunidad_produccion->parroquia;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
