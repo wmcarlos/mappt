@@ -49,7 +49,10 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <?php @include('antes_form.php'); ?>
 
 
+
+
 <div id='mensajes_sistema'></div><br />
+<center><h1 style="font-size: 30px;">Certificación</h1></center>
 <center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
@@ -59,6 +62,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<tr style='display:none;'>
 			<td align='right'><span class='rojo'>*</span> id:</td>
 			<td><input type='text' disabled='disabled' maxlength='' name='txtid' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
+			
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
@@ -170,6 +174,55 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 
 	</table>
 </div>
+
+<!--REQUISITOS PREVIOS-->
+<div class='cont_frame'>
+	<h1>Documentos Requeridos para certificación</h1>
+	<p style="background-color: #D9D9D9;padding: 10px; color: red; font-weight: bold; text-align: center;">A continuación se presentan los documentos que validan  la condición como productor agrícola ante la UTMPPAT - PORTUGUESA</p>
+	<table border='1' class='datos' align='center'>
+		<tr>
+			<td><input type="checkbox" name="" value="si">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">5.- PLANOS DE LA UNIDAD DE PRODUCCIÓN EMITIDO POR EL EL INSTITUTO NACIONAL DE TIERRAS (INTi) CON COORDENADAS UTM</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="" value="si">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
+		</tr>
+	</table>
+</div>
+<!--OBTENIENDO LOS REQUISITOS PREVIOS-->
+
+
+<!--datos del funcionario receptor-->
+<div class='cont_frame'>
+	<table border='1' class='datos' align='center'>
+	<tr>
+		<td>Funcionario Receptor: <input type="text" name="funcionario_receptor" readonly="readonly"></td>
+		<td>Oficina: <input type="text" name="oficina_area"></td>
+	</tr>
+	<tr>
+		<td>Numero Registro del productor: <input type="text" name="num_registro_productor"></td>
+		<td>Numero de Certificado Runnopa: <input type="text" name="num_certificado_runnopa"></td>
+	</tr>
+	</table>
+</div>
+<!--cierre de los datos del funcionario receptor-->
 
 
 
