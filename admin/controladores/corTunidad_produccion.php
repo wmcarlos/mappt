@@ -1,7 +1,22 @@
 <?php
 require_once("../modelos/clsTunidad_produccion.php");
-$lobjTunidad_produccion = new clsTunidad_produccion();
 
+/*convertir los datos checkbox separados por coma*/
+function transform_detail_checkbox($detail_checkbox){
+	$tmp_total = count($detail_checkbox);
+	$var_details = '';
+	for($i=0; $i<$tmp_total;$i++){
+		$var_details.=$detail_checkbox[$i];
+		if($i<($tmp_total)-1){
+			$var_details.=',';
+		}
+	}
+	return $var_details;
+}
+
+
+
+$lobjTunidad_produccion = new clsTunidad_produccion();
 $lobjTunidad_produccion->acId=$_REQUEST['txtid'];
 $lobjTunidad_produccion->acCed_rif_productor=$_POST['txtced_rif_productor'];
 $lobjTunidad_produccion->acNombre=$_POST['txtnombre'];
@@ -23,9 +38,10 @@ $lobjTunidad_produccion->acTap_especie_pasto=$_POST['txttap_especie_pasto'];
 $lobjTunidad_produccion->acTap_superficie=$_POST['txttap_superficie'];
 $lobjTunidad_produccion->acTap_ultimo_mantenimiento=$_POST['txttap_ultimo_mantenimiento'];
 $lobjTunidad_produccion->acTap_fertilizacion=$_POST['txttap_fertilizacion'];
-$lobjTunidad_produccion->acMaquinariajs=$_POST['txtmaquinariajs'];
-$lobjTunidad_produccion->acImplementojs=$_POST['txtimplementojs'];
+$lobjTunidad_produccion->acMaquinariajs=transform_detail_checkbox($_POST['details_maquinarias']);
+$lobjTunidad_produccion->acImplementojs=transform_detail_checkbox($_POST['details_implementos']);
 $lcVarTem = $_POST["txtvar_tem"];
+
 
 $lcOperacion=$_REQUEST["txtoperacion"];
 
@@ -67,8 +83,9 @@ switch($lcOperacion){
 			$lcTap_superficie=$lobjTunidad_produccion->acTap_superficie;
 			$lcTap_ultimo_mantenimiento=$lobjTunidad_produccion->acTap_ultimo_mantenimiento;
 			$lcTap_fertilizacion=$lobjTunidad_produccion->acTap_fertilizacion;
-			$lcMaquinariajs=$lobjTunidad_produccion->acMaquinariajs;
-			$lcImplementojs=$lobjTunidad_produccion->acImplementojs; 
+			$lcMaquinariajs=explode(',',$lobjTunidad_produccion->acMaquinariajs);
+			$lcImplementojs=explode(',',$lobjTunidad_produccion->acImplementojs); 
+		
 			$estado = $lobjTunidad_produccion->estado;
 			$municipio = $lobjTunidad_produccion->municipio;
 			$parroquia = $lobjTunidad_produccion->parroquia;

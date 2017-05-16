@@ -9,6 +9,16 @@ $viewarray_maquinaria = array();
 $viewarray_implemento = array(); 
 list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->listar_maquinaria_complementos();
 //cierre de la funcion
+//funcion para realizar checkex transaccional
+function checked_transaccional($mydatavalue,$mydatavariable){
+	$val_checked_transaccional =  substr(array_search($mydatavalue,$mydatavariable),0,1);
+	if($val_checked_transaccional==""){
+		return "";
+	}else{
+		return "checked";
+	}
+}
+
 
 
 $objFunciones = new clsFunciones;
@@ -146,7 +156,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Maquinarias:</td>
 <td>
 	<?php for($i=0; $i<count($viewarray_maquinaria); $i++){ ?>
-		<input type="checkbox" name="details_maquinarias[]" value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
+		<input type="checkbox" name="details_maquinarias[]" <?php if(isset($lcMaquinariajs)) echo checked_transaccional($viewarray_maquinaria[$i]['id'], $lcMaquinariajs);  ?> value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
 		<br>
 	<?php }?>
 </td>
@@ -155,7 +165,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Implementos:</td>
 <td colspan="4">
 	<?php for($j=0; $j<count($viewarray_implemento); $j++){ ?>
-		<input type="checkbox" name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$i]['nombre']; ?>
+		<input type="checkbox" <?php if(isset($lcImplementojs)) echo checked_transaccional($viewarray_implemento[$j]['id'], $lcImplementojs); ?>  name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$j]['nombre']; ?>
 		<br>
 	<?php }?>
 </td>
