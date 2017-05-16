@@ -1,6 +1,16 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
 require_once('../controladores/corTunidad_produccion.php');
+require_once('../modelos/clsTmaquinaria_implemento.php');
+
+//obtener en formato array list los implementos y maquinarias por separado
+$objMaquinariaimplementos = new clsTmaquinaria_implemento();
+$viewarray_maquinaria = array();
+$viewarray_implemento = array(); 
+list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->listar_maquinaria_complementos();
+//cierre de la funcion
+
+
 $objFunciones = new clsFunciones;
 $operacion = $lcOperacion;
 $listo = $lcListo;
@@ -134,11 +144,21 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Fertilizacion:</td>
 <td>Si <input type='radio' checked name='txttap_fertilizacion' value='1'/> No <input type='radio' <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Maquinarias:</td>
-<td><input type='text' disabled='disabled' maxlength='' name='txtmaquinariajs' value='<?php print($lcMaquinariajs);?>' id='txtmaquinariajs' class='validate[required]'/></td>
+<td>
+	<?php for($i=0; $i<count($viewarray_maquinaria); $i++){ ?>
+		<input type="checkbox" name="details_maquinarias[]" value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
+		<br>
+	<?php }?>
+</td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Implementos:</td>
-<td colspan="4"><input type='text' disabled='disabled' maxlength='' name='txtimplementojs' value='<?php print($lcImplementojs);?>' id='txtimplementojs' class='validate[required]'/></td>
+<td colspan="4">
+	<?php for($j=0; $j<count($viewarray_implemento); $j++){ ?>
+		<input type="checkbox" name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$i]['nombre']; ?>
+		<br>
+	<?php }?>
+</td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
