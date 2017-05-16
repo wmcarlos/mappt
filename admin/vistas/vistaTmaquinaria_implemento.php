@@ -51,7 +51,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo:</td>
-<td>1 <input type='radio' name='txttipo' value='Maquinaria'/> 2 <input type='radio' name='txttipo' value='Implemento'/> </td>
+<td>Maquinaria <input type='radio' name='txttipo' value='1'/> Implemento <input type='radio' name='txttipo' value='2'/> </td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
