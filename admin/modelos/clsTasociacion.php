@@ -77,5 +77,27 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tasociacion where(id = '$this->acId')");
 }
+
+
+//funcion para listar las maquinarias
+public function listar_asociaciones(){
+	$lrTb=$this->ejecutar("select * from tasociacion");
+	$array_asociaciones = [];
+	while($laRow=$this->arreglo()){
+		array_push($array_asociaciones , array(
+			'id'=>$laRow['id'],
+			'nombre'=>$laRow['nombre'],
+			'estatus'=>$laRow['estatus']
+			)
+		);
+
+	}//closed while
+
+	return $array_asociaciones;
+}
+
+
+
+
 //fin clase
 }?>

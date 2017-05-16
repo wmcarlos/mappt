@@ -1,7 +1,8 @@
 <?php
 require_once("../modelos/clsTproductor.php");
-$lobjTproductor = new clsTproductor();
 
+$objFuncionescontroller =  new clsFunciones;
+$lobjTproductor = new clsTproductor();
 $lobjTproductor->acId=$_REQUEST['txtid'];
 $lobjTproductor->acTipo=$_POST['txttipo'];
 $lobjTproductor->acCed_rif=$_POST['txtced_rif'];
@@ -10,7 +11,7 @@ $lobjTproductor->acId_sector=$_POST['txtid_sector'];
 $lobjTproductor->acDireccion=$_POST['txtdireccion'];
 $lobjTproductor->acTelefono=$_POST['txttelefono'];
 $lobjTproductor->acCorreo=$_POST['txtcorreo'];
-$lobjTproductor->acAsociacionesjs=$_POST['txtasociacionesjs'];
+$lobjTproductor->acAsociacionesjs=$objFuncionescontroller->transform_detail_checkbox($_POST['txtasociacionesjs']);
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
@@ -39,7 +40,7 @@ switch($lcOperacion){
 			$lcDireccion=$lobjTproductor->acDireccion;
 			$lcTelefono=$lobjTproductor->acTelefono;
 			$lcCorreo=$lobjTproductor->acCorreo;
-			$lcAsociacionesjs=$lobjTproductor->acAsociacionesjs;
+			$lcAsociacionesjs=explode(",",$lobjTproductor->acAsociacionesjs);
 			$estado = $lobjTproductor->estado;
 			$municipio = $lobjTproductor->municipio;
 			$parroquia = $lobjTproductor->parroquia;
