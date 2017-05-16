@@ -4,8 +4,9 @@ class clsFunciones extends clsDatos{
 public $librerias_generales = '<link href="css/form_detalle.css" rel="stylesheet" type="text/css" />
 			<link href="css/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
 			<link rel="stylesheet" href="plugins/jqueryui/jquery-ui.min.css">
+			<link rel="stylesheet" href="plugins/al_transaccion/estilo.css">
 			<!--Css-->
-			<script src="js/jquery.js"></script>
+			<script src="plugins/al_transaccion/jquery.js"></script>
 			<script src="js/jquery.validationEngine-es.js"></script>
 			<script src="js/jquery.validationEngine.js"></script>
 			<script src="plugins/jqueryui/jquery-ui.min.js"></script>
@@ -26,6 +27,8 @@ public $librerias_generales = '<link href="css/form_detalle.css" rel="stylesheet
 			<script src="js/mensajes.js"></script>
 			<script src="js/centro.js"></script>
 			<script src="js/validacionGeneral.js"></script>
+			 <script src="plugins/al_transaccion/al_transaccion.js"></script>
+
 			<!--JS-->
 			';
 

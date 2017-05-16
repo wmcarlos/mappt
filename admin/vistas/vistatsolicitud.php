@@ -14,7 +14,10 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <head>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 	<title>Gestion Productor</title>
+	
+
 	<?php print($objFunciones->librerias_generales); ?>
+
 	<script>
 		function cargar()
 		{
@@ -34,56 +37,49 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	antes_form.php
 -->
 <?php @include('antes_form.php'); ?>
-<div id='mensajes_sistema'></div><br />
-<center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
-</br>
-<form name='form1' id='form1' autocomplete='off' method='post'/>
-<div class='cont_frame'>
-	<h1>Datos del productor</h1>
-	<table border='1' class='datos' align='center'>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-			<td colspan="3">Natural: <input type='radio' name='txttipo' value='Natural'/> Juridica: <input type='radio' name='txttipo' value='Juridica'/> </td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
-			<td><input type='text' disabled='disabled' maxlength='10' name='txtced_rif' value='<?php print($lcCed_rif);?>' id='txtced_rif' class='validate[required],custom[integer],maxSize[10],minSize[7]'/></td>
-			<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
-			<td><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Sector:</td>
-			<td><select name='txtid_sector' disabled='disabled' id='txtid_sector' class='validate[required]'><option value=''>Seleccione</option></select></td>
-			
-			<td align='right'><span class='rojo'>*</span> Dirección:</td>
-			<td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Telefono:</td>
-			<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
-			<td align='right'><span class='rojo'>*</span> Correo:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
-		</tr>
-	
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Asociaciones:</td>
-			<td colspan="3"><input type='text' disabled='disabled' maxlength='' name='txtasociacionesjs' value='<?php print($lcAsociacionesjs);?>' id='txtasociacionesjs' class='validate[required]'/></td>
-		</tr>
-	</table><!--cierre de los datos del productor-->
 
 
-	<br>
-	<h1>Datos de la unidad de produccion</h1>
-	<!--datos de su unidad de produccion
+<!--transacion1-->
+<table id="transaccion1" class="transaccion_estile" align="center">
+	<caption>Transaccion de persona</caption>
+	<!-- Cabecera de la tabla -->
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Cedula</th>
+			<th>Hospital</th>
+			<th><input type="button" class="agregar" value="+"/></th>
+		</tr>
+	</thead>
+	<!-- Cuerpo de la tabla con los campos -->
+	<tbody>
+		<!-- fila base a tomar en cuenta-->
+		<tr class="tr_padre">
+			<td>
+				<input type="text" name="nombres[]"  />	
+			</td>
+			<td><input type="text"  name="apellidos[]"/></td>
+			<td><input type="text" name="cedulas[]"/></td>
+			<td>
+				<select name="hopitales[]" >
+					<option value="">Ingrese el hospital</option>
+					<option value="1">San Carlos</option>
+					<option value="2">HPO</option>
+					<option value="3">Bicentenaria</option>
+					<option value="4">Santa Maria</option>
+				</select>
+			</td>
+			<td class="eliminar"><input type="button" value="-"></td>
+		</tr>
+		<!-- fin de código: fila base --> 
+	</tbody>
+</table>
 
-	<?php //$objFunciones->botonera_general('Tproductor','total',$id); ?>
-</div>
-</form>
-<!--
-	Codigo
-	Despues del
-	Formulario
-	despues_form.php
--->
+
 <?php @include('despues_form.php'); ?>
 </body>
 </html>
+
+
+</script>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ALBERTO TRANSACCIONES</title>
+</style> 
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="al_transaccion.js"></script>
+<link rel="stylesheet" type="text/css" href="estilo.css">
+</head>
+<body>
+
+
+<!--transacion1-->
+<table id="transaccion" class="transaccion_estile table_sql" tdsql="tdetalle" align="center">
+	<caption>Transaccion de persona</caption>
+	<!-- Cabecera de la tabla -->
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Apellidos</th>
+			<th>Cedula</th>
+			<th>Hospital</th>
+			<th>Doctores</th>
+			<th>Materiales</th>
+			<th><input type="button" class="agregar" value="+"/></th>
+		</tr>
+	</thead>
+	<!-- Cuerpo de la tabla con los campos -->
+	<tbody>
+		<!-- fila base a tomar en cuenta-->
+		<tr class="tr_padre">
+			<td>
+				<input type="text" name="nombres[]" colbd="nombre" />	
+			</td>
+			<td><input type="text"  name="apellidos[]" colbd="apellido"/></td>
+			<td><input type="text" name="cedulas[]" colbd="cedula" class="cedula no-repeat"/></td>
+			<td>
+				<select name="hopitales[]" class="no-repeat-combine" colbd="cod_hospital" combine="h">
+					<option value="">Ingrese el hospital</option>
+					<option value="1">San Carlos</option>
+					<option value="2">HPO</option>
+					<option value="3">Bicentenaria</option>
+					<option value="4">Santa Maria</option>
+				</select>
+			</td>
+			<td>
+				<select name="doctores[]" class="no-repeat-combine" combine="h">
+					<option value="">Ingrese los doctores</option>
+					<option value="1">Carlos</option>
+					<option value="2">ALberto</option>
+					<option value="3">Karla</option>
+					<option value="4">Skarle</option>
+				</select>
+			</td>
+			<td>
+				<input type="text" name="materiales[]" colbd="material">	
+			</td>
+			<td class="eliminar"><input type="button" value="-"></td>
+		</tr>
+		<!-- fin de código: fila base --> 
+	</tbody>
+</table>
+</body>
+</html>
