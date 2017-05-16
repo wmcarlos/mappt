@@ -51,7 +51,10 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Grupo de Rubro:</td>
-<td><select name='txtid_grupo_rubro' disabled='disabled' id='txtid_grupo_rubro' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtid_grupo_rubro' disabled='disabled' id='txtid_grupo_rubro' class='validate[required]'>
+	<option value=''>Seleccione</option>
+	<?php print $objFunciones->crear_combo("tgrupo_rubro","id","nombre",$lcId_grupo_rubro); ?>
+</select></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>

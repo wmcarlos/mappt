@@ -37,26 +37,26 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from trubro where((id like '%$valor%') or (nombre like '%$valor%') or (id_grupo_rubro like '%$valor%'))");
+$lrTb=$this->ejecutar("select tr.*,
+	(select nombre from tgrupo_rubro as tg where tg.id = tr.id_grupo_rubro) as grupo
+ from trubro as tr where((tr.id like '%$valor%') or (tr.nombre like '%$valor%') or (tr.id_grupo_rubro like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
 $this->acNombre=$laRow['nombre'];
-$this->acId_grupo_rubro=$laRow['id_grupo_rubro'];		
+$this->acId_grupo_rubro=$laRow['grupo'];		
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>id_grupo_rubro</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Grupo</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acId."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acId_grupo_rubro."</td>
+					<td>".$this->acNombre."</td>
+					<td>".$this->acId_grupo_rubro."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }

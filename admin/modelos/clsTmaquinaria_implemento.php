@@ -46,17 +46,16 @@ $this->acTipo=$laRow['tipo'];
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
-			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>nombre</td>
-<td style='font-weight:bold; font-size:20px;'>tipo</td>
+				<td style='font-weight:bold; font-size:20px;'>Nombre</td>
+				<td style='font-weight:bold; font-size:20px;'>Tipo</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
+$tipo = ($this->acTipo == 1) ? "Maquinaria" : "Implemento";
 $llEnc=$llEnc."<tr>
-					<td>".$this->acId."</td>
-<td>".$this->acNombre."</td>
-<td>".$this->acTipo."</td>
+					<td>".$this->acNombre."</td>
+					<td>".$tipo."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }
