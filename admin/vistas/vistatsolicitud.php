@@ -1,7 +1,7 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
-require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
-require_once('../controladores/corTproductor.php');
+//require_once('../controladores/corTproductor.php');
+require_once('../controladores/corTsolicitud.php');
 require_once('../modelos/clsTasociacion.php');
 $objtasociacion = new clsTasociacion();
 $viewarray_asociaciones = array();
@@ -18,6 +18,9 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
 	$sectores = $objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$parroquia,$lcId_sector);
 }
+
+
+
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
@@ -59,9 +62,10 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <div class='cont_frame'>
 	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
-		<tr style='display:none;'>
+		<tr>
+
 			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
+			<td><input type='text' disabled='disabled' maxlength='' name='txtid_productor' value='<?php print($id);?>' id='txtid_productor' class='validate[required]'/></td>
 			
 		</tr>
 		<tr>
@@ -76,24 +80,24 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Estado:</td>
-			<td><select disabled='disabled' name='txtid_estado' id='txtid_estado' operacion="listar_municipios" load_data="txtid_municipio" class='validate[required] select_change'>
+			<td><select disabled='disabled' name='txtid_productor_estado' id='txtid_productor_estado' operacion="listar_municipios" load_data="txtid_productor_municipio" class='validate[required] select_change'>
 				<option value="">Seleccione</option>
 				<?php print $objFunciones->crear_combo("testado","id","nombre",$estado); ?>
 			</select></td>
 			<td align='right'><span class='rojo'>*</span> Municipio:</td>
-			<td><select disabled='disabled' name='txtid_municipio' id='txtid_municipio' operacion="listar_parroquias" load_data="txtid_parroquia" class='validate[required] select_change'>
+			<td><select disabled='disabled' name='txtid_productor_municipio' id='txtid_productor_municipio' operacion="listar_parroquias" load_data="txtid_productor_parroquia" class='validate[required] select_change'>
 				<option value="">Seleccione</option>
 				<?php print $municipios; ?>
 			</select></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Parroquia:</td>
-			<td><select disabled='disabled' name='txtid_parroquia' id='txtid_parroquia' operacion="listar_sectores" load_data="txtid_sector" class='validate[required] select_change'>
+			<td><select disabled='disabled' name='txtid_productor_parroquia' id='txtid_productor_parroquia' operacion="listar_sectores" load_data="txtid_productor_sector" class='validate[required] select_change'>
 				<option value="">Seleccione</option>
 				<?php print $parroquias; ?>
 			</select></td>
 			<td align='right'><span class='rojo'>*</span> Sector:</td>
-			<td><select disabled='disabled' name='txtid_sector' id='txtid_sector' class='validate[required]'>
+			<td><select disabled='disabled' name='txtid_productor_sector' id='txtid_productor_sector' class='validate[required]'>
 				<option value="">Seleccione</option>
 				<?php print $sectores; ?>
 			</select></td>
@@ -129,7 +133,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<table border='1' class='datos' align='center'>
 		<tr style='display:none;'>
 			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
+			<td><input type='text' disabled='disabled' maxlength='' name='txtid_unidad' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Nombre:</td>
@@ -161,7 +165,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Dirección:</td>
-			<td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
+			<td><textarea name='txtdireccion_unidad' maxlength='' disabled='disabled' id='txtdireccion_unidad' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
 			<td align='right'><span class='rojo'>*</span> Superficie Total:</td>
 			<td><input type='text' disabled='disabled' maxlength='' name='txtsuperficie_total' value='<?php print($lcSuperficie_total);?>' id='txtsuperficie_total' class='validate[required],custom[integer]'/></td>
 		</tr>
@@ -181,28 +185,28 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<p style="background-color: #D9D9D9;padding: 10px; color: red; font-weight: bold; text-align: center;">A continuación se presentan los documentos que validan  la condición como productor agrícola ante la UTMPPAT - PORTUGUESA</p>
 	<table border='1' class='datos' align='center'>
 		<tr>
-			<td><input type="checkbox" name="" value="si">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
+			<td><input type="checkbox" name="doc_registro_uniconacional" value="si">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
+			<td><input type="checkbox" name="doc_fotocopia_cedula" value="si">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
+			<td><input type="checkbox" name="doc_fotocopia_registro_fiscal" value="si">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
+			<td><input type="checkbox" name="doc_permanencia_tierras" value="si">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
 		</tr>
 		<tr>
 			<td><input type="checkbox" name="" value="si">5.- PLANOS DE LA UNIDAD DE PRODUCCIÓN EMITIDO POR EL EL INSTITUTO NACIONAL DE TIERRAS (INTi) CON COORDENADAS UTM</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
+			<td><input type="checkbox" name="doc_constancia_ocupacion" value="si">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
+			<td><input type="checkbox" name="doc_registro_productores_asociaciones_servicios" value="si">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
+			<td><input type="checkbox" name="doc_carpeta_marron" value="si">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
 		</tr>
 	</table>
 </div>
@@ -213,7 +217,8 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <div class='cont_frame'>
 	<table border='1' class='datos' align='center'>
 	<tr>
-		<td>Funcionario Receptor: <input type="text" name="funcionario_receptor" readonly="readonly"></td>
+		<input type="hidden" name="funcionario_receptor" value="<?php print $_SESSION['user']; ?>">
+		<td>Funcionario Receptor: <input type="text" name="" value="<?php print $_SESSION['full_name'] ?>" readonly="readonly"></td>
 		<td>Oficina: <input type="text" name="oficina_area"></td>
 	</tr>
 	<tr>
@@ -225,7 +230,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <!--cierre de los datos del funcionario receptor-->
 
 
-
+<?php $objFunciones->botonera_general('clsTsolicitud','total',$id); ?>
 </form><!--cierre del formulario completo-->
 
 
