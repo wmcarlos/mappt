@@ -103,6 +103,29 @@ function botonera_general($clase,$salir='total',$id){$botonera = '<table border=
 		}
 			return $id;
 	}
+	/*convertir los datos checkbox separados por coma*/
+	function transform_detail_checkbox($detail_checkbox){
+		$tmp_total = count($detail_checkbox);
+		$var_details = '';
+		for($i=0; $i<$tmp_total;$i++){
+			$var_details.=$detail_checkbox[$i];
+			if($i<($tmp_total)-1){
+				$var_details.=',';
+			}
+		}
+		return $var_details;
+	}
+	//devolver checked transaccional
+	function checked_transaccional($mydatavalue,$mydatavariable){
+		$val_checked_transaccional =  substr(array_search($mydatavalue,$mydatavariable),0,1);
+		if($val_checked_transaccional==""){
+			return "";
+		}else{
+			return "checked";
+		}
+	}
+
+
 
 }
 
