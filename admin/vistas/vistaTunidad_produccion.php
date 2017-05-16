@@ -117,23 +117,22 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Croquis:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txtcroquisimg' value='<?php print($lcCroquisimg);?>' id='txtcroquisimg' class='validate[required]'/></td>
 <td align='right'><span class='rojo'>*</span> Tec. Apoyo Produccion Pecuaria:</td>
-<td>Si <input type='radio' checked name='txttap' value='1'/> No <input type='radio' <?php if($lcTap == 2){ print "checked"; } ?> name='txttap' value='2'/> </td>
+<td>Si <input type='radio' disabled checked name='txttap' value='1'/> No <input type='radio' disabled <?php if($lcTap == 2){ print "checked"; } ?> name='txttap' value='2'/> </td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Potreros:</td>
-<td>Si <input type='radio' checked name='txttap_potreros' value='1'/> No <input type='radio' <?php if($lcTap_potreros == 2){ print "checked"; } ?> name='txttap_potreros' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Cantidad de Potreros:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txttap_cant_potreros' value='<?php print($lcTap_cant_potreros);?>' id='txttap_cant_potreros' class='validate[required],custom[integer]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Cerca:</td>
-<td>Convencional <input type='radio' checked name='txttap_tipo_cerca' value='1'/> Electrica <input type='radio' name='txttap_tipo_cerca' <?php if($lcTap_tipo_cerca == 2){ print "checked"; } ?> value='2'/> </td>
+<td>Convencional <input type='radio' checked name='txttap_tipo_cerca' disaled value='1'/> Electrica <input type='radio' disabled name='txttap_tipo_cerca' <?php if($lcTap_tipo_cerca == 2){ print "checked"; } ?> value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Carga Animal x Ha:</td>
 <td><input type='text' disabled='disabled' maxlength='' name='txttap_carga_animal_an_ha' value='<?php print($lcTap_carga_animal_an_ha);?>' id='txttap_carga_animal_an_ha' class='validate[required],custom[integer]'/></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo de Pasto:</td>
-<td>Natural <input type='radio' name='txttap_tipo_pasto' checked value='1'/> Introducido <input type='radio' <?php if($lcTap_tipo_pasto == 2) { print "checked"; } ?> name='txttap_tipo_pasto' value='2'/> </td>
+<td>Natural <input type='radio' disabled name='txttap_tipo_pasto' checked value='1'/> Introducido <input type='radio' disabled <?php if($lcTap_tipo_pasto == 2) { print "checked"; } ?> name='txttap_tipo_pasto' value='2'/> </td>
 <td align='right'><span class='rojo'>*</span> Especie de Pasto:</td>
 <td><input type='text' disabled='disabled' maxlength='30' name='txttap_especie_pasto' value='<?php print($lcTap_especie_pasto);?>' id='txttap_especie_pasto' class='validate[required],custom[onlyLetterSp],maxSize[30],minSize[5]'/></td>
 </tr>
@@ -145,11 +144,13 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Fertilizacion:</td>
-<td>Si <input type='radio' checked name='txttap_fertilizacion' value='1'/> No <input type='radio' <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
+<td colspan="4">Si <input type='radio' disabled checked name='txttap_fertilizacion' value='1'/> No <input type='radio' disabled <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
+</tr>
+<tr>
 <td align='right'><span class='rojo'>*</span> Maquinarias:</td>
-<td>
+<td colspan="4">
 	<?php for($i=0; $i<count($viewarray_maquinaria); $i++){ ?>
-		<input type="checkbox" name="details_maquinarias[]" <?php if(isset($lcMaquinariajs)) echo $objFunciones->checked_transaccional($viewarray_maquinaria[$i]['id'], $lcMaquinariajs);  ?> value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
+		<input type="checkbox" disabled name="details_maquinarias[]" <?php if(isset($lcMaquinariajs)) echo $objFunciones->checked_transaccional($viewarray_maquinaria[$i]['id'], $lcMaquinariajs);  ?> value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
 		<br>
 	<?php }?>
 </td>
@@ -158,7 +159,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Implementos:</td>
 <td colspan="4">
 	<?php for($j=0; $j<count($viewarray_implemento); $j++){ ?>
-		<input type="checkbox" <?php if(isset($lcImplementojs)) echo $objFunciones->checked_transaccional($viewarray_implemento[$j]['id'], $lcImplementojs); ?>  name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$j]['nombre']; ?>
+		<input type="checkbox" disabled <?php if(isset($lcImplementojs)) echo $objFunciones->checked_transaccional($viewarray_implemento[$j]['id'], $lcImplementojs); ?>  name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$j]['nombre']; ?>
 		<br>
 	<?php }?>
 </td>
