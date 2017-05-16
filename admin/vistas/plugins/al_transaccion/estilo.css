@@ -71,3 +71,12 @@
 		z-index: 9999999;
 		display: none;
 	}
+	.transaccion_mascara caption{
+		padding-top: 20px !important;
+		padding-bottom: 20px !important;
+		font-size: 25px !important;
+	}
+	.transaccion_mascara caption::before{
+		content: 'X';
+		float: right;
+	}
