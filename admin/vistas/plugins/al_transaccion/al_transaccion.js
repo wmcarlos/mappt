@@ -1,15 +1,50 @@
 jQuery(document).ready(function(){
+	var tagmask = '';
+	function all_tra_centro($alltable){
+	   var window_height = $(window).height();
+	   var window_width = $(window).width();
+	   var div_height = $alltable.height();
+	   var div_width = $alltable.width();
+	   $alltable.css('margin-top',(window_height/2)-(div_height/2)).css('margin-left',(window_width /2)-(div_width/2) );
+	}
+
 	// Clona la fila oculta que tiene los campos base, y la agrega al final de la tabla
 	jQuery(".agregar").on('click', function(){
 		//vamos ahacerlo dinamico
 		dinamic_id = jQuery(this).parent().parent().parent().parent().attr("id");
 		jQuery("#"+dinamic_id+" tbody tr:eq(0)").clone().removeClass('tr_padre').appendTo("#"+dinamic_id+" tbody");
 	});
+
+
+
 	// Evento que selecciona la fila y la elimina 
 	jQuery(document).on("click",".eliminar",function(){
 		var parent = jQuery(this).parents().get(0);
 		jQuery(parent).remove();
 	});
+	//esta es otra forma de hacer la transaccion mas elegante	
+	jQuery(document).on('click','.button-all-transaccion',function(){
+		tagmask = jQuery(this).attr("tagmask");
+		$(".mask_Transaccion").remove();
+		$('body').append('<div class="mask_Transaccion"></div>');
+		$(".mask_Transaccion").fadeIn(500,function(){
+			$("#"+tagmask).slideDown(500);
+			all_tra_centro($("#"+tagmask));
+		});
+		//hacemos aparecer nuestra tabla transaccional
+	});
+	//cerrar la mascara transaccional
+	jQuery(document).on('click','.transaccion_mascara caption',function(){
+		$("#"+tagmask).slideUp(500,function(){
+			$(".mask_Transaccion").fadeOut(500,function(){
+				$(".mask_Transaccion").remove();
+				tagmask = '';
+			});
+		});
+	});
+
+
+
 
 
 	//_----------------NOREPEAT FUNCTION_____________--
@@ -155,4 +190,8 @@ jQuery(document).ready(function(){
 
 	});	
 	//------------------------funcion para el repeat combine--------------------------------
+
+
+	//funcion para abrir la transaccion como popup
+
 });

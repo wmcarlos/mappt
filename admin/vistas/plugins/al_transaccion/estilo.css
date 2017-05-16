@@ -10,6 +10,7 @@
 	table.transaccion_estile{
 		margin-bottom: 15px;
 		border:1px solid #E6E6E6;
+
 	}
 	table.transaccion_estile tr th{
 		background-color: #ccc;
@@ -19,13 +20,13 @@
 		font-size: 18px;
 		font-weight: bold;
 	}
-	table.transaccion_estile tr th, tr td{
+	table.transaccion_estile tr th, table.transaccion_estile tr td{
 		border:1px solid #ccc;
-		width: 160px;
+		min-width: 160px;
 		text-align: center;
 	}
 
-	tr.tr_padre{
+	table.transaccion_estile  tr.tr_padre{
 		display: none !important;
 	}
 	table.transaccion_estile caption{
@@ -33,10 +34,13 @@
 		background-color: #ccc;
 		color:black;
 	}
-
+	table.transaccion_estile tr{
+		background-color: white;
+	}
 	table.transaccion_estile tr:nth-child(2n){
 		background-color: #C6E4C4 !important;
 	}
+
 	table.transaccion_estile tbody tr td{
 		padding: 10px;
 		border:none !important;
@@ -45,3 +49,25 @@
 		border:none !important;
 	}
 
+	table.transaccion_estile  tr td{
+		width: 100%;
+	}
+	.mask_Transaccion{
+		position: fixed;
+		width: 100%;
+		height: 100%;
+		background-color: black;
+		opacity: 0.5;
+		display: none;
+		z-index: 999999;
+		top: 0;
+		left: 0;
+	}
+	.transaccion_mascara{
+		position: fixed;
+		top: 0;
+		left: 0;
+		margin-top: 15px;
+		z-index: 9999999;
+		display: none;
+	}

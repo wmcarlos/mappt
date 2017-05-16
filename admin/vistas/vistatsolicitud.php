@@ -40,7 +40,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 
 
 <!--transacion1-->
-<table id="transaccion1" class="transaccion_estile" align="center">
+<table id="transaccion1" class="transaccion_estile"   align="center" style="width: 80% !important;"> 
 	<caption>Transaccion de persona</caption>
 	<!-- Cabecera de la tabla -->
 	<thead>
@@ -75,6 +75,8 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<!-- fin de código: fila base --> 
 	</tbody>
 </table>
+
+
 
 
 <?php @include('despues_form.php'); ?>
