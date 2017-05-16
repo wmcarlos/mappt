@@ -83,5 +83,39 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tmaquinaria_implemento where(id = '$this->acId')");
 }
+	
+//funcion para listar las maquinarias
+public function listar_maquinaria_complementos(){
+	$lrTb=$this->ejecutar("select * from tmaquinaria_implemento");
+	$array_maquinaria = [];
+	$array_implemento = [];
+		while($laRow=$this->arreglo())
+	{		
+		//$this->acId=$laRow['id'];
+		//$this->acNombre=$laRow['nombre'];
+		//$this->acTipo=$laRow['tipo'];	
+		if($laRow['tipo']==1){	
+			array_push($array_maquinaria, array(
+				'id'=>$laRow['id'],
+				'nombre'=>$laRow['nombre'],
+				'tipo'=>$laRow['tipo']
+				)
+			);
+		}else{
+			array_push($array_implemento, array(
+				'id'=>$laRow['id'],
+				'nombre'=>$laRow['nombre'],
+				'tipo'=>$laRow['tipo']
+				)
+			);
+		}
+	}//closed while
+
+	return array($array_maquinaria, $array_implemento);
+}
+
+
+
+
 //fin clase
 }?>
