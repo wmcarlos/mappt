@@ -26,8 +26,8 @@ switch($lcOperacion){
 	
 		if($lobjTmaquinaria_implemento->buscar()){
 			$lcId=$lobjTmaquinaria_implemento->acId;
-$lcNombre=$lobjTmaquinaria_implemento->acNombre;
-$lcTipo=$lobjTmaquinaria_implemento->acTipo; 
+			$lcNombre=$lobjTmaquinaria_implemento->acNombre;
+			$lcTipo=$lobjTmaquinaria_implemento->acTipo; 
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

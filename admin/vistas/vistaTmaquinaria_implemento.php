@@ -51,7 +51,7 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tipo:</td>
-<td>Maquinaria <input type='radio' name='txttipo' value='1'/> Implemento <input type='radio' name='txttipo' value='2'/> </td>
+<td>Maquinaria <input type='radio' <?php if($lcTipo=='1') print("checked"); ?>  name='txttipo' value='1'/> Implemento <input <?php if($lcTipo=='2') print("checked"); ?> type='radio' name='txttipo' value='2'/> </td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
