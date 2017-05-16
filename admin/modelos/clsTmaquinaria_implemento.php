@@ -1,13 +1,15 @@
 <?php
 require_once("clsDatos.php"); //Clase Base de Datos Poner Ruta de Clase
-class clsTpredio extends clsDatos{
+class clsTmaquinaria_implemento extends clsDatos{
 private $acId;
 private $acNombre;
+private $acTipo;
 
 //constructor de la clase		
 public function __construct(){
 $this->acId = "";
 $this->acNombre = "";
+$this->acTipo = "";
 }
 
 //metodo magico set
@@ -21,11 +23,12 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tpredio where(id = '$this->acId')");
+$this->ejecutar("select * from tmaquinaria_implemento where(id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
-$this->acNombre=$laRow['nombre'];		
+$this->acNombre=$laRow['nombre'];
+$this->acTipo=$laRow['tipo'];		
 $llEnc=true;
 }
 return $llEnc;
@@ -34,16 +37,18 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tpredio where((id like '%$valor%') or (nombre like '%$valor%'))");
+$lrTb=$this->ejecutar("select * from tmaquinaria_implemento where((id like '%$valor%') or (nombre like '%$valor%') or (tipo like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
-$this->acNombre=$laRow['nombre'];		
+$this->acNombre=$laRow['nombre'];
+$this->acTipo=$laRow['tipo'];		
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
 			   <td style='font-weight:bold; font-size:20px;'>id</td>
 <td style='font-weight:bold; font-size:20px;'>nombre</td>
+<td style='font-weight:bold; font-size:20px;'>tipo</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
@@ -51,6 +56,7 @@ $final = "</table>";
 $llEnc=$llEnc."<tr>
 					<td>".$this->acId."</td>
 <td>".$this->acNombre."</td>
+<td>".$this->acTipo."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }
@@ -60,7 +66,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
-return $this->ejecutar("insert into tpredio(id,nombre)values('$this->acId','$this->acNombre')");
+return $this->ejecutar("insert into tmaquinaria_implemento(id,nombre,tipo)values('$this->acId','$this->acNombre','$this->acTipo')");
 }
         
 
@@ -68,14 +74,14 @@ return $this->ejecutar("insert into tpredio(id,nombre)values('$this->acId','$thi
 //funcion modificar
 public function modificar($lcVarTem)
 {
-return $this->ejecutar("update tpredio set id = '$this->acId', nombre = '$this->acNombre' where(id = '$this->acId')");
+return $this->ejecutar("update tmaquinaria_implemento set id = '$this->acId', nombre = '$this->acNombre', tipo = '$this->acTipo' where(id = '$this->acId')");
 }
  
  
 //funcion eliminar        
 public function eliminar()
 {
-return $this->ejecutar("delete from tpredio where(id = '$this->acId')");
+return $this->ejecutar("delete from tmaquinaria_implemento where(id = '$this->acId')");
 }
 //fin clase
 }?>

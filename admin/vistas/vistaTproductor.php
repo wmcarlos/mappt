@@ -1,19 +1,19 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
-require_once('../controladores/corTpersona.php');
+require_once('../controladores/corTproductor.php');
 $objFunciones = new clsFunciones;
 $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-$id = 'no';
+$id = $objFunciones->ultimo_id_plus1('tproductor','id');
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
 <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<title>Gestion Persona</title>
+<title>Gestion Productor</title>
 <?php print($objFunciones->librerias_generales); ?>
 <script>
 function cargar()
@@ -39,31 +39,31 @@ function cargar()
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-<h1>Persona</h1>
+<h1>Productor</h1>
 <table border='1' class='datos' align='center'>
-<tr >
-<td align='right'><span class='rojo'>*</span> Cedula:</td>
-<td><input type='text' disabled='disabled' maxlength='8' name='txtcedula' value='<?php print($lcCedula);?>' id='txtcedula' class='validate[required],custom[integer],maxSize[8],minSize[7]'/></td>
+<tr style='display:none;'>
+<td align='right'><span class='rojo'>*</span> id:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtid' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Nacionalidad:</td>
-<td>V <input type='radio' name='txtnacionalidad' value='V'/> E <input type='radio' name='txtnacionalidad' value='E'/> </td>
+<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
+<td>1 <input type='radio' name='txttipo' value='Natural'/> 2 <input type='radio' name='txttipo' value='Juridica'/> </td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Nombres:</td>
-<td><input type='text' disabled='disabled' maxlength='60' name='txtnombres' value='<?php print($lcNombres);?>' id='txtnombres' class='validate[required],custom[onlyLetterSp],maxSize[60],minSize[5]'/></td>
+<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
+<td><input type='text' disabled='disabled' maxlength='10' name='txtced_rif' value='<?php print($lcCed_rif);?>' id='txtced_rif' class='validate[required],custom[integer],maxSize[10],minSize[7]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Apellidos:</td>
-<td><input type='text' disabled='disabled' maxlength='60' name='txtapellidos' value='<?php print($lcApellidos);?>' id='txtapellidos' class='validate[required],custom[onlyLetterSp],maxSize[60],minSize[5]'/></td>
+<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
+<td><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Fecha de Nacimiento:</td>
-<td><input type='text' disabled='disabled' name='txtfechanacimiento' value='<?php print($lcFechanacimiento);?>' id='txtfechanacimiento' class='validate[required] fecha_formateada'/></td>
+<td align='right'><span class='rojo'>*</span> Sector:</td>
+<td><select name='txtid_sector' disabled='disabled' id='txtid_sector' class='validate[required]'><option value=''>Seleccione</option></select></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Sexo:</td>
-<td>M <input type='radio' name='txtsexo' value='M'/> F <input type='radio' name='txtsexo' value='F'/> </td>
+<td align='right'><span class='rojo'>*</span> Dirección:</td>
+<td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Telefono:</td>
@@ -74,14 +74,14 @@ function cargar()
 <td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
 </tr>
 <tr>
-<td align='right'><span class='rojo'>*</span> Direccion:</td>
-<td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
+<td align='right'><span class='rojo'>*</span> Asociaciones:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtasociacionesjs' value='<?php print($lcAsociacionesjs);?>' id='txtasociacionesjs' class='validate[required]'/></td>
 </tr>
 
 <input type='hidden' name='txtoperacion' value='des'>
-<input type='hidden' name='txtvar_tem' value='<?php print($lcCedula); ?>'>
+<input type='hidden' name='txtvar_tem' value='<?php print($lcId); ?>'>
 </table>
-<?php $objFunciones->botonera_general('Tpersona','total',$id); ?>
+<?php $objFunciones->botonera_general('Tproductor','total',$id); ?>
 </div>
 </form>
 <!--

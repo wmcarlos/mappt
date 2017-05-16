@@ -4,6 +4,7 @@ $lobjTrubro = new clsTrubro();
 
 $lobjTrubro->acId=$_REQUEST['txtid'];
 $lobjTrubro->acNombre=$_POST['txtnombre'];
+$lobjTrubro->acId_grupo_rubro=$_POST['txtid_grupo_rubro'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
@@ -25,7 +26,8 @@ switch($lcOperacion){
 	
 		if($lobjTrubro->buscar()){
 			$lcId=$lobjTrubro->acId;
-$lcNombre=$lobjTrubro->acNombre; 
+$lcNombre=$lobjTrubro->acNombre;
+$lcId_grupo_rubro=$lobjTrubro->acId_grupo_rubro; 
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

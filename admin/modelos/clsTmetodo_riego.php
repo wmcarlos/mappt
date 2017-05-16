@@ -1,6 +1,6 @@
 <?php
 require_once("clsDatos.php"); //Clase Base de Datos Poner Ruta de Clase
-class clsTproducto extends clsDatos{
+class clsTmetodo_riego extends clsDatos{
 private $acId;
 private $acNombre;
 
@@ -21,7 +21,7 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tproducto where(id = '$this->acId')");
+$this->ejecutar("select * from tmetodo_riego where(id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -34,7 +34,7 @@ return $llEnc;
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
-$lrTb=$this->ejecutar("select * from tproducto where((id like '%$valor%') or (nombre like '%$valor%'))");
+$lrTb=$this->ejecutar("select * from tmetodo_riego where((id like '%$valor%') or (nombre like '%$valor%'))");
 while($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -60,7 +60,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
-return $this->ejecutar("insert into tproducto(id,nombre)values('$this->acId','$this->acNombre')");
+return $this->ejecutar("insert into tmetodo_riego(id,nombre)values('$this->acId','$this->acNombre')");
 }
         
 
@@ -68,14 +68,14 @@ return $this->ejecutar("insert into tproducto(id,nombre)values('$this->acId','$t
 //funcion modificar
 public function modificar($lcVarTem)
 {
-return $this->ejecutar("update tproducto set id = '$this->acId', nombre = '$this->acNombre' where(id = '$this->acId')");
+return $this->ejecutar("update tmetodo_riego set id = '$this->acId', nombre = '$this->acNombre' where(id = '$this->acId')");
 }
  
  
 //funcion eliminar        
 public function eliminar()
 {
-return $this->ejecutar("delete from tproducto where(id = '$this->acId')");
+return $this->ejecutar("delete from tmetodo_riego where(id = '$this->acId')");
 }
 //fin clase
 }?>
