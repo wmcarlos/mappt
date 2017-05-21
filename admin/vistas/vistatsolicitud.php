@@ -75,7 +75,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-	<h1>Productor </h1>
+	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
