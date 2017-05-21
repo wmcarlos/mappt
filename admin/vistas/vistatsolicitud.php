@@ -75,11 +75,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-<<<<<<< HEAD
 	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
-=======
-	<h1>Productor</h1>
->>>>>>> 0d0dddbfe12b3ebbf71b1909fa98f537b272782d
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
@@ -89,7 +85,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			<input type="hidden" id="txtced_rif" name="txtced_rif">
 			<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
 			<td id="cedula"></td>
-			<input>
 			<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
 			<td id="nombre"></td>
 		</tr>
