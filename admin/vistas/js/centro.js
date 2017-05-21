@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$(".datos_busqueda").empty();
+
+$(".datos_busqueda").empty();
 	
   function centro(){
 	   var window_height = $(window).height();
@@ -8,19 +9,20 @@ $(document).ready(function(){
 	   var div_width = $('#contenedor_resultados_busqueda').width();
 	   $('#contenedor_resultados_busqueda').css('margin-top',(window_height/2)-(div_height/2)).css('margin-left',(window_width /2)-(div_width/2) );
 	}
-  centro();
+	
+centro();
 	
 	$(".btn_buscar").click(function(){
-		 var operacion = $(this).attr("operacion");
+		 var oper = $(this).attr("operacion");
 		 var salir = $(this).attr("salir");
 		 var clas = $(this).attr("clase");
 		 $(".txtbuscador").attr("clase",clas);
+		 $(".txtbuscador").attr("operacion",oper);
 		 
 		 $('.cerrar_resultados').attr("salir",salir);
 		 $("#mascara").fadeIn(500);
 		 $('#contenedor_resultados_busqueda').show().hide().delay(1).fadeIn(600);
 	});
-	
 
  
    /*para el boton de buscar cerrar*/
@@ -48,8 +50,9 @@ $(document).ready(function(){
    $(".txtbuscador").keyup(function(){
         var val = $(this).val();
 		var clas = $(this).attr("clase");
-		
-        $.post("../controladores/ajaxdata.php", { datos: val, clase: clas },
+		var oper = $(this).attr("operacion");	
+
+        $.post("../controladores/ajaxdata.php", { datos: val, clase: clas, operacion:oper },
               function(data){
                  $(".datos_busqueda").html(data);
               });						

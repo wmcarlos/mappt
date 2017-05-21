@@ -75,58 +75,43 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-	<h1>Productor </h1>
+	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-			<td colspan="4">Natural <input type='radio' checked name='txttipo' value='1'/> Juridica <input type='radio' <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
+			<td colspan="4" id="tipopersona"></td>
 		</tr>
 		<tr>
+			<input type="hidden" id="txtced_rif" name="txtced_rif">
 			<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
-			<td><input type='text' disabled='disabled' maxlength='10' name='txtced_rif' value='<?php print($lcCed_rif);?>' id='txtced_rif' class='validate[required],custom[integer],maxSize[10],minSize[7]'/></td>
+			<td id="cedula"></td>
+			<input>
 			<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
-			<td><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
+			<td id="nombre"></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Estado:</td>
-			<td><select disabled='disabled' name='txtid_productor_estado' id='txtid_productor_estado' operacion="listar_municipios" load_data="txtid_productor_municipio" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $objFunciones->crear_combo("testado","id","nombre",$estado); ?>
-			</select></td>
+			<td id="estado"></td>
 			<td align='right'><span class='rojo'>*</span> Municipio:</td>
-			<td><select disabled='disabled' name='txtid_productor_municipio' id='txtid_productor_municipio' operacion="listar_parroquias" load_data="txtid_productor_parroquia" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $municipios; ?>
-			</select></td>
+			<td id="municipio"></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Parroquia:</td>
-			<td><select disabled='disabled' name='txtid_productor_parroquia' id='txtid_productor_parroquia' operacion="listar_sectores" load_data="txtid_productor_sector" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $parroquias; ?>
-			</select></td>
+			<td id="parroquia"></td>
 			<td align='right'><span class='rojo'>*</span> Sector:</td>
-			<td><select disabled='disabled' name='txtid_productor_sector' id='txtid_productor_sector' class='validate[required]'>
-				<option value="">Seleccione</option>
-				<?php print $sectores; ?>
-			</select></td>
+			<td id="sector"></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Dirección:</td>
-			<td><textarea name='txtdireccion' maxlength='' disabled='disabled' id='txtdireccion' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
+			<td id="direccion"></td>
 			<td align='right'><span class='rojo'>*</span> Telefono:</td>
-			<td><input type='text' disabled='disabled' maxlength='11' name='txttelefono' value='<?php print($lcTelefono);?>' id='txttelefono' class='validate[required],custom[integer],maxSize[11],minSize[11]'/></td>
+			<td id="telefono"></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Correo:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
+			<td id="correo"></td>
 			<td align='right'><span class='rojo'>*</span> Asociaciones:</td>
-			<td>
-				<?php for($i=0; $i<count($viewarray_asociaciones); $i++){ ?>
-				<input type="checkbox" name="txtasociacionesjs[]" <?php if(isset($lcAsociacionesjs)) echo $objFunciones->checked_transaccional($viewarray_asociaciones[$i]['id'], $lcAsociacionesjs);  ?> value="<?php echo $viewarray_asociaciones[$i]['id']; ?>"> <?php echo $viewarray_asociaciones[$i]['nombre']; ?>
-				<br>
-				<?php }?>
-			</td>
+			<td id="asociaciones"></td>
 		</tr>
 
 		<input type='hidden' name='txtoperacion' value='des'>
@@ -296,6 +281,31 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 
 		});
 
-	
+		$(document).on('click','.searchdata',function(){
+			var data = $(this).attr("data-get").split(",");
+			console.log(data);
+			$("#tipopersona").text(data[0]);
+			$("#cedula").text(data[1]);
+			$("#txtced_rif").val(data[1]);
+			$("#nombre").text(data[2]);
+			$("#estado").text(data[3]);
+			$("#municipio").text(data[4]);
+			$("#parroquia").text(data[5]);
+			$("#sector").text(data[6]);
+			$("#direccion").text(data[7]);
+			$("#telefono").text(data[8]);
+			$("#correo").text(data[9]);
+			var arraso = data[10].split("-");
+			$("#asociaciones").text("");
+			for(var i = 0 ; i < arraso.length; i++){
+				$("#asociaciones").append(arraso[i]+"<br/>");
+			}
+			$("#mascara").fadeOut(300);
+			$("#contenedor_resultados_busqueda").hide(0);
+		});
+
 	});
+
+
+
 </script>

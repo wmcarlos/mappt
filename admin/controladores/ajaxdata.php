@@ -21,6 +21,11 @@ print($obj->busqueda_ajax($datos));
 		case "listar_sectores":
 			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$datos,"");
 		break;
+		case "busqueda_ajax_productor":
+			require_once("../modelos/clsTproductor.php");
+			$objProductor = new clsTproductor();
+			print $objProductor->busqueda_ajax2($datos);
+		break;
 	}	
 }
 ?>
