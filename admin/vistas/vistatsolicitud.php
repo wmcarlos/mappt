@@ -277,9 +277,9 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 				$(this).hide(0);
 			}
 			if(i==0){
-				$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
-			}else{
 				$(".ol-step").append('<li class="step step_active" tagstep="'+i+'" >'+(i+1)+'</li>');
+			}else{
+				$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
 			}
 		});
 		$(document).on('click','li.step',function(){
