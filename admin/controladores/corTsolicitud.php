@@ -9,6 +9,7 @@
 
 	$objTsolicitud->idtsolicitud_certificacion_renovacion='';
 	//$objTsolicitud->cedula_rif_productor=$_POST['txtced_rif'];
+	$objTsolicitud->fecha_recepcion = $_POST['fecha_recepcion'];
 	$objTsolicitud->cedula_rif_productor = $_POST['txtced_rif'];
 	$objTsolicitud->id_unidad_produccion = $_POST['txtid_unidad'];
 	$objTsolicitud->documentos = $objFuncionescontroller->transform_detail_checkbox($_POST['documentos']);
@@ -21,7 +22,7 @@
 
 	/*GUARDAREMOS LOS DATOS DE LA UNIDAD DE PRODUCCION*/
 	$lobjTunidad_produccion->acId=$_POST['txtid_unidad'];
-	$lobjTunidad_produccion->acCed_rif_productor='20467294';
+	$lobjTunidad_produccion->acCed_rif_productor=$_POST['txtced_rif'];
 	$lobjTunidad_produccion->acNombre=$_POST['txtnombre'];
 	$lobjTunidad_produccion->acId_sector=$_POST['txtid_sector'];
 	$lobjTunidad_produccion->acDireccion=$_POST['txtdireccion_unidad'];
@@ -33,6 +34,8 @@
 
 	if(isset($_POST['btnguardar']))
 	{
+		//guardamos la unidad de produccion primeramente
+		$lobjTunidad_produccion->incluir();
 		$objTsolicitud->incluir();
 	}
 

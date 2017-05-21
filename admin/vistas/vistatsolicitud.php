@@ -74,6 +74,11 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </ol></center>
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
+<br>	
+<input type="hidden" name="fecha_recepcion" value="<?php @date("Y-m-d"); ?>">
+<center><strong style="font-weight: bold;">Fecha De Recepción:<?php echo @date("d-m-Y"); ?></strong></center>
+<br>
+
 <div class='cont_frame'>
 	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
 	<table border='1' class='datos' align='center'>
