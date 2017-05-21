@@ -25,7 +25,6 @@ USE `mappt`;
 --
 -- Estructura de tabla para la tabla `tasociacion`
 --
-
 CREATE TABLE `tasociacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
@@ -539,13 +538,7 @@ CREATE TABLE `tsolicitud_certificado_renovacion` (
   `fecha_recepcion` date NOT NULL,
   `cedula_rif_productor` varchar(15) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
-  `doc_registro_uniconacional` char(1) NOT NULL,
-  `doc_fotocopia_cedula` char(1) NOT NULL,
-  `doc_fotocopia_registro_fiscal` char(1) NOT NULL,
-  `doc_permanencia_tierras` char(1) NOT NULL,
-  `doc_constancia_ocupacion` char(1) NOT NULL,
-  `doc_registro_productores_asociaciones_servicios` char(1) NOT NULL,
-  `doc_carpeta_marron` char(1) NOT NULL,
+  `documentos` char(100) NOT NULL,
   `funcionario_receptor` char(25) NOT NULL,
   `oficina_area` varchar(100) NOT NULL,
   `num_certificado_runnopa` char(50) NOT NULL,
