@@ -186,5 +186,15 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tunidad_produccion where(id = '$this->acId')");
 }
+
+
+/*Nos traeremos el ultimo codigo de unidad  de produccion registrada*/
+public function traer_codigo_unidadproduccion(){
+	$this->ejecutar("SELECT MAX(id) AS txtid_unidad  FROM tunidad_produccion");
+	return $this->arreglo();
+}
+
+
+
 //fin clase
 }?>

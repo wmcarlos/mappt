@@ -1,38 +1,27 @@
 <?php
 	
 	//primero obtendremos los datos del productor
-	require_once("../modelos/clsTproductor.php");
+	require_once("../modelos/clsTsolicitud.php");
 	$objFuncionescontroller =  new clsFunciones;
-	$lobjTproductor = new clsTproductor();
-	$lobjTproductor->acId=$_REQUEST['txtid_productor'];
-	$lobjTproductor->acTipo=$_POST['txttipo'];
-	$lobjTproductor->acCed_rif=$_POST['txtced_rif'];
-	$lobjTproductor->acNom_rso=$_POST['txtnom_rso'];
-	$lobjTproductor->acId_sector=$_POST['txtid_productor_sector'];
-	$lobjTproductor->acDireccion=$_POST['txtdireccion'];
-	$lobjTproductor->acTelefono=$_POST['txttelefono'];
-	$lobjTproductor->acCorreo=$_POST['txtcorreo'];
-	$lobjTproductor->acAsociacionesjs=$objFuncionescontroller->transform_detail_checkbox($_POST['txtasociacionesjs']);	
+	$objTsolicitud  = new clsTsolicitud();
+
+	$objTsolicitud->idtsolicitud_certificacion_renovacion='';
+	//$objTsolicitud->cedula_rif_productor=$_POST['txtced_rif'];
+	$objTsolicitud->cedula_rif_productor = '20467294';
+	$objTsolicitud->id_unidad_produccion = $_POST['txtid_unidad'];
+	$objTsolicitud->documentos = $objFuncionescontroller->transform_detail_checkbox($_POST['documentos']);
+	$objTsolicitud->funcionario_receptor = $_POST['funcionario_receptor'];
+	$objTsolicitud->oficina_area = $_POST['oficina_area'];
+	$objTsolicitud->num_registro_productor = $_POST['num_registro_productor'];
+	$objTsolicitud->$num_certificado_runnopa; = $_POST['num_certificado_runnopa'];
+	$objTsolicitud->tipo_tramite = '1';
+	$objTsolicitud->estatus_solicitud = '1';
 
 
 
 	if(isset($_POST['btnguardar']))
 	{
-
-		echo "si estas guardando".$_REQUEST['txtid_productor'];
-		echo "<br>";
-		echo 'TIPO'.$_POST['txttipo'];
-		echo '<br>';
-		echo 'cedula'.$_POST['txtced_rif'];
-		echo '<br>';
-		echo 'sector'.$_POST['txtid_productor_sector'];
-		echo '<br>';
-		echo 'correo'.$_POST['txtcorreo'];
-		echo '<br>';
-		echo 'Telefono'.$_POST['txttelefono'];
-		echo '<br>';
-		echo 'Direccion'.$_POST['txtdireccion'];
-		echo '<br>';
+		$objTsolicitud->incluir();
 	}
 
 

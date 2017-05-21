@@ -1,8 +1,17 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
 //require_once('../controladores/corTproductor.php');
+require_once("../modelos/clsTunidad_produccion.php");
 require_once('../controladores/corTsolicitud.php');
 require_once('../modelos/clsTasociacion.php');
+
+
+/*vamos a traernos el codigo de la ultima unidad de produccion registrada*/
+$objunidad_produccion = new clsTunidad_produccion();
+$tunidad_produccion = $objunidad_produccion->traer_codigo_unidadproduccion();
+
+
+
 $objtasociacion = new clsTasociacion();
 $viewarray_asociaciones = array();
 $viewarray_asociaciones  = $objtasociacion->listar_asociaciones();
@@ -69,12 +78,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
-
-			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid_productor' value='<?php print($id);?>' id='txtid_productor' class='validate[required]'/></td>
-			
-		</tr>
-		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
 			<td colspan="4">Natural <input type='radio' checked name='txttipo' value='1'/> Juridica <input type='radio' <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
 		</tr>
@@ -137,9 +140,9 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <div class='cont_frame'>
 	<h1>Datos de la Unidad de Produccion</h1>
 	<table border='1' class='datos' align='center'>
-		<tr style='display:none;'>
+		<tr style=''>
 			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid_unidad' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
+			<td><input type='text' disabled='disabled' maxlength='' name='txtid_unidad' value='<?php print($tunidad_produccion['txtid_unidad']+1);?>' id='txtid' class='validate[required]'/></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Nombre:</td>
@@ -191,28 +194,28 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<p style="background-color: #D9D9D9;padding: 10px; color: red; font-weight: bold; text-align: center;">A continuación se presentan los documentos que validan  la condición como productor agrícola ante la UTMPPAT - PORTUGUESA</p>
 	<table border='1' class='datos' align='center'>
 		<tr>
-			<td><input type="checkbox" name="doc_registro_uniconacional" value="si">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
+			<td><input type="checkbox" name="documentos[]" value="1">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_fotocopia_cedula" value="si">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
+			<td><input type="checkbox" name="documentos[]" value="2">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_fotocopia_registro_fiscal" value="si">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
+			<td><input type="checkbox" name="documentos[]" value="3">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_permanencia_tierras" value="si">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
+			<td><input type="checkbox" name="documentos[]" value="4">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="" value="si">5.- PLANOS DE LA UNIDAD DE PRODUCCIÓN EMITIDO POR EL EL INSTITUTO NACIONAL DE TIERRAS (INTi) CON COORDENADAS UTM</td>
+			<td><input type="checkbox" name="documentos[]" value="5">5.- PLANOS DE LA UNIDAD DE PRODUCCIÓN EMITIDO POR EL EL INSTITUTO NACIONAL DE TIERRAS (INTi) CON COORDENADAS UTM</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_constancia_ocupacion" value="si">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
+			<td><input type="checkbox" name="documentos[]" value="6">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_registro_productores_asociaciones_servicios" value="si">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
+			<td><input type="checkbox" name="documentos[]" value="7">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
 		</tr>
 		<tr>
-			<td><input type="checkbox" name="doc_carpeta_marron" value="si">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
+			<td><input type="checkbox" name="documentos[]" value="8">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
 		</tr>
 	</table>
 </div>
@@ -229,7 +232,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	</tr>
 	<tr>
 		<td>Numero Registro del productor: <input type="text" name="num_registro_productor"></td>
-		<td>Numero de Certificado Runnopa: <input type="text" name="num_certificado_runnopa"></td>
+		<td>Numero de Certificado Runnopa: <input type="text" name="num_registro_productor"></td>
 	</tr>
 	</table>
 </div>
