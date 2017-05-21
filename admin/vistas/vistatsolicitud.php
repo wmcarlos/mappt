@@ -263,6 +263,9 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		background-color: #6D6D6D;
 		color:white;
 	}
+	.step_active{
+		background-color: #6D6D6D !important;		
+	}
 
 </style>
 <script type="text/javascript">
@@ -280,7 +283,12 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			tagstep = parseInt($(this).attr('tagstep'));
 			$(".cont_frame").hide(0);
 			$(".cont_frame").eq(tagstep).fadeIn(200);
-				
+			//activamos el boton
+			$(".ol-ste li").removeClass('step_active');
+			//dejamos activado el formulario en donde nos encontramos
+			$(this).nextAll().removeClass("step_active");
+			$(this).prevAll().removeClass("step_active");
+			$(this).addClass("step_active");
 
 
 		});
