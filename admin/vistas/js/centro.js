@@ -65,5 +65,8 @@ $(document).ready(function(){
           $("#"+load_data).html(data);
        });						
     });
+
+   /*FUNCION PARA CREEAR FORMULARIOS POR PASOS*/
+   
  
 });//cierre del ready

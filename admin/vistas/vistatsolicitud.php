@@ -51,12 +51,18 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 -->
 <?php @include('antes_form.php'); ?>
 
-
-
-
 <div id='mensajes_sistema'></div><br />
 <center><h1 style="font-size: 30px;">Certificación</h1></center>
 <center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
+
+<!--creando el step-->
+<br>
+<center><ol class="ol-step">
+	<!--<li class="step" tagstep="0">1</li>
+	<li class="step" tagstep="1">2</li>
+	<li class="step" tagstep="2">3</li>
+	<li class="step" tagstep="3">4</li>-->	
+</ol></center>
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
@@ -239,6 +245,42 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <?php @include('despues_form.php'); ?>
 </body>
 </html>
+<style type="text/css">
+	ol li.step{
+		display: inline;
+		padding:10px 15px;
+		border:1px solid  #ccc;
+		font-size: 25px;
+		background-color: #ccc;
+		color:black;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	ol li.step:hover{
+		background-color: #6D6D6D;
+		color:white;
+	}
+
+</style>
+<script type="text/javascript">
+	
+	jQuery(document).ready(function($){
+
+		$(".cont_frame").each(function(i){
+			if(i>0){
+				$(this).hide(0);
+			}
+			$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
+
+		});
+		$(document).on('click','li.step',function(){
+			tagstep = parseInt($(this).attr('tagstep'));
+			$(".cont_frame").hide(0);
+			$(".cont_frame").eq(tagstep).fadeIn(200);
+				
 
 
+		});
+
+	});
 </script>
