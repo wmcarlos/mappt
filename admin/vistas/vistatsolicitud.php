@@ -75,7 +75,11 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
+<<<<<<< HEAD
 	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
+=======
+	<h1>Productor</h1>
+>>>>>>> 0d0dddbfe12b3ebbf71b1909fa98f537b272782d
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
