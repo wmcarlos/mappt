@@ -75,7 +75,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-	<h1>Productor</h1>
+	<h1>Productor </h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
@@ -276,8 +276,11 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			if(i>0){
 				$(this).hide(0);
 			}
-			$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
-
+			if(i==0){
+				$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
+			}else{
+				$(".ol-step").append('<li class="step step_active" tagstep="'+i+'" >'+(i+1)+'</li>');
+			}
 		});
 		$(document).on('click','li.step',function(){
 			tagstep = parseInt($(this).attr('tagstep'));
@@ -293,5 +296,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 
 		});
 
+	
 	});
 </script>
