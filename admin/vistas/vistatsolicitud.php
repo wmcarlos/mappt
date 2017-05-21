@@ -236,7 +236,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <!--cierre de los datos del funcionario receptor-->
 
 
-<?php $objFunciones->botonera_general('clsTsolicitud','total',$id); ?>
+<?php $objFunciones->botonera_general('Tsolicitud','total',$id); ?>
 </form><!--cierre del formulario completo-->
 
 
