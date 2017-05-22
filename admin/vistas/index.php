@@ -14,9 +14,6 @@ session_start();
 </head>
 <body>
 <div id="contenedor">
-	<div id="cintillo" style='height:auto;'>
-        <img src="img/cintillo.png" style='width:100%;'/>
-    </div>
     <!--Estructura para el banner-->
     <div id="banner" style="height:auto;">
         <img src="../../img/banner.png" style='width:100%;'/>

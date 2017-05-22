@@ -3,14 +3,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Documento sin título</title>
-<link href="css/global.css" rel="stylesheet" type="text/css" />
+<link href="../../css/global.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js"></script>
 </head>
 <body>
 <div id="contenedor">
-  	<div id="cintillo" style='height:auto;'>
-  		<img src="img/cintillo.png" style='width:100%;'/>
-    </div>
     <div id="banner" style="height:auto;">
     	 <img src="../../img/banner.png" style='width:100%;'/>
     </div>
