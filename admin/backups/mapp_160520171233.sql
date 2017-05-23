@@ -25,6 +25,7 @@ USE `mappt`;
 --
 -- Estructura de tabla para la tabla `tasociacion`
 --
+
 CREATE TABLE `tasociacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
@@ -181,7 +182,8 @@ INSERT INTO `tmodulo` (`id_modulo`, `nombre`, `estatus`, `posicion`, `icono`, `u
 (7, 'SEGURIDAD', 1, 5, '', ''),
 (8, 'LOCALIZACION', 0, 2, '', ''),
 (9, 'MAESTROS', 0, 3, '', ''),
-(10, 'TRANSACCION', 0, 5, '', '');
+(10, 'TRANSACCION', 0, 5, '', ''),
+(11, 'INSPECCION', 0, 6, '', '');
 
 -- --------------------------------------------------------
 
@@ -378,6 +380,28 @@ INSERT INTO `tproductor` (`id`, `tipo`, `ced_rif`, `nom_rso`, `id_sector`, `dire
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tprogramacion_inspeccion`
+--
+
+CREATE TABLE `tprogramacion_inspeccion` (
+  `nro_informe_inspeccion` int(11) NOT NULL,
+  `idtsolicitud_certificacion_renovacion` int(11) NOT NULL,
+  `fecha_asignacion` date NOT NULL,
+  `nombre_usu` char(25) NOT NULL,
+  `observacion` varchar(255) NOT NULL,
+  `estatus` char(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tprogramacion_inspeccion`
+--
+
+INSERT INTO `tprogramacion_inspeccion` (`nro_informe_inspeccion`, `idtsolicitud_certificacion_renovacion`, `fecha_asignacion`, `nombre_usu`, `observacion`, `estatus`) VALUES
+(5, 4, '2017-05-23', 'ALBERTDESINGER', 'ESTA ES UNA OBSERVACION DE SOPORTE TECNICO', '2');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `trol`
 --
 
@@ -413,29 +437,31 @@ CREATE TABLE `trol_servicio` (
 --
 
 INSERT INTO `trol_servicio` (`id_rol_servicio`, `id_rol`, `id_servicio`, `estatus`) VALUES
-(54, 3, 3, 0),
-(55, 3, 9, 0),
-(56, 3, 1, 0),
-(57, 3, 23, 0),
-(58, 3, 5, 0),
-(59, 3, 6, 0),
-(60, 3, 4, 0),
-(61, 3, 10, 0),
-(62, 3, 2, 0),
-(63, 3, 11, 0),
-(64, 3, 7, 0),
-(65, 3, 8, 0),
-(66, 3, 12, 0),
-(67, 3, 13, 0),
-(68, 3, 14, 0),
-(69, 3, 15, 0),
-(70, 3, 16, 0),
-(71, 3, 17, 0),
-(72, 3, 18, 0),
-(73, 3, 19, 0),
-(74, 3, 20, 0),
-(75, 3, 21, 0),
-(76, 3, 22, 0);
+(77, 3, 1, 0),
+(78, 3, 9, 0),
+(79, 3, 23, 0),
+(80, 3, 5, 0),
+(81, 3, 24, 0),
+(82, 3, 3, 0),
+(83, 3, 4, 0),
+(84, 3, 2, 0),
+(85, 3, 10, 0),
+(86, 3, 6, 0),
+(87, 3, 7, 0),
+(88, 3, 11, 0),
+(89, 3, 12, 0),
+(90, 3, 8, 0),
+(91, 3, 13, 0),
+(92, 3, 14, 0),
+(93, 3, 15, 0),
+(94, 3, 16, 0),
+(95, 3, 17, 0),
+(96, 3, 18, 0),
+(97, 3, 19, 0),
+(98, 3, 20, 0),
+(99, 3, 21, 0),
+(100, 3, 22, 0),
+(101, 4, 25, 0);
 
 -- --------------------------------------------------------
 
@@ -513,7 +539,9 @@ INSERT INTO `tservicio` (`id_servicio`, `id_modulo`, `nombre`, `url`, `estatus`,
 (20, 9, 'TIPO DE SUPERFICIE', 'vistaTtipo_superficie.php', 0, 12, ''),
 (21, 9, 'UNIDAD DE MEDIDA', 'vistaTunidad_medida.php', 0, 13, ''),
 (22, 9, 'UNIDAD DE PRODUCCIÃ“N', 'vistaTunidad_produccion.php', 0, 14, ''),
-(23, 10, 'SOLICITUD', 'vistatsolicitud.php', 0, 1, '');
+(23, 10, 'SOLICITUD', 'vistatsolicitud.php', 0, 1, ''),
+(24, 11, 'PROGRAMACIÓN DE INSPECCIÓN', 'vistatprogramacion_inspeccion.php', 0, 1, ''),
+(25, 11, 'INSPECCION TECNICA', 'vistaTinspeccion_tecnica.php', 0, 2, '');
 
 -- --------------------------------------------------------
 
@@ -546,6 +574,13 @@ CREATE TABLE `tsolicitud_certificado_renovacion` (
   `tipo_tramite` char(1) NOT NULL,
   `estatus_solicitud` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tsolicitud_certificado_renovacion`
+--
+
+INSERT INTO `tsolicitud_certificado_renovacion` (`idtsolicitud_certificacion_renovacion`, `fecha_recepcion`, `cedula_rif_productor`, `id_unidad_produccion`, `documentos`, `funcionario_receptor`, `oficina_area`, `num_certificado_runnopa`, `num_registro_productor`, `tipo_tramite`, `estatus_solicitud`) VALUES
+(4, '0000-00-00', '20467294', 1, '1,2,3', 'WMCARLOS', 'COPOSA', '', '', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -622,7 +657,7 @@ CREATE TABLE `tunidad_produccion` (
 --
 
 INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_sector`, `direccion`, `utm_norte`, `utm_este`, `superficie_total`, `superficie_aprovechable`, `superficie_aprovechada`, `croquisimg`, `tap`, `tap_potreros`, `tap_cant_potreros`, `tap_tipo_cerca`, `tap_carga_animal_an_ha`, `tap_tipo_pasto`, `tap_especie_pasto`, `tap_superficie`, `tap_ultimo_mantenimiento`, `tap_fertilizacion`, `maquinariajs`, `implementojs`, `estatus`) VALUES
-(2, '20467294', 'PRADO LOS ANGELES', 1, 'SAN LOS ANGELES', 500, 5000, 25000, 20000, 5000, 'CROQUIS', 1, 1, 5, 1, 120, 1, 'PASTICHO', 5000, '2017-05-16', 1, '2', '3', 1);
+(1, '20467294', 'PRADOS DEL SOL', 1, 'PRADOS DEL SOL', 0, 0, 25000, 20000, 5000, '', 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00', 0, '', '', 1);
 
 -- --------------------------------------------------------
 
@@ -767,6 +802,12 @@ ALTER TABLE `tproductor`
   ADD UNIQUE KEY `ced_rif` (`ced_rif`);
 
 --
+-- Indices de la tabla `tprogramacion_inspeccion`
+--
+ALTER TABLE `tprogramacion_inspeccion`
+  ADD PRIMARY KEY (`nro_informe_inspeccion`);
+
+--
 -- Indices de la tabla `trol`
 --
 ALTER TABLE `trol`
@@ -835,8 +876,7 @@ ALTER TABLE `tunidad_medida`
 -- Indices de la tabla `tunidad_produccion`
 --
 ALTER TABLE `tunidad_produccion`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `ced_rif_productor` (`ced_rif_productor`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tusuario`
@@ -893,7 +933,7 @@ ALTER TABLE `tmetodo_riego`
 -- AUTO_INCREMENT de la tabla `tmodulo`
 --
 ALTER TABLE `tmodulo`
-  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tmunicipio`
 --
@@ -940,6 +980,11 @@ ALTER TABLE `tproduccion_vegetal`
 ALTER TABLE `tproductor`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT de la tabla `tprogramacion_inspeccion`
+--
+ALTER TABLE `tprogramacion_inspeccion`
+  MODIFY `nro_informe_inspeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
 -- AUTO_INCREMENT de la tabla `trol`
 --
 ALTER TABLE `trol`
@@ -948,7 +993,7 @@ ALTER TABLE `trol`
 -- AUTO_INCREMENT de la tabla `trol_servicio`
 --
 ALTER TABLE `trol_servicio`
-  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 --
 -- AUTO_INCREMENT de la tabla `trubro`
 --
@@ -963,7 +1008,7 @@ ALTER TABLE `tsector`
 -- AUTO_INCREMENT de la tabla `tservicio`
 --
 ALTER TABLE `tservicio`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT de la tabla `tsistema_produccion`
 --
@@ -973,7 +1018,7 @@ ALTER TABLE `tsistema_produccion`
 -- AUTO_INCREMENT de la tabla `tsolicitud_certificado_renovacion`
 --
 ALTER TABLE `tsolicitud_certificado_renovacion`
-  MODIFY `idtsolicitud_certificacion_renovacion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtsolicitud_certificacion_renovacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT de la tabla `ttipo_pesca`
 --
@@ -993,7 +1038,7 @@ ALTER TABLE `tunidad_medida`
 -- AUTO_INCREMENT de la tabla `tunidad_produccion`
 --
 ALTER TABLE `tunidad_produccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tusuario`
 --

@@ -1,4 +1,5 @@
 <?php
+require_once("../controladores/cortprogramacion_inspeccion.php");
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
 require_once('../modelos/clstprogramacion_inspeccion.php');
 require_once("../modelos/clstusuario.php");
@@ -65,8 +66,10 @@ $data_inspector = $objusuario->listar_usuarios(4);
 	<td><?php echo $table_inspeccion[$i]['sector']; ?></td>
 	<td><a href="?solicitud=<?php echo $table_inspeccion[$i]['idsolicitud']; ?>&pos=<?php echo $i; ?>">Programar Inspección</a></td>
 </tr>
-<?php } 
+<?php } ?>
+</table>
 
+<?php 
 }else{
 	
 ?>	
@@ -74,13 +77,14 @@ $data_inspector = $objusuario->listar_usuarios(4);
 	<div id='mensajes_sistema'></div><br />
 	<center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
 	</br>
-	<form name='form1' id='form1' autocomplete='off' method='post'/>
+	<form name='form1' id='form1' action="?" autocomplete='off' method='post'/>
+	<input type="hidden" name="estatus_programacion" value="2">
 	<div class='cont_frame'>
 		<h1>Programar Inspección de unidad productiva</h1>
 		<table border='1' class='datos' align='center'>
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Nro Solicitud:</td>
-				<td colspan="3"><input type='text' readonly="readonly"  value="<?php echo $table_inspeccion[$_GET['pos']]['idsolicitud']; ?>" /></td>
+				<td colspan="3"><input name="idsolicitud" type='text' readonly="readonly"  value="<?php echo $table_inspeccion[$_GET['pos']]['idsolicitud']; ?>" /></td>
 			</tr>
 
 			<tr>
@@ -95,14 +99,13 @@ $data_inspector = $objusuario->listar_usuarios(4);
 				<td align='right'><span class='rojo'>*</span>Sector</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['sector']; ?></td>
 			</tr>
-				<tr>
+			<tr>
 				<td align='right'><span class='rojo'>*</span>Superficie Total</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_total']; ?></td>
 				<td align='right'><span class='rojo'>*</span>Superficie Aprovechable</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechable']; ?></td>
 			</tr>
-			</tr>
-				<tr>
+			<tr>
 				<td align='right'><span class='rojo'>*</span>Superficie Aprovechada</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechada']; ?></td>
 				<td align='right'><span class='rojo'>*</span>Fecha de asignacion</td>
@@ -119,11 +122,15 @@ $data_inspector = $objusuario->listar_usuarios(4);
 					</select>
 				</td>
 			</tr>
-
-
-
+			<tr>
+				<td align='right'><span class='rojo'>*</span>Observación</td>
+				<td colspan="3">
+					<textarea name="observacion" style="width: 100%; height: 30px;"></textarea>
+				</td>
+			</tr>
 		</table>
-		<?php //$objFunciones->botonera_general('Tciclo','total',$id); ?>
+		<br>
+		<input type="submit" name="btnguardar2"  value="Enviar Programación">
 	</div>
 	</form>
 
