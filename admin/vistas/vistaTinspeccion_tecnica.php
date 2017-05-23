@@ -152,6 +152,9 @@ $data_analista = $objusuario->listar_usuarios(4);
 			</tr>
 			<!--DATOS A RELLENAR DE LA UNIDAD PRODUCTIVA-->
 			<tr>
+				<td colspan="4" style="padding:10px; background-color: #ccc; color:black; font-weight: bold;"><center>DATOS A INSPECCIONAR</center></td>
+			</tr>
+			<tr>
 				<td align='right'><span class='rojo'>*</span> UTM Este:</td>
 				<td><input type='text'  maxlength='' name='txtutm_este' value='<?php print($lcUtm_este);?>' id='txtutm_este' class='validate[required],custom[integer]'/></td>
 				<td align='right'><span class='rojo'>*</span> UTM Norte:</td>
@@ -200,6 +203,9 @@ $data_analista = $objusuario->listar_usuarios(4);
 					<br>
 					<?php }?>
 				</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="padding:10px; background-color: #ccc; color:black; font-weight: bold;"><center>PRODUCCIONES DE LA UNIDAD</center></td>
 			</tr>
 			<tr>
 				<td colspan="4">
