@@ -12,7 +12,7 @@ jQuery(document).ready(function(){
 	jQuery(".agregar").on('click', function(){
 		//vamos ahacerlo dinamico
 		dinamic_id = jQuery(this).parent().parent().parent().parent().attr("id");
-		jQuery("#"+dinamic_id+" tbody tr:eq(0)").clone().removeClass('tr_padre').appendTo("#"+dinamic_id+" tbody");
+		jQuery("#"+dinamic_id+" tbody tr:eq(0)").clone().removeClass('tr_padre').attr('class','tr_detail_padre').appendTo("#"+dinamic_id+" tbody");
 	});
 
 

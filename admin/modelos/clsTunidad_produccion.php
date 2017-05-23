@@ -180,6 +180,12 @@ $this->acTap_ultimo_mantenimiento = $this->changedate($this->acTap_ultimo_manten
 return $this->ejecutar("update tunidad_produccion set id = '$this->acId', ced_rif_productor = '$this->acCed_rif_productor', nombre = '$this->acNombre', id_sector = '$this->acId_sector', direccion = '$this->acDireccion', utm_norte = '$this->acUtm_norte', utm_este = '$this->acUtm_este', superficie_total = '$this->acSuperficie_total', superficie_aprovechable = '$this->acSuperficie_aprovechable', superficie_aprovechada = '$this->acSuperficie_aprovechada', croquisimg = '$this->acCroquisimg', tap = '$this->acTap', tap_potreros = '$this->acTap_potreros', tap_cant_potreros = '$this->acTap_cant_potreros', tap_tipo_cerca = '$this->acTap_tipo_cerca', tap_carga_animal_an_ha = '$this->acTap_carga_animal_an_ha', tap_tipo_pasto = '$this->acTap_tipo_pasto', tap_especie_pasto = '$this->acTap_especie_pasto', tap_superficie = '$this->acTap_superficie', tap_ultimo_mantenimiento = '$this->acTap_ultimo_mantenimiento', tap_fertilizacion = '$this->acTap_fertilizacion', maquinariajs = '$this->acMaquinariajs', implementojs = '$this->acImplementojs' where(id = '$this->acId')");
 }
  
+//funcion para actualizar todos los datos de inspeccion en la unidad de produccion
+public function actualizar_unidad(){
+	$this->acTap_ultimo_mantenimiento = $this->changedate($this->acTap_ultimo_mantenimiento);
+	return $this->ejecutar("update tunidad_produccion set utm_norte = '$this->acUtm_norte', utm_este = '$this->acUtm_este', croquisimg = '$this->acCroquisimg', tap = '$this->acTap', tap_potreros = '$this->acTap_potreros', tap_cant_potreros = '$this->acTap_cant_potreros', tap_tipo_cerca = '$this->acTap_tipo_cerca', tap_carga_animal_an_ha = '$this->acTap_carga_animal_an_ha', tap_tipo_pasto = '$this->acTap_tipo_pasto', tap_especie_pasto = '$this->acTap_especie_pasto', tap_superficie = '$this->acTap_superficie', tap_ultimo_mantenimiento = '$this->acTap_ultimo_mantenimiento', tap_fertilizacion = '$this->acTap_fertilizacion', maquinariajs = '$this->acMaquinariajs', implementojs = '$this->acImplementojs' where(id = '$this->acId')");
+}
+
  
 //funcion eliminar        
 public function eliminar()

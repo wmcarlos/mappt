@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once("../controladores/cortprogramacion_inspeccion.php");
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
+require_once("../controladores/corTinspeccion_tecnica.php");
 require_once('../modelos/clstprogramacion_inspeccion.php');
 require_once("../modelos/clstusuario.php");
 require_once('../modelos/clsTmaquinaria_implemento.php');
@@ -98,7 +98,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 	<div id='mensajes_sistema'></div><br />
 	<center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
 	</br>
-	<form name='form1' id='form1' action="?" autocomplete='off' method='post'/>
+	<form name='form1' id='form1'  autocomplete='off' method='post'/>
 	<input type="hidden" name="estatus_programacion" value="3">
 	<div class='cont_frame'>
 		<h1>Inspeccion Tecnica</h1>
@@ -151,6 +151,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 			<tr>
 				<td colspan="4" style="padding:10px; background-color: #ccc; color:black; font-weight: bold;"><center>DATOS A INSPECCIONAR</center></td>
 			</tr>
+			<input type="hidden" name="idunidad_produccion" value="<?php echo $table_inspeccion[$_GET['pos']]['idunidad_produccion']; ?>">
 			<tr>
 				<td align='right'><span class='rojo'>*</span> UTM Este:</td>
 				<td><input type='text'  maxlength='' name='txtutm_este' value='<?php print($lcUtm_este);?>' id='txtutm_este' class='validate[required],custom[integer]'/></td>
@@ -165,29 +166,29 @@ $data_analista = $objusuario->listar_usuarios(4);
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span> Potreros:</td>
-				<td colspan="3"><input type='text' disabled='disabled' maxlength='' name='txttap_cant_potreros' value='<?php print($lcTap_cant_potreros);?>' id='txttap_cant_potreros' class='validate[required],custom[integer]'/></td>
+				<td colspan="3"><input type='text'  maxlength='' name='txttap_cant_potreros' value='<?php print($lcTap_cant_potreros);?>' id='txttap_cant_potreros' class='validate[required],custom[integer]'/></td>
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span> Tipo de Cerca:</td>
-				<td>Convencional <input type='radio' checked name='txttap_tipo_cerca' disaled value='1'/> Electrica <input type='radio' disabled name='txttap_tipo_cerca' <?php if($lcTap_tipo_cerca == 2){ print "checked"; } ?> value='2'/> </td>
+				<td>Convencional <input type='radio' checked name='txttap_tipo_cerca' disaled value='1'/> Electrica <input type='radio' name='txttap_tipo_cerca' <?php if($lcTap_tipo_cerca == 2){ print "checked"; } ?> value='2'/> </td>
 				<td align='right'><span class='rojo'>*</span> Carga Animal x Ha:</td>
-				<td><input type='text' disabled='disabled' maxlength='' name='txttap_carga_animal_an_ha' value='<?php print($lcTap_carga_animal_an_ha);?>' id='txttap_carga_animal_an_ha' class='validate[required],custom[integer]'/></td>
+				<td><input type='text'  maxlength='' name='txttap_carga_animal_an_ha' value='<?php print($lcTap_carga_animal_an_ha);?>' id='txttap_carga_animal_an_ha' class='validate[required],custom[integer]'/></td>
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span> Superficie:</td>
-				<td><input type='text' disabled='disabled' maxlength='' name='txttap_superficie' value='<?php print($lcTap_superficie);?>' id='txttap_superficie' class='validate[required],custom[integer]'/></td>
+				<td><input type='text'  maxlength='' name='txttap_superficie' value='<?php print($lcTap_superficie);?>' id='txttap_superficie' class='validate[required],custom[integer]'/></td>
 				<td align='right'><span class='rojo'>*</span> Ultimo Mantenimiento:</td>
-				<td><input type='text' disabled='disabled' name='txttap_ultimo_mantenimiento' value='<?php print($lcTap_ultimo_mantenimiento);?>' id='txttap_ultimo_mantenimiento' class='validate[required] fecha_formateada'/></td>
+				<td><input type='text'  name='txttap_ultimo_mantenimiento' value='<?php print($lcTap_ultimo_mantenimiento);?>' id='txttap_ultimo_mantenimiento' class='validate[required] fecha_formateada'/></td>
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span> Fertilizacion:</td>
-				<td colspan="4">Si <input type='radio' disabled checked name='txttap_fertilizacion' value='1'/> No <input type='radio' disabled <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
+				<td colspan="4">Si <input type='radio' checked name='txttap_fertilizacion' value='1'/> No <input type='radio'  <?php if($lcTap_fertilizacion == 2){ print "checked"; }?> name='txttap_fertilizacion' value='2'/> </td>
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span> Maquinarias:</td>
 				<td colspan="4">
 					<?php for($i=0; $i<count($viewarray_maquinaria); $i++){ ?>
-					<input type="checkbox" disabled name="details_maquinarias[]" <?php if(isset($lcMaquinariajs)) echo $objFunciones->checked_transaccional($viewarray_maquinaria[$i]['id'], $lcMaquinariajs);  ?> value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
+					<input type="checkbox"  name="details_maquinarias[]" <?php if(isset($lcMaquinariajs)) echo $objFunciones->checked_transaccional($viewarray_maquinaria[$i]['id'], $lcMaquinariajs);  ?> value="<?php echo $viewarray_maquinaria[$i]['id']; ?>"> <?php echo $viewarray_maquinaria[$i]['nombre']; ?>
 					<br>
 					<?php }?>
 				</td>
@@ -196,7 +197,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 				<td align='right'><span class='rojo'>*</span> Implementos:</td>
 				<td colspan="4">
 					<?php for($j=0; $j<count($viewarray_implemento); $j++){ ?>
-					<input type="checkbox" disabled <?php if(isset($lcImplementojs)) echo $objFunciones->checked_transaccional($viewarray_implemento[$j]['id'], $lcImplementojs); ?>  name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$j]['nombre']; ?>
+					<input type="checkbox"  <?php if(isset($lcImplementojs)) echo $objFunciones->checked_transaccional($viewarray_implemento[$j]['id'], $lcImplementojs); ?>  name="details_implementos[]" value="<?php echo $viewarray_implemento[$j]['id']; ?>"> <?php echo $viewarray_implemento[$j]['nombre']; ?>
 					<br>
 					<?php }?>
 				</td>
@@ -239,107 +240,9 @@ $data_analista = $objusuario->listar_usuarios(4);
 		<input type="submit" name="btnguardar2"  value="Enviar inspeccion">
 	</div>
 
-
-	<!--tablas transaccionles para cada produccion-->
-	<!--produccion vegetal-->
-	<style type="text/css">
-		tr.tr_padre td.eliminar{
-			display: none;
-		}
-	</style>
-	<table id="transaccion_produccion_vegetal"  width="90%" style="background-color: white;" class="transaccion_mascara"  align="center">
-		<caption>Transaccion de persona</caption>
-		<!-- Cabecera de la tabla -->
-		<thead>
-			<tr>
-				<th>Agregar</th>
-				<th><input type="button" class="agregar" value="+"/></th>
-			</tr>
-		</thead>
-		<!-- Cuerpo de la tabla con los campos -->
-		<tbody>
-			<!-- fila base a tomar en cuenta-->
-			<tr class="tr_padre" style="display: block;">
-				<td style="padding:10px; border-bottom: 1px solid #ccc;"><!--aqui se crea el formulario-->
-				
-					<span>
-						Ciclo:
-						<br>
-						<select name="ciclo_vegetal[]" class="select-change"> 
-						<?php for($i=0; $i<count($data_ciclos);$i++){ ?> 
-							<option value="<?php echo $data_ciclos[$i]['idciclo']; ?>"><?php echo $data_ciclos[$i]['nombre_ciclo']; ?></option>
-						<?php }?>
-						</select>
-					</span>
-					<span>
-						Año:
-						<input type="text" maxlength="4" name="anio_vegetal[]">
-					</span>
-					<span>
-						Grupo Rubro:
-						<select class="select_change" operacion="listar_rubros" load_data="rubros">
-							<option value=''>Seleccione</option>
-							<?php  print $objFunciones->crear_combo("tgrupo_rubro","id","nombre",""); ?>
-						</select>
-					</span>
-					<span>
-						Rubro:
-						<select name="rubros_vegetal[]" id="rubros">
-							<option value=''>Seleccione</option>
-						</select>
-					</span>
-					<span>
-						Superficie:
-						<input type="text" name="superficie_vegetal[]">
-					</span>
-					<br>
-					<br>
-					<span>
-						Superficie de cosecha:
-						<input type="text" name="superficie_vegetal_cosecha[]">
-					</span>
-					<span>
-						Rendimiento:
-						<input type="text" name="rendimiento_vegetal[]">
-					</span>
-					<span>
-						Produccion:
-						<input type="text" name="produccion_vegetal[]">
-					</span>
-					<br>
-					<br>
-					<span>Riego:
-						<input type="text" name="riego_vegetal[]">
-					</span>
-					<span>
-						Superficie Bajo Riego:
-						<input type="text" name="superficie_bajoriego_vegetal[]">
-					</span>
-					<span>
-						Superficie Regada:
-						<input type="text" name="superficie_regada_vegetal[]">
-					</span>
-					<br>
-					<br>
-					<span>
-						Tipo de ambiente:
-						<input type="text" name="tipo_ambiente_vegetal[]">
-					</span>
-					<span>
-						Fuente de agua:
-						<input type="text" name="fuente_agua_vegetal[]">
-					</span>
-					<br>
-					<br>
-					
-				</td>
-				<td class="eliminar"><input type="button" value="-"></td>
-			</tr>
-			<!-- fin de código: fila base --> 
-		</tbody>
-	</table>
-	<!--cierre de la produccion vegetal-->
-
+	<!--llamaremos a los formularios detalles aqui-->
+	<?php include_once("vistaDetalles.php"); ?>
+	<!--cierre de los formularios detalles-->
 
 	<!--cierre de los formularios de contacto-->
 	</form>
@@ -378,7 +281,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 <script type="text/javascript">
 	
 	jQuery(document).ready(function($){
-		$("tr.tr_padre span select.select-change").change(function(){
+		$(document).on('change','tr.tr_padre span select.select-change',function(){
 			valor_select = $(this).val();
 			select_temp = $(this);
 			//hacemos un each para remover los selected y agregarlo al seleccionado
@@ -394,7 +297,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 			/*reiniciamos todos los campos*/
 			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span input').val("");
 			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span textarea').val("");
-			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span select').val("1");
+			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span select').val("");
 
 			
 		});

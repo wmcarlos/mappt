@@ -64,7 +64,7 @@
 		public function listar_solicitudes_inspector($usuario_inspector){
 			$array_solicitudes = [];
 
-			$this->ejecutar("SELECT tsolicitud_certificado_renovacion.* , tproductor.nom_rso,tproductor.ced_rif,tproductor.direccion, tproductor.telefono, tproductor.correo,tunidad_produccion.nombre, tunidad_produccion.superficie_total, tunidad_produccion.superficie_aprovechable, tunidad_produccion.superficie_aprovechada, tsector.nombre AS sector,tprogramacion_inspeccion.observacion, tprogramacion_inspeccion.fecha_asignacion ,tprogramacion_inspeccion.nro_informe_inspeccion FROM tsolicitud_certificado_renovacion, tproductor, tunidad_produccion, tsector, tprogramacion_inspeccion WHERE tsolicitud_certificado_renovacion.estatus_solicitud = 2 AND tsolicitud_certificado_renovacion.cedula_rif_productor = tproductor.ced_rif AND tsolicitud_certificado_renovacion.id_unidad_produccion = tunidad_produccion.id AND tunidad_produccion.id_sector = tsector.id AND tsolicitud_certificado_renovacion.idtsolicitud_certificacion_renovacion = tprogramacion_inspeccion.idtsolicitud_certificacion_renovacion 
+			$this->ejecutar("SELECT tsolicitud_certificado_renovacion.* , tproductor.nom_rso,tproductor.ced_rif,tproductor.direccion, tproductor.telefono, tproductor.correo,tunidad_produccion.id AS idunidad_produccion ,tunidad_produccion.nombre, tunidad_produccion.superficie_total, tunidad_produccion.superficie_aprovechable, tunidad_produccion.superficie_aprovechada, tsector.nombre AS sector,tprogramacion_inspeccion.observacion, tprogramacion_inspeccion.fecha_asignacion ,tprogramacion_inspeccion.nro_informe_inspeccion FROM tsolicitud_certificado_renovacion, tproductor, tunidad_produccion, tsector, tprogramacion_inspeccion WHERE tsolicitud_certificado_renovacion.estatus_solicitud = 2 AND tsolicitud_certificado_renovacion.cedula_rif_productor = tproductor.ced_rif AND tsolicitud_certificado_renovacion.id_unidad_produccion = tunidad_produccion.id AND tunidad_produccion.id_sector = tsector.id AND tsolicitud_certificado_renovacion.idtsolicitud_certificacion_renovacion = tprogramacion_inspeccion.idtsolicitud_certificacion_renovacion 
 				AND tprogramacion_inspeccion.nombre_usu = '$usuario_inspector' ");
 
 				while($laRow=$this->arreglo()){
@@ -80,6 +80,7 @@
 						'correo_productor'=>$laRow['correo'],
 						'telefono_productor'=>$laRow['telefono'],
 						'unidad_produccion'=>$laRow['nombre'],
+						'idunidad_produccion'=>$laRow['idunidad_produccion'],
 						'superficie_total'=>$laRow['superficie_total'],
 						'superficie_aprovechable'=>$laRow['superficie_aprovechable'],
 						'superficie_aprovechada'=>$laRow['superficie_aprovechada'],
