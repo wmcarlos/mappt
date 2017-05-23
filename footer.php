@@ -6,7 +6,7 @@
         <li><a href=""><img src="img/inder.png"></a></li>
         <li><a href=""><img src="img/inia.png"></a></li>
       </ol>-->
-      <div class="contenido_pie"></div>
+      <p id="contenido_pie"></p>
   </div>
 </div>
 </body>

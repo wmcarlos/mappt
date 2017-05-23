@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Entrar</title>
 <link href="../css/global.css" rel="stylesheet" type="text/css" />
-<script src="vistas/js/jquery.js"></script>
+<script src="vistas/js/jquery2.js"></script>
 </head>
 <body>
 <div id="contenedor">
@@ -65,12 +65,14 @@
    <!--Pie de Pagina-->
    <!--Pie de Pagina-->
   <div id="pie">
+    <!--
       <ol class="style-footer">
         <li><a href=""><img src="../img/icono_agropatria.png"></a></li>
         <li><a href=""><img src="../img/icono_inti.png"></a></li>
         <li><a href=""><img src="../img/inder.png"></a></li>
         <li><a href=""><img src="../img/inia.png"></a></li>
-      </ol>
+      </ol>-->
+      <p id="contenido_pie"></p>
   </div>
 </div>
 </body>
