@@ -26,6 +26,9 @@
 
 	function insertproduccion(){
 		$objInspecciontecnica_vegetal = new clsTinspeccion_tecnica(); 
+		$objInspecciontecnica_apicola= new clsTinspeccion_tecnica(); 
+		$objInspecciontecnica_cunicula= new clsTinspeccion_tecnica(); 
+
 
 		//insertamos todos los datos de la produccion vegetal
 		for($i=0; $i<count($_POST['ciclo_vegetal']); $i++){
@@ -51,7 +54,36 @@
 				$objInspecciontecnica_vegetal->insertar_produccion_vegetal();
 			}
 		}//cierre del registro de produccion vegetal
-	}
+
+
+
+		//insertamos todos los datos de la produccion apicola
+		for($i=0; $i<count($_POST['cantidad_apicola']); $i++){
+			if($i>0){
+				$objInspecciontecnica_apicola->id_unidad_produccion = $_POST['idunidad_produccion'];
+				$objInspecciontecnica_apicola->id_rubro = $_POST['rubros_apicola'][$i];
+				$objInspecciontecnica_apicola->cantidad_apicola = $_POST['cantidad_apicola'][$i];
+				$objInspecciontecnica_apicola->produccion_mensual_apicola = $_POST['produccion_mensual_apicola'][$i];
+				$objInspecciontecnica_apicola->unidad_medida_apicola = $_POST['unidad_medida_apicola'][$i];
+				/*insertamos los datos*/
+				$objInspecciontecnica_apicola->insertar_produccion_apicola();
+			}
+		}
+
+		//insertamos todos los datos de la produccion cunicula
+		for($i=0; $i<count($_POST['cantidad_cunicula']); $i++){
+			if($i>0){
+				$objInspecciontecnica_cunicula->id_unidad_produccion = $_POST['idunidad_produccion'];
+				$objInspecciontecnica_cunicula->id_rubro = $_POST['rubros_cunicula'][$i];
+				$objInspecciontecnica_cunicula->cantidad_cunicula = $_POST['cantidad_cunicula'][$i];
+				$objInspecciontecnica_cunicula->produccion_mensual_cunicula = $_POST['produccion_mensual_apicola'][$i];
+				$objInspecciontecnica_cunicula->unidad_medida_apicola = $_POST['unidad_medida_apicola'][$i];
+				/*insertamos los datos*/
+				$objInspecciontecnica_cunicula->insertar_produccion_cunicula();
+			}
+		}
+
+	}	
 
 
 	/*una ves enviado los datos procederemos a actualizar la unidad de produccion*/

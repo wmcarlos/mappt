@@ -6,6 +6,7 @@ require_once('../modelos/clstprogramacion_inspeccion.php');
 require_once("../modelos/clstusuario.php");
 require_once('../modelos/clsTmaquinaria_implemento.php');
 require_once("../modelos/clsTciclo.php");
+require_once("../modelos/clsTunidad_medida.php");
 //obtener en formato array list los implementos y maquinarias por separado
 $objMaquinariaimplementos = new clsTmaquinaria_implemento();
 $viewarray_maquinaria = array();
@@ -18,8 +19,13 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 /*listas los ciclos*/
 $objciclos = new clsTciclo();
 $data_ciclos = $objciclos->listar_ciclos();
-
 /*listar los ciclos*/
+/*listas unidad de medida*/
+$objunidad_medida = new clsTunidad_medida();
+$data_unidad_medida = $objunidad_medida->listar_unidad_medida();
+/*..*/
+
+
 
 $objFunciones = new clsFunciones;
 $objprogramacion_inspeccion = new clstprogramacion_inspeccion();
@@ -209,10 +215,11 @@ $data_analista = $objusuario->listar_usuarios(4);
 				<td colspan="4">
 					<center>
 						<input type="button" tagmask="transaccion_produccion_vegetal" class="button-all-transaccion" value="Produccion Vegetal">
+						<input type="button" tagmask="transaccion_produccion_apicola" class="button-all-transaccion" value="Produccion Apicola">
+						<input type="button" value="Produccio Cunicula" tagmask="transaccion_produccion_cunicula" class="button-all-transaccion">
 						<input type="button" value="Produccion Pecuaria">
 						<input type="button" value="Produccion Pescera">
-						<input type="button" value="Produccion Avicola">
-						<input type="button" value="Produccion Porcino">
+						
 					</center>
 				</td>
 			</tr>

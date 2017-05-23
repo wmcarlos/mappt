@@ -75,6 +75,22 @@ public function modificar($lcVarTem)
 return $this->ejecutar("update tunidad_medida set id = '$this->acId', nombre = '$this->acNombre', siglas = '$this->acSiglas' where(id = '$this->acId')");
 }
  
+
+//listar unidades de medida
+public function listar_unidad_medida()
+{	
+	$array = array();
+	$this->ejecutar("SELECT * FROM tunidad_medida");
+	//return $this->arreglo();
+	while($laRow = $this->arreglo()){
+		array_push($array,array(
+			'idunidad_medida'=>$laRow['id'],
+			'nombre_unidad_medida'=>$laRow['nombre'],
+			'siglas_unidad_medida'=>$laRow['siglas']
+		));
+	}
+	return $array; 
+} 
  
 //funcion eliminar        
 public function eliminar()
