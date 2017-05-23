@@ -26,6 +26,9 @@ print($obj->busqueda_ajax($datos));
 			$objProductor = new clsTproductor();
 			print $objProductor->busqueda_ajax2($datos);
 		break;
+		case "listar_rubros":
+			print "<option value=''>Seleccione</option>".$objFunciones->combo_segun_combo("trubro","id","nombre","id_grupo_rubro",$datos,"");
+		break;
 	}	
 }
 ?>

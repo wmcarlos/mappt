@@ -27,9 +27,6 @@ $objusuario = new clstusuario();
 $table_inspeccion = $objprogramacion_inspeccion->listar_solicitudes_inspector($_SESSION['user']);
 //esto lo utilizaremos al a hora de enviarlo a la analista
 $data_analista = $objusuario->listar_usuarios(4);
-
-
-
 ?>
 
 
@@ -279,8 +276,17 @@ $data_analista = $objusuario->listar_usuarios(4);
 						<input type="text" maxlength="4" name="anio_vegetal[]">
 					</span>
 					<span>
+						Grupo Rubro:
+						<select class="select_change" operacion="listar_rubros" load_data="rubros">
+							<option value=''>Seleccione</option>
+							<?php  print $objFunciones->crear_combo("tgrupo_rubro","id","nombre",""); ?>
+						</select>
+					</span>
+					<span>
 						Rubro:
-						<input type="text" name="rubros_vegetal[]">
+						<select name="rubros_vegetal[]" id="rubros">
+							<option value=''>Seleccione</option>
+						</select>
 					</span>
 					<span>
 						Superficie:
