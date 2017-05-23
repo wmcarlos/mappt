@@ -4,7 +4,7 @@
         <div id="izquierdo">
 			<h1 class="titulo">Bienvenido</h1>
 			<p class="parrafo">
-				LA INDUSTRIA VENEZOLANA MAICERA PRONUTRICOS C.A., es una empresa agroindustrial con sede en Araure, Estado Portuguesa, dedicada al procesamiento, comercialización de maíz y sus derivados. Así como a la recepción, acondicionamiento y almacenaje de granos en general.
+				El Ministerio del Poder popular para la Agricultura y Tierras Es la instancia designada por el Poder Ejecutivo Nacional para llevar adelante los procesos de coordinación y concertación de las cadenas agro productivas, a objeto de fomentar el desarrollo de un sector agrícola realmente fortalecido, diversificado y con altos niveles de eficiencia. Para la consecución de ese objetivo estratégico trabajamos arduamente en el fortalecimiento de sistemas específicos de información y divulgación tecnológica, que proporcionen las herramientas necesarias a los agentes involucrados, para optimizar su trabajo productivo y garantizar la seguridad alimentaria de todos los venezolanos, siempre dentro de un marco de respeto a la biodiversidad y estímulo al desarrollo ecológicamente sustentable.
 			</p>
 			<h1 class="titulo">Galeria</h1>
 			<!--Contenedor del Slider de Noticias-->
@@ -48,13 +48,6 @@
 					 </div>
 				</div>
 			</div>
-			<!--Contenedor de Noticias Restantes-->
-			<h1 class="titulo">USO ACTUAL</h1>
-			<p class="parrafo">La Planta Agroindustrial INDUSTRIA VENEZOLANA MAICERA PRONUTRICOS, C.A dispone de dos (2) plantas de recepción, secado y almacenamiento, con una capacidad estimada de 13.500 toneladas métricas de arroz y maíz, lo cual la ubica en una de las plantas de recepción de granos líder en la zona.
-<br/><br/>
-En referencia al potencial de procesamiento de cereales, es bueno destacar que es una de las pocas plantas procesadoras de precocido de harina de maíz en el área, dado que las empresas lideres en la obtención de este producto se localizan en la zona Centro – Occidental del País.
-<br/> <br/>
-En cuanto a la mano de obra se trabaja actualmente con un plantel de unos 135 empleados, quienes operan en tres (3) turnos durante las 24 horas del día en la planta de precocido de harina de maíz.</p>
         </div>
 		<!--Contenido Derecho-->
         <?php include("widget.php"); ?>
