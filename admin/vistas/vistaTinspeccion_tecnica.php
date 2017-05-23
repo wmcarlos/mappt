@@ -296,6 +296,30 @@ $data_analista = $objusuario->listar_usuarios(4);
 					</span>
 					<br>
 					<br>
+					<span>Riego:
+						<input type="text" name="riego_vegetal[]">
+					</span>
+					<span>
+						Superficie Bajo Riego:
+						<input type="text" name="superficie_bajoriego_vegetal[]">
+					</span>
+					<span>
+						Superficie Regada:
+						<input type="text" name="superficie_regada_vegetal[]">
+					</span>
+					<br>
+					<br>
+					<span>
+						Tipo de ambiente:
+						<input type="text" name="tipo_ambiente_vegetal[]">
+					</span>
+					<span>
+						Fuente de agua:
+						<input type="text" name="fuente_agua_vegetal[]">
+					</span>
+					<br>
+					<br>
+					
 				</td>
 				<td class="eliminar"><input type="button" value="-"></td>
 			</tr>
