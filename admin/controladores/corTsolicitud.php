@@ -34,9 +34,11 @@
 
 	if(isset($_POST['btnguardar']))
 	{
+		$lcOperacion = "incluir";
 		//guardamos la unidad de produccion primeramente
 		$lobjTunidad_produccion->incluir();
 		$objTsolicitud->incluir();
+		$lcListo = 1;
 	}
 
 
