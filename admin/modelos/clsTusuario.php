@@ -144,5 +144,19 @@ public function eliminar()
 {
 return $this->ejecutar("delete from tusuario where(nombre_usu = '$this->acNombre_usu')");
 }
+
+public function listar_usuarios($tipo_usuario){
+	$arrData = [];
+	$this->ejecutar("SELECT * FROM tusuario WHERE tipo='$tipo_usuario' ");
+	while($row = $this->arreglo()){ 
+		array_push($arrData,array(
+			'nombre_usu'=>$row['nombre_usu'],
+			'nombre_completo'=>$row['nombre_completo']
+
+		));
+	}
+	return $arrData;
+}
+
 //fin clase
 }?>

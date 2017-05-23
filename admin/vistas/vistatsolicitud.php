@@ -75,7 +75,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <br>	
-<input type="hidden" name="fecha_recepcion" value="<?php @date("Y-m-d"); ?>">
+<input type="hidden" name="fecha_recepcion" value="<?php echo @date("Y-m-d"); ?>">
 <center><strong style="font-weight: bold;">Fecha De Recepción:<?php echo @date("d-m-Y"); ?></strong></center>
 <br>
 
