@@ -5,6 +5,7 @@ require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
 require_once('../modelos/clstprogramacion_inspeccion.php');
 require_once("../modelos/clstusuario.php");
 require_once('../modelos/clsTmaquinaria_implemento.php');
+require_once("../modelos/clsTciclo.php");
 //obtener en formato array list los implementos y maquinarias por separado
 $objMaquinariaimplementos = new clsTmaquinaria_implemento();
 $viewarray_maquinaria = array();
@@ -13,12 +14,21 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 //cierre de la funcion
 //funcion para realizar checkex transaccional
 
+
+/*listas los ciclos*/
+$objciclos = new clsTciclo();
+$data_ciclos = $objciclos->listar_ciclos();
+
+/*listar los ciclos*/
+
 $objFunciones = new clsFunciones;
 $objprogramacion_inspeccion = new clstprogramacion_inspeccion();
 $objusuario = new clstusuario();
 $table_inspeccion = $objprogramacion_inspeccion->listar_solicitudes_inspector($_SESSION['user']);
 //esto lo utilizaremos al a hora de enviarlo a la analista
 $data_analista = $objusuario->listar_usuarios(4);
+
+
 
 ?>
 
@@ -194,7 +204,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 			<tr>
 				<td colspan="4">
 					<center>
-						<input type="button" value="Produccion Vegetal">
+						<input type="button" tagmask="transaccion_produccion_vegetal" class="button-all-transaccion" value="Produccion Vegetal">
 						<input type="button" value="Produccion Pecuaria">
 						<input type="button" value="Produccion Pescera">
 						<input type="button" value="Produccion Avicola">
@@ -225,9 +235,78 @@ $data_analista = $objusuario->listar_usuarios(4);
 		<br>
 		<input type="submit" name="btnguardar2"  value="Enviar inspeccion">
 	</div>
+
+
+	<!--tablas transaccionles para cada produccion-->
+	<!--produccion vegetal-->
+	<style type="text/css">
+		tr.tr_padre td.eliminar{
+			display: none;
+		}
+	</style>
+	<table id="transaccion_produccion_vegetal"  width="90%" style="background-color: white;" class="transaccion_mascara"  align="center">
+		<caption>Transaccion de persona</caption>
+		<!-- Cabecera de la tabla -->
+		<thead>
+			<tr>
+				<th>Agregar</th>
+				<th><input type="button" class="agregar" value="+"/></th>
+			</tr>
+		</thead>
+		<!-- Cuerpo de la tabla con los campos -->
+		<tbody>
+			<!-- fila base a tomar en cuenta-->
+			<tr class="tr_padre" style="display: block;">
+				<td style="padding:10px; border-bottom: 1px solid #ccc;"><!--aqui se crea el formulario-->
+				
+					<span>
+						Ciclo:
+						<br>
+						<select name="ciclo_vegetal[]" class="select-change"> 
+						<?php for($i=0; $i<count($data_ciclos);$i++){ ?> 
+							<option value="<?php echo $data_ciclos[$i]['idciclo']; ?>"><?php echo $data_ciclos[$i]['nombre_ciclo']; ?></option>
+						<?php }?>
+						</select>
+					</span>
+					<span>
+						Año:
+						<input type="text" maxlength="4" name="anio_vegetal[]">
+					</span>
+					<span>
+						Rubro:
+						<input type="text" name="rubros_vegetal[]">
+					</span>
+					<span>
+						Superficie:
+						<input type="text" name="superficie_vegetal[]">
+					</span>
+					<br>
+					<br>
+					<span>
+						Superficie de cosecha:
+						<input type="text" name="superficie_vegetal_cosecha[]">
+					</span>
+					<span>
+						Rendimiento:
+						<input type="text" name="rendimiento_vegetal[]">
+					</span>
+					<span>
+						Produccion:
+						<input type="text" name="produccion_vegetal[]">
+					</span>
+					<br>
+					<br>
+				</td>
+				<td class="eliminar"><input type="button" value="-"></td>
+			</tr>
+			<!-- fin de código: fila base --> 
+		</tbody>
+	</table>
+	<!--cierre de la produccion vegetal-->
+
+
+	<!--cierre de los formularios de contacto-->
 	</form>
-
-
 <?php
 }?>
 </table>
@@ -260,3 +339,29 @@ $data_analista = $objusuario->listar_usuarios(4);
 	}
 
 </style>
+<script type="text/javascript">
+	
+	jQuery(document).ready(function($){
+		$("tr.tr_padre span select.select-change").change(function(){
+			valor_select = $(this).val();
+			select_temp = $(this);
+			//hacemos un each para remover los selected y agregarlo al seleccionado
+			$(this).find('option').each(function(){
+				$(this).removeAttr('selected');
+				if($(this).val()==valor_select){
+					$(this).attr("selected","selected");
+					select_temp.val($(this).val());
+				}
+			});
+		});
+		$(".agregar").click(function(){
+			/*reiniciamos todos los campos*/
+			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span input').val("");
+			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span textarea').val("");
+			$(this).parent().parent().parent().parent().find('tbody tr.tr_padre td span select').val("1");
+
+			
+		});
+	});
+
+</script>

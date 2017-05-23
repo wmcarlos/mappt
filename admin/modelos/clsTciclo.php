@@ -69,6 +69,21 @@ public function modificar($lcVarTem)
 return $this->ejecutar("update tciclo set id = '$this->acId', nombre = '$this->acNombre' where(id = '$this->acId')");
 }
  
+public function listar_ciclos(){
+	$array = array();
+	$this->ejecutar("SELECT * FROM tciclo");
+	//return $this->arreglo();
+	while($laRow = $this->arreglo()){
+		array_push($array,array(
+			'idciclo'=>$laRow['id'],
+			'nombre_ciclo'=>$laRow['nombre']
+		));
+	}
+	return $array;
+}
+
+
+
  
 //funcion eliminar        
 public function eliminar()
