@@ -26,6 +26,24 @@ USE `mappt`;
 -- Estructura de tabla para la tabla `tasociacion`
 --
 
+CREATE TABLE `tanalisis_inspeccion` (
+  `idtanalisis_inspeccion` int(11) NOT NULL,
+  `nro_informe_inspeccion` int(11) NOT NULL,
+  `fecha_entrada` date NOT NULL,
+  `fecha_revision` date NOT NULL,
+  `oficina_dependencia` varchar(255) NOT NULL,
+  `aprobacion_certificado` char(1) NOT NULL,
+  `descripcion_porque` varchar(255) NOT NULL,
+  `observacion` varchar(255) NOT NULL,
+  `nombre_usu` char(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tasociacion`
+--
+
 CREATE TABLE `tasociacion` (
   `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
@@ -53,6 +71,14 @@ CREATE TABLE `tciclo` (
   `nombre` varchar(30) NOT NULL,
   `estatus` int(1) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tciclo`
+--
+
+INSERT INTO `tciclo` (`id`, `nombre`, `estatus`) VALUES
+(1, 'ciclo1', 1),
+(2, 'ciclo2', 1);
 
 -- --------------------------------------------------------
 
@@ -123,6 +149,13 @@ CREATE TABLE `tgrupo_rubro` (
   `nombre` varchar(30) NOT NULL,
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tgrupo_rubro`
+--
+
+INSERT INTO `tgrupo_rubro` (`id`, `nombre`, `estatus`) VALUES
+(1, 'LEGAMINOSOS', 1);
 
 -- --------------------------------------------------------
 
@@ -417,7 +450,8 @@ CREATE TABLE `trol` (
 
 INSERT INTO `trol` (`codigo`, `nombre`, `estatus`) VALUES
 (3, 'ADMINISTRADOR', '1'),
-(4, 'TECNICO', '');
+(4, 'TECNICO', ''),
+(5, 'ANALISTA', '');
 
 -- --------------------------------------------------------
 
@@ -475,6 +509,15 @@ CREATE TABLE `trubro` (
   `id_grupo_rubro` int(11) NOT NULL,
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trubro`
+--
+
+INSERT INTO `trubro` (`id`, `nombre`, `id_grupo_rubro`, `estatus`) VALUES
+(1, 'MAIZ', 1, 1),
+(2, 'ARROZ', 1, 1),
+(3, 'CARAOTAS', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -619,6 +662,14 @@ CREATE TABLE `tunidad_medida` (
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tunidad_medida`
+--
+
+INSERT INTO `tunidad_medida` (`id`, `nombre`, `siglas`, `estatus`) VALUES
+(1, 'KILOGRAMOS', 'KG', 1),
+(2, 'GRAMOS', 'GR', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -657,7 +708,7 @@ CREATE TABLE `tunidad_produccion` (
 --
 
 INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_sector`, `direccion`, `utm_norte`, `utm_este`, `superficie_total`, `superficie_aprovechable`, `superficie_aprovechada`, `croquisimg`, `tap`, `tap_potreros`, `tap_cant_potreros`, `tap_tipo_cerca`, `tap_carga_animal_an_ha`, `tap_tipo_pasto`, `tap_especie_pasto`, `tap_superficie`, `tap_ultimo_mantenimiento`, `tap_fertilizacion`, `maquinariajs`, `implementojs`, `estatus`) VALUES
-(1, '20467294', 'PRADOS DEL SOL', 1, 'PRADOS DEL SOL', 0, 0, 25000, 20000, 5000, '', 0, 0, 0, 0, 0, 0, '', 0, '0000-00-00', 0, '', '', 1);
+(1, '20467294', 'PRADOS DEL SOL', 1, 'PRADOS DEL SOL', 4000, 5000, 25000, 20000, 5000, '', 2, 0, 50, 2, 50, 0, '', 1000, '2017-05-15', 1, '2', '3', 1);
 
 -- --------------------------------------------------------
 
@@ -684,11 +735,18 @@ CREATE TABLE `tusuario` (
 
 INSERT INTO `tusuario` (`nombre_usu`, `clave`, `tipo`, `pregunta`, `respuesta`, `intentos`, `estatus`, `nombre_completo`, `correo`, `id_usuario`) VALUES
 ('wmcarlos', 'carlos19455541', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'CARLOS VARGAS', 'LIBROSDELPROGRAMADOR@GMAIL.COM', 1),
-('ALBERTDESINGER', 'TICO20467294', 4, 'MAMA', 'LISBETH', 0, '1', 'ALBERTO DANIEL VARGAS TOVAR', 'TICO20BBOY@GMAIL.COM', 2);
+('ALBERTDESINGER', 'TICO20467294', 4, 'MAMA', 'LISBETH', 0, '1', 'ALBERTO DANIEL VARGAS TOVAR', 'TICO20BBOY@GMAIL.COM', 2),
+('ANALISTA', 'ANALISTA', 5, 'MAMA', 'MAMA', 0, '1', 'ANALISTA DE SISTEMAS', 'ANALISTA@GMAIL.COM', 3);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `tanalisis_inspeccion`
+--
+ALTER TABLE `tanalisis_inspeccion`
+  ADD PRIMARY KEY (`idtanalisis_inspeccion`);
 
 --
 -- Indices de la tabla `tasociacion`
@@ -890,6 +948,11 @@ ALTER TABLE `tusuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `tanalisis_inspeccion`
+--
+ALTER TABLE `tanalisis_inspeccion`
+  MODIFY `idtanalisis_inspeccion` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT de la tabla `tasociacion`
 --
 ALTER TABLE `tasociacion`
@@ -898,7 +961,7 @@ ALTER TABLE `tasociacion`
 -- AUTO_INCREMENT de la tabla `tciclo`
 --
 ALTER TABLE `tciclo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tespecie_ave`
 --
@@ -918,7 +981,7 @@ ALTER TABLE `tfuente_agua`
 -- AUTO_INCREMENT de la tabla `tgrupo_rubro`
 --
 ALTER TABLE `tgrupo_rubro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tmaquinaria_implemento`
 --
@@ -948,7 +1011,7 @@ ALTER TABLE `tparroquia`
 -- AUTO_INCREMENT de la tabla `tproduccion_apicola`
 --
 ALTER TABLE `tproduccion_apicola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tproduccion_avicola`
 --
@@ -968,12 +1031,12 @@ ALTER TABLE `tproduccion_pesquera_aquicola`
 -- AUTO_INCREMENT de la tabla `tproduccion_porcino_cunicula`
 --
 ALTER TABLE `tproduccion_porcino_cunicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT de la tabla `tproduccion_vegetal`
 --
 ALTER TABLE `tproduccion_vegetal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `tproductor`
 --
@@ -988,7 +1051,7 @@ ALTER TABLE `tprogramacion_inspeccion`
 -- AUTO_INCREMENT de la tabla `trol`
 --
 ALTER TABLE `trol`
-  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT de la tabla `trol_servicio`
 --
@@ -998,7 +1061,7 @@ ALTER TABLE `trol_servicio`
 -- AUTO_INCREMENT de la tabla `trubro`
 --
 ALTER TABLE `trubro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT de la tabla `tsector`
 --
@@ -1033,7 +1096,7 @@ ALTER TABLE `ttipo_superficie`
 -- AUTO_INCREMENT de la tabla `tunidad_medida`
 --
 ALTER TABLE `tunidad_medida`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tunidad_produccion`
 --
@@ -1043,7 +1106,7 @@ ALTER TABLE `tunidad_produccion`
 -- AUTO_INCREMENT de la tabla `tusuario`
 --
 ALTER TABLE `tusuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --

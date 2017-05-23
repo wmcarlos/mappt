@@ -219,7 +219,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<td>Funcionario Receptor: <input type="text" name="" value="<?php print $_SESSION['full_name'] ?>" readonly="readonly"></td>
 		<td>Oficina: <input type="text" name="oficina_area"></td>
 	</tr>
-	<tr>
+	<tr style="display: none;">
 		<td>Numero Registro del productor: <input type="text" name="num_registro_productor"></td>
 		<td>Numero de Certificado Runnopa: <input type="text" name="num_registro_productor"></td>
 	</tr>

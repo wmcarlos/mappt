@@ -1,7 +1,10 @@
 <?php
 	require_once("../modelos/clsTunidad_produccion.php");
 	require_once("../modelos/clsTinspeccion_tecnica.php");
+	require_once("../modelos/clsTanalisis_inspeccion.php");
 	$objFuncionescontroller =  new clsFunciones;
+	//$_POST['idsolicitud'];-> hay que actualizarlo a 3
+	//
 	//aqui llamaremos multiples detalles
 	$lobjTunidad_produccion = new clsTunidad_produccion();
 	$lobjTunidad_produccion->acId=$_POST['idunidad_produccion'];
@@ -21,6 +24,11 @@
 	$lobjTunidad_produccion->acMaquinariajs=$objFuncionescontroller->transform_detail_checkbox($_POST['details_maquinarias']);
 	$lobjTunidad_produccion->acImplementojs=$objFuncionescontroller->transform_detail_checkbox($_POST['details_implementos']);
 
+	/*guardamos los datos del analista asignado en analisis de inspeccion*/
+	$objtanalisis_inspeccion =  new clsTanalisis_inspeccion();
+	$objtanalisis_inspeccion->nro_informe_inspeccion = $_POST['nro_informe_inspeccion'];
+	$objtanalisis_inspeccion->observacion_inspeccion = $_POST['observacion_inspeccion'];
+	$objtanalisis_inspeccion->nombre_usu = $_POST['analista_tecnico'];
 
 
 
@@ -92,7 +100,12 @@
 		//primero modificalos la unidad de produccion
 		if($lobjTunidad_produccion->actualizar_unidad()>-1){
 			//insertar las producciones
+			//insertamos el analista y cambiamos el estatus de la solicitud
+			$objtanalisis_inspeccion->insertar_solicitud_analisis();
+			$objtanalisis_inspeccion->actualizar_solicitud($_POST['idsolicitud']);
 			insertproduccion();
+			
+			
 			echo '<script> alert("Inspeccion de la unidad enviada a analisis"); </script>';
 		}else{
 			echo '<script> alert("Ocurrio un error al enviar la inspeccion"); </script>';

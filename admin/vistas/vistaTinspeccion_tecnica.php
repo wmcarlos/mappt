@@ -32,7 +32,7 @@ $objprogramacion_inspeccion = new clstprogramacion_inspeccion();
 $objusuario = new clstusuario();
 $table_inspeccion = $objprogramacion_inspeccion->listar_solicitudes_inspector($_SESSION['user']);
 //esto lo utilizaremos al a hora de enviarlo a la analista
-$data_analista = $objusuario->listar_usuarios(4);
+$data_analista = $objusuario->listar_usuarios(5);
 ?>
 
 
@@ -108,6 +108,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 	<input type="hidden" name="estatus_programacion" value="3">
 	<div class='cont_frame'>
 		<h1>Inspeccion Tecnica</h1>
+		<input type="hidden" name="nro_informe_inspeccion" value="<?php echo $table_inspeccion[$_GET['pos']]['nro_informe_inspeccion']; ?>">
 		<table border='1' class='datos' align='center'>
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Nro Solicitud:</td>
@@ -228,8 +229,8 @@ $data_analista = $objusuario->listar_usuarios(4);
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Analista de inspeccion</td>
 				<td colspan="3">
-					<select name="inspector_tecnico">
-						<option value="">Seleccione el inspector tecnico</option>
+					<select name="analista_tecnico">
+						<option value="">Seleccione el analista</option>
 						<?php for($ins=0; $ins<count($data_analista); $ins++){ ?>
 							<option value="<?php echo $data_analista[$ins]['nombre_usu']; ?>"><?php echo $data_analista[$ins]['nombre_completo']; ?></option>
 						<?php } ?> 
@@ -239,7 +240,7 @@ $data_analista = $objusuario->listar_usuarios(4);
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Observación</td>
 				<td colspan="3">
-					<textarea name="observacion" style="width: 100%; height: 30px;"></textarea>
+					<textarea name="observacion_inspeccion" style="width: 100%; height: 30px;"></textarea>
 				</td>
 			</tr>
 		</table>
