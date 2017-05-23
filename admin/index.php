@@ -36,7 +36,7 @@
             	<h1 class="titulo2">Iniciar Sesion</h1>
                 <p>
                     <table>
-                        <form name="fentrar" action="controladores/corTusuario.php" method="post">
+                        <form name="fentrar" action="controladores/corTusuario.php" method="post" autocomplete="off">
                         	<tr>
                             	<td>Usuario:</td>
                                 <td><input type="text" name="txtnombre_usu" size="15" /></td>
@@ -94,7 +94,7 @@ mostrar_mensaje = function(){
   ?>
   var error = '<?php print $error; ?>';
   if(error == "si"){
-      alert("Contraseña Cambiada Con  Existo");
+      alert("Contraseña Cambiada Con  Exito");
   }else if(error == "no"){
   	alert("Ocurrio un Error al Cambiar la Contraseña");
   }else if(error == "no_pass"){

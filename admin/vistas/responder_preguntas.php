@@ -6,34 +6,31 @@ session_start();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Responder Preguntas</title>
-<link href="css/global.css" rel="stylesheet" type="text/css" />
+<link href="../../css/global.css" rel="stylesheet" type="text/css" />
 <script src="js/jquery.js"></script>
 </head>
 <body>
 <div id="contenedor">
-	   <div id="cintillo" style='height:auto;'>
-      <img src="img/cintillo.png" style='width:100%;'/>
-    </div>
     <div id="banner" style="height:auto;">
-      <img src="img/banner.png" style='width:100%;'/>
+       <img src="../../img/banner.png" style='width:100%;'/>
     </div>
    <!--Contenedor del Contenido Central-->
    <div id="contenido">
 		<!--Contenido derecho-->
-        <div id="derecho">
+        <div id="derecho" style="width: 98%;">
         <span id="fecha">Domingo, 10 de Noviembre del 2012</span>
 				<p class="parrafo">
 					<div class="cuadro">
               <h1 class="titulo2">Responder Preguntas</h1>
                 <p>
                     <table>
-                        <form name="fentrar" action="../controladores/corTusuario.php" method="post">
+                        <form name="fentrar" action="../controladores/corTusuario.php" method="post" autocomplete="off">
                           <tr>
                               <td>¿ <?php print $_SESSION['pregunta']; ?> ? </td>
                                 <td> <input type="text" name="txtrespuesta" size="15" /></td>
                             </tr>
                              <tr>
-                <td colspan="2" align="center"><a href="../index.php">Volver</a> <input type="submit" name="btn_entrar" value="Responder" /><input type="hidden" name="txtoperacion" value="ingresar" /></td>
+                <td colspan="2" align="center"><a href="cerrar.php">Cancelar</a> <input type="submit" name="btn_entrar" value="Responder" /><input type="hidden" name="txtoperacion" value="ingresar" /></td>
                             </tr>
                             <input type="hidden" name="txtnombre_usu" value="<?php print $_SESSION['user']; ?>">
                             <input type="hidden" name='txtoperacion' value='responder_preguntas'/>
@@ -46,11 +43,7 @@ session_start();
    </div>
    <!--Pie de Pagina-->
    <div id="pie">
-                <p id="contenido_pie">
-					Calle San Felipe entre avenidas Libertador y Miranda Frente a la Plaza Bolivar Sarare Estado Lara<br />
-					 <a href="#">Codigo Postal: 3015</a><br />
-           <a href="#">Telefonos: 0251-9921112</a><br />
-                </p>
+      <p id="contenido_pie"></p>
    </div>
 </div>
 </body>

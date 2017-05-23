@@ -124,6 +124,9 @@ switch($lcOperacion){
 	break;
 
 	case "cambiar_contra":
+		unset($_SESSION['user']);
+		unset($_SESSION['pass']);
+		unset($_SESSION['type']);
 		if($lobjTusuario->cambiar_contra($_POST['txtnombre_usu'],$_POST['txtnueva_contra'])){
 			header("location: ../index.php?valido=si");
 		}else{
