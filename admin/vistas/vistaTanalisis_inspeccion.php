@@ -127,13 +127,13 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Superficie Total</td>
-				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_total']; ?></td>
+				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_total']; ?> (HA)</td>
 				<td align='right'><span class='rojo'>*</span>Superficie Aprovechable</td>
-				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechable']; ?></td>
+				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechable']; ?> (HA)</td>
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Superficie Aprovechada</td>
-				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechada']; ?></td>
+				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechada']; ?> (HA)</td>
 				<td align='right'><span class='rojo'>*</span>Fecha revision</td>
 				<td>
 					<input type="hidden" name="fecha_revision">
@@ -201,6 +201,12 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 				<td colspan="4" style="padding:10px; background-color: #ccc; color:black; font-weight: bold;"><center>PRODUCCIONES DE LA UNIDAD</center></td>
 			</tr>
 			<tr>
+				<td colspan="4">
+				<input type="button"  id="elementos_vegetal" value="Produccion Vegetal">
+				<input type="button"  id="elementos_apicola" value="Produccion Apicola">
+				</td>
+			</tr>
+			<tr>
 			<style type="text/css">
 					.elementos_vegetal span,.elementos_apicola span{
 						padding:10px;
@@ -212,6 +218,7 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 					}
 
 			</style>
+			
 				<td colspan="4" class="elementos_vegetal">
 					<center><h2 style="background-color: #E3ECD8; color: white; font-size: 18px; font-weight: bold; padding: 10px; color:black;">Produccion Vegetal</h2></center>
 					<br>
@@ -352,3 +359,19 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 	}
 
 </style>
+<script type="text/javascript">
+	jQuery(document).ready(function($){
+
+		$("#elementos_vegetal").click(function(){
+			$(".elementos_apicola").hide(0);
+			$(".elementos_vegetal").show(0);
+		});
+		$("#elementos_apicola").click(function(){
+			$(".elementos_vegetal").hide(0);
+			$(".elementos_apicola").show(0);
+		});
+
+	});
+
+
+</script>
