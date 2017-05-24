@@ -202,7 +202,7 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 			</tr>
 			<tr>
 			<style type="text/css">
-					.elementos_vegetal span{
+					.elementos_vegetal span,.elementos_apicola span{
 						padding:10px;
 						border:1px solid #ccc;
 						font-size: 18px;
@@ -264,6 +264,39 @@ list($viewarray_maquinaria,$viewarray_implemento) = $objMaquinariaimplementos->l
 					<span>
 						Superficie Regada:
 						<?php echo $array_vegetal[$i]['superficie_regada'] ?>
+					</span>
+					<br>
+					</center>
+					<?php  } ?>
+				</td>
+
+				<!--produccion apicola-->
+					<td colspan="4" class="elementos_apicola" style="display: none;">
+					<center><h2 style="background-color: #E3ECD8; color: white; font-size: 18px; font-weight: bold; padding: 10px; color:black;">Produccion Apicola</h2></center>
+					<br>
+					<br>
+					<?php 
+						$view_array_apicola= array();
+						$view_array_apicola = $produccion_apicola->listar_produccion_apicola_unidad($table_inspeccion[$_GET['pos']]['idunidad_produccion']);
+						//print_r($view_array_apicola);
+						
+						for($j=0; $j<count($view_array_apicola);$j++){
+					?><center>
+					<span>
+						Rubro:
+						<?php echo $view_array_apicola[$j]['rubro'] ?>
+					</span>
+					<span>
+						Cantidad:
+						<?php echo $view_array_apicola[$j]['cantidad'] ?>
+					</span>
+					<span>
+						Produccion Mensual:
+							<?php echo $view_array_apicola[$j]['produccion_mensual'] ?>
+					</span>
+					<span>
+						Unidad de medida:
+						<?php echo $view_array_apicola[$j]['unidad_medida'] ?>
 					</span>
 					<br>
 					</center>

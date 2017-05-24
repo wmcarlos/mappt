@@ -75,12 +75,13 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <br>	
-<input type="hidden" name="fecha_recepcion" value="<?php echo @date("Y-m-d"); ?>">
 <center><strong style="font-weight: bold;">Fecha De Recepción:<?php echo @date("d-m-Y"); ?></strong></center>
 <br>
 
 <div class='cont_frame'>
 	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
+<input type="hidden" name="fecha_recepcion" value="<?php echo @date("Y-m-d"); ?>">
+	
 	<table border='1' class='datos' align='center'>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
@@ -165,13 +166,13 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			<td align='right'><span class='rojo'>*</span> Dirección:</td>
 			<td><textarea name='txtdireccion_unidad' maxlength='' disabled='disabled' id='txtdireccion_unidad' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
 			<td align='right'><span class='rojo'>*</span> Superficie Total:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtsuperficie_total' value='<?php print($lcSuperficie_total);?>' id='txtsuperficie_total' class='validate[required],custom[integer]'/></td>
+			<td>HA <input  style="width: 60%;" type='text' disabled='disabled' maxlength='' name='txtsuperficie_total' value='<?php print($lcSuperficie_total);?>' id='txtsuperficie_total' class='validate[required],custom[integer]'/></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Superficie Aprovechable:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechable' value='<?php print($lcSuperficie_aprovechable);?>' id='txtsuperficie_aprovechable' class='validate[required],custom[integer]'/></td>
+			<td>HA<input  style="width: 60%;"type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechable' value='<?php print($lcSuperficie_aprovechable);?>' id='txtsuperficie_aprovechable' class='validate[required],custom[integer]'/></td>
 			<td align='right'><span class='rojo'>*</span> Superficie Aprovechada:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechada' value='<?php print($lcSuperficie_aprovechada);?>' id='txtsuperficie_aprovechada' class='validate[required],custom[integer]'/></td>
+			<td>HA<input style="width: 60%;" type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechada' value='<?php print($lcSuperficie_aprovechada);?>' id='txtsuperficie_aprovechada' class='validate[required],custom[integer]'/></td>
 		</tr>
 
 	</table>
@@ -255,11 +256,21 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	.step_active{
 		background-color: #6D6D6D !important;		
 	}
+	.btn-buscar,.btn-modificar,.btn-eliminar,.btn-guardar{
+		display: none;
+	}
+
+
 
 </style>
 <script type="text/javascript">
 	
 	jQuery(document).ready(function($){
+
+		$(".btn-incluir").find('input').click(function(){
+			//hacemos un click de una ves
+			$(".btn_buscar").trigger( "click" );
+		});
 
 		$(".cont_frame").each(function(i){
 			if(i>0){
@@ -281,6 +292,16 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			$(this).nextAll().removeClass("step_active");
 			$(this).prevAll().removeClass("step_active");
 			$(this).addClass("step_active");
+			switch(tagstep){
+				case 3:
+					$(".btn-guardar").show(0);
+					$(".btn-incluir").hide(0);
+
+				break;
+				default:
+					$(".btn-guardar").hide(0);
+					$(".btn-incluir").show(0);
+			}
 
 
 		});
