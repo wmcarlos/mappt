@@ -25,7 +25,6 @@ USE `mappt`;
 --
 -- Estructura de tabla para la tabla `tasociacion`
 --
-
 CREATE TABLE `tanalisis_inspeccion` (
   `idtanalisis_inspeccion` int(11) NOT NULL,
   `nro_informe_inspeccion` int(11) NOT NULL,
@@ -37,6 +36,13 @@ CREATE TABLE `tanalisis_inspeccion` (
   `observacion` varchar(255) NOT NULL,
   `nombre_usu` char(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tanalisis_inspeccion`
+--
+
+INSERT INTO `tanalisis_inspeccion` (`idtanalisis_inspeccion`, `nro_informe_inspeccion`, `fecha_entrada`, `fecha_revision`, `oficina_dependencia`, `aprobacion_certificado`, `descripcion_porque`, `observacion`, `nombre_usu`) VALUES
+(1, 5, '0000-00-00', '0000-00-00', '', '', '', 'Se observo que hubo tantas cosas x', 'ANALISTA');
 
 -- --------------------------------------------------------
 
@@ -276,6 +282,14 @@ CREATE TABLE `tproduccion_apicola` (
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tproduccion_apicola`
+--
+
+INSERT INTO `tproduccion_apicola` (`id`, `id_unidad_produccion`, `tipo_colmena`, `cantidad`, `id_rubro`, `produccion_mensual`, `id_unidad_mendida`, `estatus`) VALUES
+(7, 1, 0, 40, 3, 600, 1, 1),
+(8, 1, 0, 80, 3, 600, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -358,6 +372,13 @@ CREATE TABLE `tproduccion_porcino_cunicula` (
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tproduccion_porcino_cunicula`
+--
+
+INSERT INTO `tproduccion_porcino_cunicula` (`id`, `id_unidad_produccion`, `tipo`, `id_rubro`, `cantidad`, `estatus`) VALUES
+(11, 1, 0, 1, 50, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -384,6 +405,13 @@ CREATE TABLE `tproduccion_vegetal` (
   `metodo_riego_js` text NOT NULL,
   `estatus` int(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproduccion_vegetal`
+--
+
+INSERT INTO `tproduccion_vegetal` (`id`, `id_unidad_produccion`, `id_ciclo`, `ano`, `id_rubro`, `superficie`, `superifice_de_cosecha`, `rendimiento`, `produccion`, `riego`, `superficiebajoriego`, `superficieregada`, `tipoambiente`, `id_tipo_superficie`, `fecha`, `fuente_agua_js`, `metodo_riego_js`, `estatus`) VALUES
+(7, 1, 1, '2017', 2, 5000, 6000, 4000, 500, 500, 6000, 400, 0, 0, '2017-05-23', '4000', '500', 1);
 
 -- --------------------------------------------------------
 
@@ -495,7 +523,8 @@ INSERT INTO `trol_servicio` (`id_rol_servicio`, `id_rol`, `id_servicio`, `estatu
 (98, 3, 20, 0),
 (99, 3, 21, 0),
 (100, 3, 22, 0),
-(101, 4, 25, 0);
+(101, 4, 25, 0),
+(102, 5, 26, 0);
 
 -- --------------------------------------------------------
 
@@ -584,7 +613,8 @@ INSERT INTO `tservicio` (`id_servicio`, `id_modulo`, `nombre`, `url`, `estatus`,
 (22, 9, 'UNIDAD DE PRODUCCIÃ“N', 'vistaTunidad_produccion.php', 0, 14, ''),
 (23, 10, 'SOLICITUD', 'vistatsolicitud.php', 0, 1, ''),
 (24, 11, 'PROGRAMACIÓN DE INSPECCIÓN', 'vistatprogramacion_inspeccion.php', 0, 1, ''),
-(25, 11, 'INSPECCION TECNICA', 'vistaTinspeccion_tecnica.php', 0, 2, '');
+(25, 11, 'INSPECCION TECNICA', 'vistaTinspeccion_tecnica.php', 0, 2, ''),
+(26, 11, 'ANÁLISIS DE INSPECCIÓN', 'vistaTanalisis_inspeccion.php', 0, 3, '');
 
 -- --------------------------------------------------------
 
@@ -623,7 +653,7 @@ CREATE TABLE `tsolicitud_certificado_renovacion` (
 --
 
 INSERT INTO `tsolicitud_certificado_renovacion` (`idtsolicitud_certificacion_renovacion`, `fecha_recepcion`, `cedula_rif_productor`, `id_unidad_produccion`, `documentos`, `funcionario_receptor`, `oficina_area`, `num_certificado_runnopa`, `num_registro_productor`, `tipo_tramite`, `estatus_solicitud`) VALUES
-(4, '0000-00-00', '20467294', 1, '1,2,3', 'WMCARLOS', 'COPOSA', '', '', '1', 2);
+(4, '0000-00-00', '20467294', 1, '1,2,3', 'WMCARLOS', 'COPOSA', '', '', '1', 3);
 
 -- --------------------------------------------------------
 
@@ -708,7 +738,7 @@ CREATE TABLE `tunidad_produccion` (
 --
 
 INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_sector`, `direccion`, `utm_norte`, `utm_este`, `superficie_total`, `superficie_aprovechable`, `superficie_aprovechada`, `croquisimg`, `tap`, `tap_potreros`, `tap_cant_potreros`, `tap_tipo_cerca`, `tap_carga_animal_an_ha`, `tap_tipo_pasto`, `tap_especie_pasto`, `tap_superficie`, `tap_ultimo_mantenimiento`, `tap_fertilizacion`, `maquinariajs`, `implementojs`, `estatus`) VALUES
-(1, '20467294', 'PRADOS DEL SOL', 1, 'PRADOS DEL SOL', 4000, 5000, 25000, 20000, 5000, '', 2, 0, 50, 2, 50, 0, '', 1000, '2017-05-15', 1, '2', '3', 1);
+(1, '20467294', 'PRADOS DEL SOL', 1, 'PRADOS DEL SOL', 6000, 5000, 25000, 20000, 5000, '', 2, 0, 50, 2, 500, 0, '', 5000, '2017-05-22', 1, '2', '3', 1);
 
 -- --------------------------------------------------------
 
@@ -951,7 +981,7 @@ ALTER TABLE `tusuario`
 -- AUTO_INCREMENT de la tabla `tanalisis_inspeccion`
 --
 ALTER TABLE `tanalisis_inspeccion`
-  MODIFY `idtanalisis_inspeccion` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idtanalisis_inspeccion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT de la tabla `tasociacion`
 --
@@ -1011,7 +1041,7 @@ ALTER TABLE `tparroquia`
 -- AUTO_INCREMENT de la tabla `tproduccion_apicola`
 --
 ALTER TABLE `tproduccion_apicola`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT de la tabla `tproduccion_avicola`
 --
@@ -1031,12 +1061,12 @@ ALTER TABLE `tproduccion_pesquera_aquicola`
 -- AUTO_INCREMENT de la tabla `tproduccion_porcino_cunicula`
 --
 ALTER TABLE `tproduccion_porcino_cunicula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `tproduccion_vegetal`
 --
 ALTER TABLE `tproduccion_vegetal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT de la tabla `tproductor`
 --
@@ -1056,7 +1086,7 @@ ALTER TABLE `trol`
 -- AUTO_INCREMENT de la tabla `trol_servicio`
 --
 ALTER TABLE `trol_servicio`
-  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 --
 -- AUTO_INCREMENT de la tabla `trubro`
 --
@@ -1071,7 +1101,7 @@ ALTER TABLE `tsector`
 -- AUTO_INCREMENT de la tabla `tservicio`
 --
 ALTER TABLE `tservicio`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- AUTO_INCREMENT de la tabla `tsistema_produccion`
 --
