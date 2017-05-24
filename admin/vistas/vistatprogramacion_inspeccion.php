@@ -101,12 +101,12 @@ $data_inspector = $objusuario->listar_usuarios(4);
 			</tr>
 			<tr>
 				<td align='right'><span class='rojo'>*</span>Superficie Total</td>
-				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_total']; ?></td>
-				<td align='right'><span class='rojo'>*</span>Superficie Aprovechable</td>
+				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_total']; ?> (HA)</td>
+				<td align='right'><span class='rojo'>*</span>Superficie Aprovechable (HA)</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechable']; ?></td>
 			</tr>
 			<tr>
-				<td align='right'><span class='rojo'>*</span>Superficie Aprovechada</td>
+				<td align='right'><span class='rojo'>*</span>Superficie Aprovechada (HA)</td>
 				<td><?php echo $table_inspeccion[$_GET['pos']]['superficie_aprovechada']; ?></td>
 				<td align='right'><span class='rojo'>*</span>Fecha de asignacion</td>
 				<td><input type="date" name="fecha_asignacion"></td>

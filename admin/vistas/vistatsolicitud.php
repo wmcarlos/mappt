@@ -332,5 +332,25 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	});
 
 
+	$("#txtsuperficie_aprovechable").keyup(function(){
+		txtsuperficie_total = parseInt($("#txtsuperficie_total").val());
+		txtsuperficie_aprovechable = parseInt($(this).val());
+		if(txtsuperficie_aprovechable>txtsuperficie_total){
+			alert("La superficie total no puede ser menor a la aprovechable");
+			$(this).val("");
+		}
+	});
+
+	$("#txtsuperficie_aprovechada").keyup(function(){
+		txtsuperficie_total = parseInt($("#txtsuperficie_total").val());
+		txtsuperficie_aprovechable = parseInt($("#txtsuperficie_aprovechable").val());
+		txtsuperficie_aprovechada = parseInt($("#txtsuperficie_aprovechada").val());
+		if(txtsuperficie_aprovechada>txtsuperficie_aprovechable){
+			alert("La superficie aprovechada no puede ser mayor a la aprovechable");
+			$(this).val("");
+		}
+
+	});
+
 
 </script>
