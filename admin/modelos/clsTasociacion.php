@@ -80,7 +80,7 @@ return $this->ejecutar("delete from tasociacion where(id = '$this->acId')");
 //funcion para listar las maquinarias
 public function listar_asociaciones(){
 	$lrTb=$this->ejecutar("select * from tasociacion");
-	$array_asociaciones = [];
+	$array_asociaciones = array();
 	while($laRow=$this->arreglo()){
 		array_push($array_asociaciones , array(
 			'id'=>$laRow['id'],

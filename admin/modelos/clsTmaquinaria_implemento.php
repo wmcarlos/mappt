@@ -86,8 +86,8 @@ return $this->ejecutar("delete from tmaquinaria_implemento where(id = '$this->ac
 //funcion para listar las maquinarias
 public function listar_maquinaria_complementos(){
 	$lrTb=$this->ejecutar("select * from tmaquinaria_implemento");
-	$array_maquinaria = [];
-	$array_implemento = [];
+	$array_maquinaria = array();
+	$array_implemento = array();
 		while($laRow=$this->arreglo())
 	{		
 		//$this->acId=$laRow['id'];

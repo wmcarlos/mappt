@@ -146,7 +146,7 @@ return $this->ejecutar("delete from tusuario where(nombre_usu = '$this->acNombre
 }
 
 public function listar_usuarios($tipo_usuario){
-	$arrData = [];
+	$arrData = array();
 	$this->ejecutar("SELECT * FROM tusuario WHERE tipo='$tipo_usuario' ");
 	while($row = $this->arreglo()){ 
 		array_push($arrData,array(
