@@ -1,17 +1,12 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
 require_once('../controladores/corTproductor.php');
-require_once('../modelos/clsTasociacion.php');
-$objtasociacion = new clsTasociacion();
-$viewarray_asociaciones = array();
-$viewarray_asociaciones  = $objtasociacion->listar_asociaciones();
-
 $objFunciones = new clsFunciones;
 $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-	$id = $objFunciones->ultimo_id_plus1('tproductor','id');
+
 }else{
 	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
 	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
@@ -50,10 +45,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <div class='cont_frame'>
 	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
-		<tr style='display:none;'>
-			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid' value='<?php print($lcId);?>' id='txtid' class='validate[required]'/></td>
-		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
 			<td colspan="4">Natural <input type='radio' checked name='txttipo' value='1'/> Juridica <input type='radio' <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
@@ -99,10 +90,11 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			<td><input type='text' disabled='disabled' maxlength='' name='txtcorreo' value='<?php print($lcCorreo);?>' id='txtcorreo' class='validate[required],custom[email]'/></td>
 			<td align='right'><span class='rojo'>*</span> Asociaciones:</td>
 			<td>
-					<?php for($i=0; $i<count($viewarray_asociaciones); $i++){ ?>
-						<input type="checkbox" name="txtasociacionesjs[]" <?php if(isset($lcAsociacionesjs)) echo $objFunciones->checked_transaccional($viewarray_asociaciones[$i]['id'], $lcAsociacionesjs);  ?> value="<?php echo $viewarray_asociaciones[$i]['id']; ?>"> <?php echo $viewarray_asociaciones[$i]['nombre']; ?>
-						<br>
-					<?php }?>
+				<select name="txtid_asociacion" id="txtid_asociacion" disabled="disabled">
+					<option value="">Seleccione:</option>
+					<?php print $objFunciones->crear_combo("tasociacion","id","nombre",$lcId_asociacion); ?>
+				</select>
+					
 			</td>
 		</tr>
 
