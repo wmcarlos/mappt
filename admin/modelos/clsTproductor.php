@@ -197,20 +197,4 @@ $llEnc=$llEnc."<tr>
 return $inicio.$llEnc.$final;
 }
 
-public function getAsociaciones($arr){
-	$data = "";
-	for($i = 0; $i < count($arr); $i++){
-		$lrTb=$this->ejecutar("select nombre from tasociacion where id = ".$arr[$i]);
-		if($arreglo=$this->arreglo()){
-			if($i<(count($arr)-1)){
-				$data.=$arreglo["nombre"]."-";	
-			}else{
-				$data.=$arreglo["nombre"];	
-			}
-			
-		}
-	}
-	return $data;
-}
-
 }?>

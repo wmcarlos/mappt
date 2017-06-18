@@ -21,7 +21,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-	$id = $objFunciones->ultimo_id_plus1('tproductor','id');
+	
 }else{
 	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
 	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);

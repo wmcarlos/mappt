@@ -12,6 +12,7 @@ $lobjTproductor->acTelefono=$_POST['txttelefono'];
 $lobjTproductor->acCorreo=$_POST['txtcorreo'];
 $lobjTproductor->acId_asociacion = $_POST['txtid_asociacion'];
 
+$lcOperacion = $_REQUEST["txtoperacion"];
 
 switch($lcOperacion){
 

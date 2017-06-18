@@ -6,7 +6,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-
+	
 }else{
 	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
 	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
@@ -27,6 +27,10 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			mensajes(operacion,listo);
 			cargar_select(operacion,listo);
 		}
+
+		$(document).ready(function(){
+			$("#tabs").tabs();
+		});
 	</script>
 </head>
 <body onload='cargar();'>
