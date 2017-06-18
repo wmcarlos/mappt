@@ -46,7 +46,7 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 <center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
-<div class='cont_frame'>
+<div class='cont_frame' style="width: 95%;">
 	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
@@ -105,6 +105,61 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<input type='hidden' name='txtoperacion' value='des'>
 		<input type='hidden' name='txtvar_tem' value='<?php print($lcId); ?>'>
 	</table>
+	<div class="cont_frame" style="width: 100%;">
+		<h1>Unidades de Produccion</h1>
+		<table border="1" class="datos" align="center">
+			<tr>
+				<td>Nombre</td>
+				<td>Estado</td>
+				<td>Municipio</td>
+				<td>Parroquia</td>
+				<td>Sector</td>
+				<td>Direccion</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="text" id="txtnombre_unidad_medida" disabled="disabled">
+				</td>
+				<td>
+					<select id="estado" disabled="disabled">
+						<option>Portuguesa</option>
+					</select>
+				</td>
+				<td>
+					<select id="municipio" disabled="disabled">
+						<option>Araure</option>
+					</select>
+				</td>
+				<td>
+					<select id="parroquia" disabled="disabled">
+						<option>Araure</option>
+					</select>
+				</td>
+				<td>
+					<select id="sector" disabled="disabled">
+						<option>Baraure</option>
+					</select>
+				</td>
+				<td>
+					<textarea id="direccion"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>Cord. Norte</td>
+				<td>Cord. Este</td>
+				<td>Spf. Total</td>
+				<td>Spf. Aprovechable</td>
+				<td colspan="2">Spf. Aprovechada</td>
+			</tr>
+			<tr>
+				<td><input type="text" disabled="disabled" size="3" id="cordenadasnorte"></td>
+				<td><input type="text" disabled="disabled" size="3" id="cordenadaseste"></td>
+				<td><input type="text" disabled="disabled" size="3" id="superficietotal"></td>
+				<td><input type="text" disabled="disabled" size="3" id="superficieaprovechable"></td>
+				<td colspan="2"><input type="text" disabled="disabled" size="3" id="superficieaprovechada"></td>
+			</tr>
+		</table>
+	</div>
 	<?php $objFunciones->botonera_general('Tproductor','total',$id); ?>
 </div>
 </form>
