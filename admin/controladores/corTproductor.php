@@ -4,7 +4,7 @@ require_once("../modelos/clsTproductor.php");
 $objFuncionescontroller =  new clsFunciones;
 $lobjTproductor = new clsTproductor();
 $lobjTproductor->acTipo=$_POST['txttipo'];
-$lobjTproductor->acCed_rif=$_POST['txtced_rif'];
+$lobjTproductor->acCed_rif=$_REQUEST['txtced_rif'];
 $lobjTproductor->acNom_rso=$_POST['txtnom_rso'];
 $lobjTproductor->acId_sector=$_POST['txtid_sector'];
 $lobjTproductor->acDireccion=$_POST['txtdireccion'];
@@ -37,6 +37,7 @@ switch($lcOperacion){
 			$lcTelefono=$lobjTproductor->acTelefono;
 			$lcCorreo=$lobjTproductor->acCorreo;
 			$lcId_asociacion=$lobjTproductor->acId_asociacion;
+			$estado = $lobjTproductor->estado;
 			$municipio = $lobjTproductor->municipio;
 			$parroquia = $lobjTproductor->parroquia;
 			$lcListo = 1;

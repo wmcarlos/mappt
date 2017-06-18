@@ -54,6 +54,7 @@ tpa.id as parroquia
  inner join tmunicipio as tm on (tm.id = tpa.id_municipio)
  inner join testado as te on (te.id = tm.id_estado)
  where(tp.ced_rif = '$this->acCed_rif')");
+
 if($laRow=$this->arreglo())
 {		
 $this->acTipo=$laRow['tipo'];
@@ -66,7 +67,8 @@ $this->acCorreo=$laRow['correo'];
 $this->acId_asociacion=$laRow['id_asociacion'];
 $this->estado = $laRow['estado'];
 $this->municipio = $laRow['municipio'];
-$this->parroquia = $laRow['parroquia'];		
+$this->parroquia = $laRow['parroquia'];	
+$this->estado = $laRow["estado"];
 $llEnc=true;
 }
 return $llEnc;

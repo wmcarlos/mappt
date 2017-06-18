@@ -6,7 +6,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-	
+
 }else{
 	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
 	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
@@ -50,14 +50,14 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<h1>Productor</h1>
 	<table border='1' class='datos' align='center'>
 		<tr>
-			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-			<td colspan="4">Natural <input type='radio' checked name='txttipo' value='1'/> Juridica <input type='radio' <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
-		</tr>
-		<tr>
 			<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
 			<td><input type='text' disabled='disabled' maxlength='10' name='txtced_rif' value='<?php print($lcCed_rif);?>' id='txtced_rif' class='validate[required],custom[integer],maxSize[10],minSize[7]'/></td>
+			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
+			<td colspan="4">Natural <input type='radio' disabled="disabled" checked name='txttipo' value='1'/> Juridica <input type='radio' disabled="disabled" <?php if($lcTipo == 2) print "checked"; ?> name='txttipo' value='2'/> </td>
+		</tr>
+		<tr>
 			<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
-			<td><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
+			<td colspan="3"><input type='text' disabled='disabled' maxlength='60' name='txtnom_rso' value='<?php print($lcNom_rso);?>' id='txtnom_rso' class='validate[required],maxSize[60],minSize[5]'/></td>
 		</tr>
 		<tr>
 			<td align='right'><span class='rojo'>*</span> Estado:</td>
