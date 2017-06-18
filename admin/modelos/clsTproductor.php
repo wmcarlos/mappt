@@ -13,6 +13,10 @@ private $estado;
 private $municipio;
 private $parroquia;
 
+//datos de la unidad de produccion
+
+private $finca;
+
 //constructor de la clase		
 public function __construct(){
 $this->acTipo = "";
@@ -23,6 +27,7 @@ $this->acDireccion = "";
 $this->acTelefono = "";
 $this->acCorreo = "";
 $this->acId_asociacion = "";
+$this->fincas = null;
 }
 
 //metodo magico set
@@ -31,6 +36,25 @@ public function __set($atributo, $valor){ $this->$atributo = strtoupper($valor);
 public function __get($atributo){ return trim($this->$atributo); }
 //destructor de la clase        
 public function __destruct() { }
+
+
+public function incluir_fincas(){
+
+	if(count($this->fincas) > 0){
+		for($i = 0; $i < count($this->fincas); $i++){
+
+			$this->ejecutar("update tunidad_produccion set ced_rif_productor = '$this->acCed_rif' WHERE id = ".$this->fincas[$i]);
+
+		}
+	}
+}
+
+public function update_fincas(){
+
+	$this->ejecutar("update tunidad_produccion set ced_rif_productor = NULL WHERE ced_rif_productor = '$this->acCed_rif'");
+
+}
+
 		
 //funcion Buscar        
 public function buscar()
@@ -197,6 +221,20 @@ $llEnc=$llEnc."<tr>
 				</tr>";
 }
 return $inicio.$llEnc.$final;
+}
+
+public function getFincas(){
+	$query = "select * from tunidad_produccion WHERE ced_rif_productor = '$this->acCed_rif'";
+	$this->ejecutar($query);
+
+	while($arr = $this->arreglo()){
+		$cad .= "<tr>";
+			$cad .= "<td><a href='vistaTunidad_produccion.php?txtid=".$arr["id"]."&txtoperacion=buscar' target='_blank'>".$arr["nombre"]."</a><input type='hidden' name='txtfincas[]' value='".$arr["id"]."'/></td>";
+			$cad .= "<td><button onclick='del_detail(this);'>X</button></td>";
+		$cad .= "</tr>";
+	}
+
+	return $cad;
 }
 
 }?>

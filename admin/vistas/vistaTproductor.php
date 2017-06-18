@@ -19,6 +19,13 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 	<title>Gestion Productor</title>
 	<?php print($objFunciones->librerias_generales); ?>
+	<style type="text/css">
+		tr.agregada{
+			border:1px solid green;
+			padding: 2px;
+			background: #ccc;
+		}
+	</style>
 	<script>
 		function cargar()
 		{
@@ -27,10 +34,6 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 			mensajes(operacion,listo);
 			cargar_select(operacion,listo);
 		}
-
-		$(document).ready(function(){
-			$("#tabs").tabs();
-		});
 	</script>
 </head>
 <body onload='cargar();'>
@@ -109,55 +112,23 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 		<h1>Unidades de Produccion</h1>
 		<table border="1" class="datos" align="center">
 			<tr>
-				<td>Nombre</td>
-				<td>Estado</td>
-				<td>Municipio</td>
-				<td>Parroquia</td>
-				<td>Sector</td>
-				<td>Direccion</td>
+				<td>Finca</td>
+				<td>-</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="text" id="txtnombre_unidad_medida" disabled="disabled">
-				</td>
-				<td>
-					<select id="estado" disabled="disabled">
-						<option>Portuguesa</option>
+					<select id="finca" disabled="disabled">
+						<option value="">Seleccione la Finca</option>
+						<?php 
+							print $objFunciones->crear_combo("tunidad_produccion WHERE ced_rif_productor IS NULL","id","nombre",NULL);
+						?>
 					</select>
 				</td>
-				<td>
-					<select id="municipio" disabled="disabled">
-						<option>Araure</option>
-					</select>
-				</td>
-				<td>
-					<select id="parroquia" disabled="disabled">
-						<option>Araure</option>
-					</select>
-				</td>
-				<td>
-					<select id="sector" disabled="disabled">
-						<option>Baraure</option>
-					</select>
-				</td>
-				<td>
-					<textarea id="direccion"></textarea>
-				</td>
+				<td><button onclick="add_detail();" type="button">+</button></td>
 			</tr>
-			<tr>
-				<td>Cord. Norte</td>
-				<td>Cord. Este</td>
-				<td>Spf. Total</td>
-				<td>Spf. Aprovechable</td>
-				<td colspan="2">Spf. Aprovechada</td>
-			</tr>
-			<tr>
-				<td><input type="text" disabled="disabled" size="3" id="cordenadasnorte"></td>
-				<td><input type="text" disabled="disabled" size="3" id="cordenadaseste"></td>
-				<td><input type="text" disabled="disabled" size="3" id="superficietotal"></td>
-				<td><input type="text" disabled="disabled" size="3" id="superficieaprovechable"></td>
-				<td colspan="2"><input type="text" disabled="disabled" size="3" id="superficieaprovechada"></td>
-			</tr>
+			<tbody id="load_detail">
+				<?php print $fincas; ?>
+			</tbody>
 		</table>
 	</div>
 	<?php $objFunciones->botonera_general('Tproductor','total',$id); ?>
@@ -170,5 +141,63 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	despues_form.php
 -->
 <?php @include('despues_form.php'); ?>
+<script type="text/javascript">
+
+	getElement = function(id){
+		return document.getElementById(id);
+	}
+
+	getDataSelect = function(id){
+		var tbody = getElement("load_data");
+		var select = document.getElementById(id);
+		var val = select.value;
+		var tex = select.options[select.selectedIndex].text;
+		var data = new Array();
+
+		data.push({
+			'val' : val,
+			'text' : tex
+		});
+		console.log(val+" "+tex);
+
+		return data[0];
+	}
+
+
+	add_detail = function(){
+		var parent = getElement("load_detail");
+		var o_finca = getDataSelect("finca");
+		var finca_v = o_finca.val;
+		var finca_t = o_finca.text;
+
+		var cad = "";
+
+		cad += "<tr>";
+			cad += "<td>"+finca_t+"<input type='hidden' name='txtfincas[]' value='"+finca_v+"'/></td>";
+			cad += "<td><button onclick='del_detail(this);'>X</button></td>";
+		cad += "</tr>";
+
+		parent.innerHTML += cad;
+
+		var fields = new Array("finca");
+		empty_fields(fields);
+
+	}
+
+	del_detail = function(e){
+		var td = e.parentNode;
+		var tr = td.parentNode;
+		var tbody = tr.parentNode;
+
+		tbody.removeChild(tr);
+	}
+
+	empty_fields = function(a){
+		for(var i = 0; i < a.length; i++){
+			document.getElementById(a[i]).value = "";
+		}
+	}
+
+</script>
 </body>
 </html>
