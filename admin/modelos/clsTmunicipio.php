@@ -22,17 +22,32 @@ public function __destruct() { }
 //funcion Buscar        
 public function buscar()
 {
-$llEnc=false;
-$this->ejecutar("select * from tmunicipio where(id = '$this->acId')");
-if($laRow=$this->arreglo())
-{		
-$this->acId=$laRow['id'];
-$this->acNombre=$laRow['nombre'];
-$this->acId_estado=$laRow['id_estado'];		
-$llEnc=true;
+	$llEnc=false;
+	$this->ejecutar("select * from tmunicipio where(id = '$this->acId')");
+	if($laRow=$this->arreglo())
+	{		
+	$this->acId=$laRow['id'];
+	$this->acNombre=$laRow['nombre'];
+	$this->acId_estado=$laRow['id_estado'];		
+	$llEnc=true;
+	}
+	return $llEnc;
 }
-return $llEnc;
+
+public function buscarbyname()
+{
+	$llEnc=false;
+	$this->ejecutar("select * from tmunicipio where(nombre = '$this->acNombre')");
+	if($laRow=$this->arreglo())
+	{		
+	$this->acId=$laRow['id'];
+	$this->acNombre=$laRow['nombre'];
+	$this->acId_estado=$laRow['id_estado'];		
+	$llEnc=true;
+	}
+	return $llEnc;
 }
+
 
 //Busqueda Ajax
 public function busqueda_ajax($valor)

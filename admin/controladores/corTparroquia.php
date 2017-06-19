@@ -13,7 +13,7 @@ switch($lcOperacion){
 
 	case "incluir":
 	
-		if($lobjTparroquia->buscar()){
+		if($lobjTparroquia->buscarbyname()){
 			$lcListo = 0;
 		}else{
 			$lcListo = 1;

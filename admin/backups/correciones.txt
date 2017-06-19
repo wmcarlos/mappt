@@ -1,6 +1,5 @@
 -------------------Alberto------------------------------
 1-*cambiar id en la solicitud por numero solicitud (alberto)
-3-*los datos de la fincas se registra una sola vez, no deben de estar en solicitud (alberto)
 4-*en el segundo paso debe mostrar si es solicitud o renovacion (alberto)
 5-*paso 4 la oficina por defecto (alberto)
 6-*agregar las opcion modificar solicitud y cancelar (alberto)
@@ -8,7 +7,7 @@
 13-*en la bandeja del tecnico se deben diferenciar el tipo de solicitud aprobadas o rechasadasa. (Alberto)
 10-*cambiar a combo los datos como: riego, metodo de riego,fuente de agua... (Alberto)
 
---------------------Carlos VArgas--------------------------
+--------------------Carlos Vargas--------------------------
 
 7-*al asignar al tecnico la solicitud se debe definir fecha y hora de la visita,
 al productor se le debe enviar estar informacion para este pendiente el tecnico,
@@ -41,10 +40,14 @@ reportes
 6:reporte visitas de tecnico.
 
 
+
+
+
 ---------------------Listos
 
 16-*en la vista del productor colocar la asociaciones en un combo
 2-*al registrar el agricultor asociarle las fincas (carlos)
+3-*los datos de la fincas se registra una sola vez, no deben de estar en solicitud (alberto)
 
 ---------------------Repetido
 

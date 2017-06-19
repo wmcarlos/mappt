@@ -24,25 +24,48 @@ public function __destruct() { }
 //funcion Buscar        
 public function buscar()
 {
-$llEnc=false;
-$this->ejecutar("select 
-tp.id,
-tp.nombre,
-tp.id_municipio,
-te.id as id_estado
-from tparroquia as tp
-inner join tmunicipio as tm on (tm.id = tp.id_municipio)
-inner join testado as te on (te.id = tm.id_estado)
-where(tp.id = '$this->acId')");
-if($laRow=$this->arreglo())
-{		
-$this->acId=$laRow['id'];
-$this->acNombre=$laRow['nombre'];
-$this->acId_municipio=$laRow['id_municipio'];
-$this->estado = $laRow['id_estado'];		
-$llEnc=true;
+	$llEnc=false;
+	$this->ejecutar("select 
+	tp.id,
+	tp.nombre,
+	tp.id_municipio,
+	te.id as id_estado
+	from tparroquia as tp
+	inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+	inner join testado as te on (te.id = tm.id_estado)
+	where(tp.id = '$this->acId')");
+	if($laRow=$this->arreglo())
+	{		
+	$this->acId=$laRow['id'];
+	$this->acNombre=$laRow['nombre'];
+	$this->acId_municipio=$laRow['id_municipio'];
+	$this->estado = $laRow['id_estado'];		
+	$llEnc=true;
+	}
+	return $llEnc;
 }
-return $llEnc;
+
+public function buscarbyname()
+{
+	$llEnc=false;
+	$this->ejecutar("select 
+	tp.id,
+	tp.nombre,
+	tp.id_municipio,
+	te.id as id_estado
+	from tparroquia as tp
+	inner join tmunicipio as tm on (tm.id = tp.id_municipio)
+	inner join testado as te on (te.id = tm.id_estado)
+	where(tp.nombre = '$this->acNombre')");
+	if($laRow=$this->arreglo())
+	{		
+	$this->acId=$laRow['id'];
+	$this->acNombre=$laRow['nombre'];
+	$this->acId_municipio=$laRow['id_municipio'];
+	$this->estado = $laRow['id_estado'];		
+	$llEnc=true;
+	}
+	return $llEnc;
 }
 
 //Busqueda Ajax
