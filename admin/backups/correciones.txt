@@ -1,0 +1,54 @@
+-------------------Alberto------------------------------
+1-*cambiar id en la solicitud por numero solicitud (alberto)
+3-*los datos de la fincas se registra una sola vez, no deben de estar en solicitud (alberto)
+4-*en el segundo paso debe mostrar si es solicitud o renovacion (alberto)
+5-*paso 4 la oficina por defecto (alberto)
+6-*agregar las opcion modificar solicitud y cancelar (alberto)
+12-*si la certificacion no es aprobada por el analista devolver a la bandeja del tecnico. (Alberto)
+13-*en la bandeja del tecnico se deben diferenciar el tipo de solicitud aprobadas o rechasadasa. (Alberto)
+10-*cambiar a combo los datos como: riego, metodo de riego,fuente de agua... (Alberto)
+
+--------------------Carlos VArgas--------------------------
+
+7-*al asignar al tecnico la solicitud se debe definir fecha y hora de la visita,
+al productor se le debe enviar estar informacion para este pendiente el tecnico,
+validar que maximo a un tecnico no se le asigne N de inspeccion (Carlos)
+
+8-*la fecha del ultimo mantenimiento que cargar el tecnico debe ser menor a la fecha de la visita (Carlos)
+
+11-*validar los campos obligatorios que no quden vacios. (Carlos)
+
+14-* se le simula que al tecnico le llegue un correo por aprovada o solicitad. (Carlos) 
+
+15-*cuando el analista aprueba la solicitud se debe imprimir para sello y firma del director.incluir en el certificado un codigo qr. (Carlos)
+
+17-*en la vista rubro se debe asociar los ciclos en donde se dan esos rubros y 
+combo de selecion multiple. (Carlos)
+
+18-*en el menu archivo dividir por submenu. (Carlos)
+
+19-*al crear un nuevo usuario no se le puede colocar las pregunta de seguridad ....
+el sistema debe saber cuando inicia sesion por primera vez y asi crear automaticamente 
+sus preguntas de seguridad (Carlos)
+
+
+reportes 
+1:generar un reporte que muestre todas solicitud fuera de tiempo indicando el estatus de la solicitud y en que etapa del proceso esta.
+2:mostrar un historico por productor de solicitudes. 
+3:emitir un lista de certificados vencidos.
+4:reporte de solicitudes por estatus.
+5:reporte por soliciudes asigandas por tecnico.
+6:reporte visitas de tecnico.
+
+
+---------------------Listos
+
+16-*en la vista del productor colocar la asociaciones en un combo
+2-*al registrar el agricultor asociarle las fincas (carlos)
+
+---------------------Repetido
+
+9-* en la maestra de ciclo debe colocarse el detalle de los rubros por ciclo,
+de tal forma que en la solicitud al selecionar el ciclo se llene el combo rubro (Esta Repetida)
+
+ 
