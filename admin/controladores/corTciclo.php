@@ -12,7 +12,7 @@ switch($lcOperacion){
 
 	case "incluir":
 	
-		if($lobjTciclo->buscar()){
+		if($lobjTciclo->buscarbyname()){
 			$lcListo = 0;
 		}else{
 			$lcListo = 1;
@@ -25,7 +25,7 @@ switch($lcOperacion){
 	
 		if($lobjTciclo->buscar()){
 			$lcId=$lobjTciclo->acId;
-$lcNombre=$lobjTciclo->acNombre; 
+			$lcNombre=$lobjTciclo->acNombre; 
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

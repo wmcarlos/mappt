@@ -31,6 +31,19 @@ $llEnc=true;
 return $llEnc;
 }
 
+public function buscarbyname()
+{
+$llEnc=false;
+$this->ejecutar("select * from tespecie_ave where(nombre = '$this->acNombre')");
+if($laRow=$this->arreglo())
+{		
+$this->acId=$laRow['id'];
+$this->acNombre=$laRow['nombre'];		
+$llEnc=true;
+}
+return $llEnc;
+}
+
 //Busqueda Ajax
 public function busqueda_ajax($valor)
 {
