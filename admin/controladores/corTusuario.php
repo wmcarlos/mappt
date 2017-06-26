@@ -11,8 +11,7 @@ $lobjTusuario->acRespuesta=$_POST['txtrespuesta'];
 $lobjTusuario->estatus = $_POST['txtestatus'];
 $lobjTusuario->nombre_completo = $_POST["txtnombre_completo"];
 $lobjTusuario->correo = $_POST["txtcorreo"];
-$lobjTusuario->id_pais = $_POST["txtid_pais"];
-$lobjTusuario->url_avatar = $_POST["txturl_avatar"];
+$lobjTusuario->id_oficina = $_POST["txtid_oficina"];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
@@ -21,10 +20,14 @@ switch($lcOperacion){
 	case "entrar":
 		$arrData = $lobjTusuario->validar_entrada($lobjTusuario->acNombre_usu,$lobjTusuario->acClave);
 		if(count($arrData) > 0){
+			$_SESSION['codigo'] = $arrData[0]['id_usuario'];
 			$_SESSION['user'] = $arrData[0]['nombre_usu'];
 			$_SESSION['pass'] = $arrData[0]['clave'];
 			$_SESSION['type'] = $arrData[0]['tipo'];
 			$_SESSION['full_name'] = $arrData[0]['nombre_completo'];
+			$_SESSION['oficina'] = $arrData[0]['oficina'];
+			$_SESSION['id_oficina'] = $arrData[0]['id_oficina'];
+			$_SESSION['rol'] = $arrData[0]['rol'];
 			$lobjTusuario->reiniciar_contador($_SESSION['user']);
 			if($arrData[0]['estatus'] == 2){
 				header("location: ../index.php?valido=bloqueado");
@@ -73,8 +76,7 @@ switch($lcOperacion){
 			$estatus = $lobjTusuario->estatus;
 			$nombre_completo = $lobjTusuario->nombre_completo;
 			$correo = $lobjTusuario->correo;
-			$id_pais = $lobjTusuario->id_pais;
-			$url_avatar = $lobjTusuario->url_avatar;
+			$id_oficina = $lobjTusuario->id_oficina;
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;

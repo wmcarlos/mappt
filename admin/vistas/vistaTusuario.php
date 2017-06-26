@@ -55,6 +55,13 @@ function cargar()
 </select></td>
 </tr>
 <tr>
+<td align='right'>Oficina:</td>
+<td><select class='validate[required]' disabled name='txtid_oficina'>
+	<option value="">-</option>
+	<?php print $objFunciones->crear_combo("toficina","id","nombre",$id_oficina); ?>
+</select></td>
+</tr>
+<tr>
 <td align='right'>Pregunta:</td>
 <td><input type='text' size="40" class='validate[required]' disabled name='txtpregunta' value='<?php print($lcPregunta);?>' /></td>
 </tr>

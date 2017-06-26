@@ -9,6 +9,8 @@ private $acRespuesta;
 private $estatus;
 private $nombre_completo;
 private $correo;
+private $id_oficina;
+private $nombre_oficina;
 
 //constructor de la clase		
 public function __construct(){
@@ -20,6 +22,8 @@ $this->acRespuesta = "";
 $this->estatus = "";
 $this->nombre_completo ="";
 $this->correo = "";
+$this->id_oficina ="";
+$this->nombre_oficina = "";
 }
 
 //metodo magico set
@@ -33,7 +37,12 @@ public function __destruct() { }
 public function buscar2()
 {
 $llEnc=false;
-$this->ejecutar("select * from tusuario where(nombre_usu = '$this->acNombre_usu')");
+$this->ejecutar("select
+	tusuario.*, 
+	tof.nombre AS oficina
+	from tusuario
+left join toficina AS tof ON (tof.id = tusuario.id_oficina)
+where(nombre_usu = '$this->acNombre_usu')");
 if($laRow=$this->arreglo())
 {		
 $this->acNombre_usu=$laRow['nombre_usu'];
@@ -44,13 +53,18 @@ $this->acRespuesta=$laRow['respuesta'];
 $this->estatus = $laRow['estatus'];	
 $this->nombre_completo = $laRow["nombre_completo"];
 $this->correo = $laRow["correo"];
+$this->id_oficina = $laRow["id_oficina"];
+$this->nombre_oficina = $laRow["oficina"];
 $llEnc=true;
 }
 return $llEnc;
 }
 
 public function validar_entrada($user,$pass){
-	$this->ejecutar("select * from tusuario where nombre_usu = '$user' and clave = '$pass'");
+	$this->ejecutar("select tusuario.*, tof.nombre as oficina, tr.nombre as rol from tusuario 
+		left join toficina as tof on (tof.id = tusuario.id_oficina)
+		left join trol AS tr ON (tr.codigo = tusuario.tipo)
+		where nombre_usu = '$user' and clave = '$pass'");
 	if($row=$this->arreglo()){
 		$arrData[] = $row;
 	}
@@ -58,7 +72,7 @@ public function validar_entrada($user,$pass){
 }
 
 public function comprobar_usuarios($nombre){
-	$this->ejecutar("select * from tusuario where (nombre_usu = '$nombre') ");
+	$this->ejecutar("select * tusuario where (nombre_usu = '$nombre') ");
 	if($row = $this->arreglo()){  $arrData[] = $row; }
 	return $arrData;
 }
@@ -111,7 +125,7 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
-return $this->ejecutar("insert into tusuario(nombre_usu,clave,tipo,pregunta,respuesta,estatus,nombre_completo,correo)values('$this->acNombre_usu','$this->acClave','$this->acTipo','$this->acPregunta','$this->acRespuesta','$this->estatus','$this->nombre_completo','$this->correo')");
+return $this->ejecutar("insert into tusuario(nombre_usu,clave,tipo,pregunta,respuesta,estatus,nombre_completo,correo, id_oficina)values('$this->acNombre_usu','$this->acClave','$this->acTipo','$this->acPregunta','$this->acRespuesta','$this->estatus','$this->nombre_completo','$this->correo',$this->id_oficina)");
 }
 public function reiniciar_contador($user){
 	return $this->ejecutar("update tusuario set intentos = 0 where nombre_usu = '$user'");
@@ -120,7 +134,7 @@ public function reiniciar_contador($user){
 //funcion modificar
 public function modificar($lcVarTem)
 {
-return $this->ejecutar("update tusuario set nombre_usu = '$this->acNombre_usu', clave = '$this->acClave', tipo = '$this->acTipo', pregunta = '$this->acPregunta', respuesta = '$this->acRespuesta', estatus = '$this->estatus', nombre_completo = '$this->nombre_completo', correo = '$this->correo' where(nombre_usu = '$this->acNombre_usu')");
+return $this->ejecutar("update tusuario set nombre_usu = '$this->acNombre_usu', clave = '$this->acClave', tipo = '$this->acTipo', pregunta = '$this->acPregunta', respuesta = '$this->acRespuesta', estatus = '$this->estatus', nombre_completo = '$this->nombre_completo', correo = '$this->correo', id_oficina = '$this->id_oficina' where(nombre_usu = '$this->acNombre_usu')");
 }
 
 public function incrementar_intentos($usuario, $inten){

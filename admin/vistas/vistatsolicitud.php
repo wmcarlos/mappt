@@ -1,57 +1,73 @@
 <?php
 require_once('../modelos/clsFunciones.php'); //Funciones PreInstaladas
-//require_once('../controladores/corTproductor.php');
-require_once("../modelos/clsTunidad_produccion.php");
 require_once('../controladores/corTsolicitud.php');
-require_once('../modelos/clsTasociacion.php');
-
-
-/*vamos a traernos el codigo de la ultima unidad de produccion registrada*/
-$objunidad_produccion = new clsTunidad_produccion();
-$tunidad_produccion = $objunidad_produccion->traer_codigo_unidadproduccion();
-
-
-
-$objtasociacion = new clsTasociacion();
-$viewarray_asociaciones = array();
-$viewarray_asociaciones  = $objtasociacion->listar_asociaciones();
-
 $objFunciones = new clsFunciones;
 $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-	
-}else{
-	$municipios = $objFunciones->combo_segun_combo("tmunicipio","id","nombre","id_estado",$estado,$municipio);
-	$parroquias = $objFunciones->combo_segun_combo("tparroquia","id","nombre","id_municipio",$municipio,$parroquia);
-	$sectores = $objFunciones->combo_segun_combo("tsector","id","nombre","id_parroquia",$parroquia,$lcId_sector);
+$id = $objFunciones->ultimo_id_plus1("tsolicitud","nro_solicitud");
 }
-
-
-
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
 <head>
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-	<title>Gestion Productor</title>
-	
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>Gestion Solicitud</title>
+<?php print($objFunciones->librerias_generales); ?>
+<script>
+  $(document).ready(function(){
+	    var availableTags = [
 
-	<?php print($objFunciones->librerias_generales); ?>
+	    <?php 
+	    	for($i = 0; $i < count($productores); $i++){
+	    		if( ($i+1) == count($productores) ){
+	    			print '"'.$productores[$i]['ced_rif'].'_'.$productores[$i]['nom_rso'].'"';
+	    		}else{
+	    			print '"'.$productores[$i]['ced_rif'].'_'.$productores[$i]['nom_rso'].'",';
+	    		}
+	    	}
+	    ?>
+	    ];
+	    $( "#txtcedula_rif_productor" ).autocomplete({
+	      source: availableTags,
 
-	<script>
-		function cargar()
-		{
-			var operacion = '<?php print($operacion);?>';
-			var listo = '<?php print($listo);?>';
-			mensajes(operacion,listo);
-			cargar_select(operacion,listo);
-		}
-	</script>
+	      select : function(event, ui){
+	      	event.preventDefault();
+
+	      	var part = ui.item.value.split("_");
+	      	$("#txtcedula_rif_productor").val(part[0]);
+	      	$("#nom_rso").val(part[1]);
+
+	      	$.get("../controladores/print_data_ajax.php",{ operacion : 'get_full_producto_data', cedula : part[0] },function(data){
+	      		var arr = $.parseJSON(data);
+
+	      		$("#tipo_persona").val(arr[0].tipo);
+	      		$("#correo").val(arr[0].correo);
+	      		$("#telefono").val(arr[0].telefono);
+
+	      	});
+
+	      	$.get("../controladores/print_data_ajax.php",{ operacion : 'get_all_unidades_produccion', cedula : part[0] },function(data){
+	      		$("#unidades_produccion").html(data);
+	      	});
+
+	      }
+	    });
+  } );
+
+
+function cargar()
+{
+	var operacion = '<?php print($operacion);?>';
+	var listo = '<?php print($listo);?>';
+	mensajes(operacion,listo);
+	cargar_select(operacion,listo);
+}
+</script>
 </head>
 <body onload='cargar();'>
-	<?php print($objFunciones->cuadro_busqueda); ?>
+<?php print($objFunciones->cuadro_busqueda); ?>
 <!--
 	Codigo
 	Antes del
@@ -59,298 +75,106 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 	antes_form.php
 -->
 <?php @include('antes_form.php'); ?>
-
 <div id='mensajes_sistema'></div><br />
-<center><h1 style="font-size: 30px;">Certificación</h1></center>
 <center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
-
-<!--creando el step-->
-<br>
-<center><ol class="ol-step">
-	<!--<li class="step" tagstep="0">1</li>
-	<li class="step" tagstep="1">2</li>
-	<li class="step" tagstep="2">3</li>
-	<li class="step" tagstep="3">4</li>-->	
-</ol></center>
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
-<br>	
-<center><strong style="font-weight: bold;">Fecha De Recepción:<?php echo @date("d-m-Y"); ?></strong></center>
-<br>
-
 <div class='cont_frame'>
-	<h1>Productor <button class="btn_buscar" operacion="busqueda_ajax_productor" type="button" clase="Tproductor" salir="local">Buscar</button></h1>
-<input type="hidden" name="fecha_recepcion" value="<?php echo @date("Y-m-d"); ?>">
-	
-	<table border='1' class='datos' align='center'>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
-			<td colspan="4" id="tipopersona"></td>
-		</tr>
-		<tr>
-			<input type="hidden" id="txtced_rif" name="txtced_rif">
-			<td align='right'><span class='rojo'>*</span> Cedula o Rif:</td>
-			<td id="cedula"></td>
-			<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
-			<td id="nombre"></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Estado:</td>
-			<td id="estado"></td>
-			<td align='right'><span class='rojo'>*</span> Municipio:</td>
-			<td id="municipio"></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Parroquia:</td>
-			<td id="parroquia"></td>
-			<td align='right'><span class='rojo'>*</span> Sector:</td>
-			<td id="sector"></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Dirección:</td>
-			<td id="direccion"></td>
-			<td align='right'><span class='rojo'>*</span> Telefono:</td>
-			<td id="telefono"></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Correo:</td>
-			<td id="correo"></td>
-			<td align='right'><span class='rojo'>*</span> Asociaciones:</td>
-			<td id="asociaciones"></td>
-		</tr>
-
-		<input type='hidden' name='txtoperacion' value='des'>
-		<input type='hidden' name='txtvar_tem' value='<?php print($lcId); ?>'>
-	</table>
-	<?php //$objFunciones->botonera_general('Tproductor','total',$id); ?>
+<h1>Solicitud</h1>
+<table border='1' class='datos' align='center'>
+<tr >
+<td align='right'><span class='rojo'>*</span> Nro Solicitud:</td>
+<td><input type='text' disabled='disabled' readonly="readonly" maxlength='' name='txtnro_solicitud' value='<?php print($lcNro_solicitud);?>' id='txtnro_solicitud' class='validate[required]'/></td>
+<td align='right'><span class='rojo'>*</span> Fecha Recepcion:</td>
+<td><input type='text' readonly="readonly" disabled='disabled' maxlength='' name='txtfecha_recepcion' value='<?php print($lcFecha_recepcion);?>' id='txtfecha_recepcion' class='validate[required]'/></td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Tipo de Tramite:</td>
+<td colspan="3">Certificacion <input type='radio' checked="checked" disabled="disabled" name='txttipo_tramite' value='1'/> Renovacion <input type='radio' disabled="disabled" <?php if($lcTipo_tramite == "2"){ print "checked='checked'"; } ?> name='txttipo_tramite' value='2'/> </td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Analista:</td>
+<td><input type='hidden'  name='txtid_funcionario_receptor' value='<?php print($lcId_funcionario_receptor);?>' id='txtid_funcionario_receptor'/>
+<input type="text" readonly="readonly" name="funcionario" value="<?php print $_SESSION['full_name']; ?>">
+</td>
+<td align='right'><span class='rojo'>*</span> Cargo:</td>
+<td><input type='text' readonly="readonly" value="<?php print $_SESSION['rol']; ?>" disabled='disabled'/></td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Oficina:</td>
+<td colspan="3"><input type='text' readonly="readonly" value="<?php print $_SESSION['oficina']; ?>" disabled='disabled'/></td>
+</tr>
+</table>
 </div>
-
-
-<!--#################################DATOS DE LA UNIDAD DE PRODUCCION############################-->
-<div class='cont_frame'>
-	<h1>Datos de la Unidad de Produccion</h1>
-	<table border='1' class='datos' align='center'>
-		<tr style=''>
-			<td align='right'><span class='rojo'>*</span> id:</td>
-			<td><input type='text' disabled='disabled' maxlength='' name='txtid_unidad' value='<?php print($tunidad_produccion['txtid_unidad']+1);?>' id='txtid' class='validate[required]'/></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Nombre:</td>
-			<td colspan="3"><input style="width:80%;" type='text' disabled='disabled' maxlength='50' name='txtnombre' value='<?php print($lcNombre);?>' id='txtnombre' class='validate[required],maxSize[50],minSize[5]'/></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Estado:</td>
-			<td><select disabled='disabled' name='txtid_estado' id='txtid_estado' operacion="listar_municipios" load_data="txtid_municipio" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $objFunciones->crear_combo("testado","id","nombre",$estado); ?>
-			</select></td>
-			<td align='right'><span class='rojo'>*</span> Municipio:</td>
-			<td><select disabled='disabled' name='txtid_municipio' id='txtid_municipio' operacion="listar_parroquias" load_data="txtid_parroquia" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $municipios; ?>
-			</select></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Parroquia:</td>
-			<td><select disabled='disabled' name='txtid_parroquia' id='txtid_parroquia' operacion="listar_sectores" load_data="txtid_sector" class='validate[required] select_change'>
-				<option value="">Seleccione</option>
-				<?php print $parroquias; ?>
-			</select></td>
-			<td align='right'><span class='rojo'>*</span> Sector:</td>
-			<td><select disabled='disabled' name='txtid_sector' id='txtid_sector' class='validate[required]'>
-				<option value="">Seleccione</option>
-				<?php print $sectores; ?>
-			</select></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Dirección:</td>
-			<td><textarea name='txtdireccion_unidad' maxlength='' disabled='disabled' id='txtdireccion_unidad' class='validate[required]'><?php print($lcDireccion);?></textarea></td>
-			<td align='right'><span class='rojo'>*</span> Superficie Total:</td>
-			<td>HA <input  style="width: 60%;" type='text' disabled='disabled' maxlength='' name='txtsuperficie_total' value='<?php print($lcSuperficie_total);?>' id='txtsuperficie_total' class='validate[required],custom[integer]'/></td>
-		</tr>
-		<tr>
-			<td align='right'><span class='rojo'>*</span> Superficie Aprovechable:</td>
-			<td>HA<input  style="width: 60%;"type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechable' value='<?php print($lcSuperficie_aprovechable);?>' id='txtsuperficie_aprovechable' class='validate[required],custom[integer]'/></td>
-			<td align='right'><span class='rojo'>*</span> Superficie Aprovechada:</td>
-			<td>HA<input style="width: 60%;" type='text' disabled='disabled' maxlength='' name='txtsuperficie_aprovechada' value='<?php print($lcSuperficie_aprovechada);?>' id='txtsuperficie_aprovechada' class='validate[required],custom[integer]'/></td>
-		</tr>
-
-	</table>
+<div class="cont_frame">
+<h1>Datos del Productor</h1>
+<table border="1" class="datos" align="center">
+<tr>
+<td align='right'><span class='rojo'>*</span> Cedula o Rif del Productor:</td>
+<td><input type='text' disabled='disabled' maxlength='' name='txtcedula_rif_productor' value='<?php print($lcCedula_rif_productor);?>' id='txtcedula_rif_productor' class='validate[required]'/></td>
+<td align='right'><span class='rojo'>*</span> Nombre o Razon Social:</td>
+<td><input type='text' readonly="readonly" value="<?php print $nom_rif; ?>" id="nom_rso" disabled='disabled'/></td>
+</tr>
+<tr>
+<td align='right'><span class='rojo'>*</span> Tipo de Persona:</td>
+<td><input type="text" readonly="readonly" value="<?php print $tipo; ?>" id="tipo_persona"></td>
+<td align='right'><span class='rojo'>*</span> Correo:</td>
+<td><input type='text' readonly="readonly" value="<?php print $correo; ?>" id="correo" disabled='disabled'/></td>
+</tr>
+<tr>
+	<td align="right"><span class='rojo'>*</span> Telefono: </td>
+	<td colspan="3"><input type='text' value="<?php print $telefono; ?>" readonly="readonly" id="telefono" disabled='disabled'/></td>
+</tr>
+</table>
 </div>
-
-<!--REQUISITOS PREVIOS-->
-<div class='cont_frame'>
-	<h1>Documentos Requeridos para certificación</h1>
-	<p style="background-color: #D9D9D9;padding: 10px; color: red; font-weight: bold; text-align: center;">A continuación se presentan los documentos que validan  la condición como productor agrícola ante la UTMPPAT - PORTUGUESA</p>
-	<table border='1' class='datos' align='center'>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="1">1.- NOTA DE INSCRIPCIÓN DEL REGISTRO UNICO NACIONAL DE PRODUCTORES Y PRODUCTORAS AGRÍCOLAS (RUNOPPA) DEL SOLICITANTE</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="2">2.- FOTOCOPIA DE LA CÉDULA DE IDENTIDAD DEL SOLICITANTE</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="3">3.- FOTOCOPIA DEL REGISTRO DE INFORMACIÓN FISCAL (R.I.F.) DEL SOLICITANTE	</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="4">4.- DOCUMENTOS QUE ACREDITEN ADJUDICACIÓN O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRAS (INTi)</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="5">5.- PLANOS DE LA UNIDAD DE PRODUCCIÓN EMITIDO POR EL EL INSTITUTO NACIONAL DE TIERRAS (INTi) CON COORDENADAS UTM</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="6">6.- CONSTANCIA DE OCUPACIÓN DE UNIDAD DE PRODUCCIÓN, EMITIDA POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACIÓN POLÍTICO TERRITORIAL</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="7">7.-  (SI POSEE) – FOTOCOPIA DEL CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONÓMICAS DE PRODUCTORAS AGRÍCOLAS</td>
-		</tr>
-		<tr>
-			<td><input type="checkbox" name="documentos[]" value="8">8.- CARPETA MARRÓN CON GANCHOS – TAMAÑO OFICIO</td>
-		</tr>
-	</table>
-</div>
-<!--OBTENIENDO LOS REQUISITOS PREVIOS-->
-
-
-<!--datos del funcionario receptor-->
-<div class='cont_frame'>
-	<table border='1' class='datos' align='center'>
+<div class="cont_frame">
+<h1>Unidades de Produccion</h1>
+<table border="1" class="datos" id="unidades_produccion" align="center">
+	<?php if(isset($cadena) and !empty($cadena)){
+			print $cadena;
+		}else{ ?>
 	<tr>
-		<input type="hidden" name="funcionario_receptor" value="<?php print $_SESSION['user']; ?>">
-		<td>Funcionario Receptor: <input type="text" name="" value="<?php print $_SESSION['full_name'] ?>" readonly="readonly"></td>
-		<td>Oficina: <input type="text" name="oficina_area"></td>
+		<td align="center">Selecciona un productor para cargar sus unidades de produccion!!!</td>
 	</tr>
-	<tr style="display: none;">
-		<td>Numero Registro del productor: <input type="text" name="num_registro_productor"></td>
-		<td>Numero de Certificado Runnopa: <input type="text" name="num_registro_productor"></td>
-	</tr>
-	</table>
+	<?php } ?>
+</table>
 </div>
-<!--cierre de los datos del funcionario receptor-->
+<div class="cont_frame">
+<h1>Documentos Entregados</h1>
+<table class="datos" align="center" border="1">
+	<?php 
+		$checked = "";
+		for($i = 0; $i < count($documentos); $i++){
+
+			if($lobjTsolicitud->getCheckDocumentos($lcNro_solicitud,$documentos[$i]["id"])){
+				$checked = "checked='checked'";
+			}else{
+				$checked = "";
+			}
 
 
+			print "<tr>";
+				print "<td><input type='checkbox' ".$checked." disabled='disabled' name='txtdocumentos[]' value='".$documentos[$i]['id']."'></td>";
+				print "<td>".$documentos[$i]['nombre']."</td>";
+			print "</tr>";
+		}
+	?>
+</table>
+</div>
+<div class="cont_frame">
+<table border="1" class="datos" align="center">
+<input type='hidden' name='txtoperacion' value='des'>
+<input type='hidden' name='txtvar_tem' value='<?php print($lcNro_solicitud); ?>'>
+</table>
 <?php $objFunciones->botonera_general('Tsolicitud','total',$id); ?>
-</form><!--cierre del formulario completo-->
-
-
-
-
+</div>
+</form>
+<!--
+	Codigo
+	Despues del
+	Formulario
+	despues_form.php
+-->
 <?php @include('despues_form.php'); ?>
 </body>
 </html>
-<style type="text/css">
-	ol li.step{
-		display: inline;
-		padding:10px 15px;
-		border:1px solid  #ccc;
-		font-size: 25px;
-		background-color: #ccc;
-		color:black;
-		font-weight: bold;
-		cursor: pointer;
-	}
-	ol li.step:hover{
-		background-color: #6D6D6D;
-		color:white;
-	}
-	.step_active{
-		background-color: #6D6D6D !important;		
-	}
-	.btn-buscar,.btn-modificar,.btn-eliminar,.btn-guardar{
-		display: none;
-	}
-
-
-
-</style>
-<script type="text/javascript">
-	
-	jQuery(document).ready(function($){
-
-		$(".btn-incluir").find('input').click(function(){
-			//hacemos un click de una ves
-			$(".btn_buscar").trigger( "click" );
-		});
-
-		$(".cont_frame").each(function(i){
-			if(i>0){
-				$(this).hide(0);
-			}
-			if(i==0){
-				$(".ol-step").append('<li class="step step_active" tagstep="'+i+'" >'+(i+1)+'</li>');
-			}else{
-				$(".ol-step").append('<li class="step" tagstep="'+i+'" >'+(i+1)+'</li>');
-			}
-		});
-		$(document).on('click','li.step',function(){
-			tagstep = parseInt($(this).attr('tagstep'));
-			$(".cont_frame").hide(0);
-			$(".cont_frame").eq(tagstep).fadeIn(200);
-			//activamos el boton
-			$(".ol-ste li").removeClass('step_active');
-			//dejamos activado el formulario en donde nos encontramos
-			$(this).nextAll().removeClass("step_active");
-			$(this).prevAll().removeClass("step_active");
-			$(this).addClass("step_active");
-			switch(tagstep){
-				case 3:
-					$(".btn-guardar").show(0);
-					$(".btn-incluir").hide(0);
-
-				break;
-				default:
-					$(".btn-guardar").hide(0);
-					$(".btn-incluir").show(0);
-			}
-
-
-		});
-
-		$(document).on('click','.searchdata',function(){
-			var data = $(this).attr("data-get").split(",");
-			console.log(data);
-			$("#tipopersona").text(data[0]);
-			$("#cedula").text(data[1]);
-			$("#txtced_rif").val(data[1]);
-			$("#nombre").text(data[2]);
-			$("#estado").text(data[3]);
-			$("#municipio").text(data[4]);
-			$("#parroquia").text(data[5]);
-			$("#sector").text(data[6]);
-			$("#direccion").text(data[7]);
-			$("#telefono").text(data[8]);
-			$("#correo").text(data[9]);
-			var arraso = data[10].split("-");
-			$("#asociaciones").text("");
-			for(var i = 0 ; i < arraso.length; i++){
-				$("#asociaciones").append(arraso[i]+"<br/>");
-			}
-			$("#mascara").fadeOut(300);
-			$("#contenedor_resultados_busqueda").hide(0);
-		});
-
-	});
-
-
-	$("#txtsuperficie_aprovechable").keyup(function(){
-		txtsuperficie_total = parseInt($("#txtsuperficie_total").val());
-		txtsuperficie_aprovechable = parseInt($(this).val());
-		if(txtsuperficie_aprovechable>txtsuperficie_total){
-			alert("La superficie total no puede ser menor a la aprovechable");
-			$(this).val("");
-		}
-	});
-
-	$("#txtsuperficie_aprovechada").keyup(function(){
-		txtsuperficie_total = parseInt($("#txtsuperficie_total").val());
-		txtsuperficie_aprovechable = parseInt($("#txtsuperficie_aprovechable").val());
-		txtsuperficie_aprovechada = parseInt($("#txtsuperficie_aprovechada").val());
-		if(txtsuperficie_aprovechada>txtsuperficie_aprovechable){
-			alert("La superficie aprovechada no puede ser mayor a la aprovechable");
-			$(this).val("");
-		}
-
-	});
-
-
-</script>

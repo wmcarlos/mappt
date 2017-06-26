@@ -194,7 +194,6 @@ $this->acDireccion=$laRow['direccion'];
 $this->acTelefono=$laRow['telefono'];
 $this->acCorreo=$laRow['correo'];
 $this->acId_asociacion=$laRow['id_asociacion'];
-$this->acId_asociacion = $this->getAsociaciones($arraso);
 $data = $this->acTipo.",".$this->acCed_rif.",".$this->acNom_rso.",".$laRow['estado'].",".$laRow['municipio'].",".$laRow['parroquia'].",".$laRow['sector'].",".$this->acDireccion.",".$this->acTelefono.",".$this->acCorreo.",".$this->acId_asociacion;
 $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2017 a las 06:36:05
+-- Tiempo de generación: 26-06-2017 a las 06:43:52
 -- Versión del servidor: 5.5.27
 -- Versión de PHP: 5.4.7
 
@@ -21,26 +21,6 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE `mappt` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
 USE `mappt`;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `tanalisis_inspeccion`
---
-
-CREATE TABLE IF NOT EXISTS `tanalisis_inspeccion` (
-  `idtanalisis_inspeccion` int(11) NOT NULL AUTO_INCREMENT,
-  `nro_informe_inspeccion` int(11) NOT NULL,
-  `fecha_entrada` date NOT NULL,
-  `fecha_revision` date NOT NULL,
-  `oficina_dependencia` varchar(255) NOT NULL,
-  `aprobacion_certificado` char(1) NOT NULL,
-  `descripcion_porque` varchar(255) NOT NULL,
-  `observacion` varchar(255) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  PRIMARY KEY (`idtanalisis_inspeccion`),
-  KEY `fk_id_usuario002` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -138,6 +118,34 @@ CREATE TABLE IF NOT EXISTS `tdetalle_metodo_riego` (
   KEY `fk_id_metodo_riego` (`id_metodo_riego`),
   KEY `fk_id_produccion_vegetal002` (`id_produccion_vegetal`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tdocumento`
+--
+
+CREATE TABLE IF NOT EXISTS `tdocumento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
+  `obligatorio` int(11) NOT NULL,
+  `estatus` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `tdocumento`
+--
+
+INSERT INTO `tdocumento` (`id`, `nombre`, `obligatorio`, `estatus`) VALUES
+(1, 'NOTA DE INSCRIPCION DE REGISTRO UNICO NACIONAL OBLIGATORIO DE PRODUCTORES Y PRODUCTORAS AGRICOLAS (RUNOPPA) DEL SOLICITANTE', 1, 1),
+(2, 'FOTOCOPIA DE LA CEDULA DE IDENTIDAD DEL SOLICITANTE', 1, 1),
+(3, 'FOTOCOPIA DEL REGISTRO DE INFORMACION FISCAL (RIF) DEL SOLICITANTE', 1, 1),
+(4, 'DOCUMENTOS QUE ACREDITEN ADJUDICACION O GARANTIA DE PERMANENCIA DE TIERRAS, EMITIDO POR EL INSTITUTO NACIONAL DE TIERRA (INTI)', 1, 1),
+(5, 'PLANOS DE LA UNIDAD DE PRODUCCION EMITIDOS POR EL INSTITUTO NACIONAL DE TIERRAS (INTI) CON COORDENADAS UTM', 1, 1),
+(6, 'CONSTANCIA DE OCUPACION DE UNIDAD DE PRODUCCION. EMITIDAS POR EL CONSEJO COMUNAL CORRESPONDIENTE A LA UBICACION POLITICA TERRITORIAL', 1, 1),
+(7, '(SI POSEE)- FOTOCOPIA DE CERTIFICADO DE REGISTRO NACIONAL DE PRODUCTORES, ASOCIACIONES, EMPRESAS DE SERVICIOS, COOPERATIVAS Y ORGANIZACIONES, ASOCIACIONES ECONOMICAS DE PRODUCTORAS AGRICOLAS', 1, 1),
+(8, 'CARPETA MARRON CON GANCHOS - TAMANO OFICIO', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -274,6 +282,27 @@ CREATE TABLE IF NOT EXISTS `tmunicipio` (
 
 INSERT INTO `tmunicipio` (`id`, `nombre`, `id_estado`, `estatus`) VALUES
 (1, 'ARAURE', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `toficina`
+--
+
+CREATE TABLE IF NOT EXISTS `toficina` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(60) COLLATE utf8_spanish2_ci NOT NULL,
+  `estatus` int(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+
+--
+-- Volcado de datos para la tabla `toficina`
+--
+
+INSERT INTO `toficina` (`id`, `nombre`, `estatus`) VALUES
+(1, 'OFICINA PRINCIPAL', 1),
+(2, 'OFICINA SECUNDARIA', 1);
 
 -- --------------------------------------------------------
 
@@ -480,23 +509,6 @@ INSERT INTO `tproductor` (`ced_rif`, `tipo`, `nom_rso`, `id_sector`, `direccion`
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tprogramacion_inspeccion`
---
-
-CREATE TABLE IF NOT EXISTS `tprogramacion_inspeccion` (
-  `nro_informe_inspeccion` int(11) NOT NULL AUTO_INCREMENT,
-  `idtsolicitud_certificacion_renovacion` int(11) NOT NULL,
-  `fecha_asignacion` date NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `observacion` varchar(255) NOT NULL,
-  `estatus` char(1) NOT NULL,
-  PRIMARY KEY (`nro_informe_inspeccion`),
-  KEY `fk_id_usuario003` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `trol`
 --
 
@@ -530,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `trol_servicio` (
   PRIMARY KEY (`id_rol_servicio`),
   KEY `id_rol` (`id_rol`),
   KEY `id_servicio` (`id_servicio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=104 ;
 
 --
 -- Volcado de datos para la tabla `trol_servicio`
@@ -562,7 +574,7 @@ INSERT INTO `trol_servicio` (`id_rol_servicio`, `id_rol`, `id_servicio`, `estatu
 (99, 3, 21, 0),
 (100, 3, 22, 0),
 (101, 4, 25, 0),
-(102, 5, 26, 0);
+(103, 5, 23, 0);
 
 -- --------------------------------------------------------
 
@@ -667,26 +679,76 @@ CREATE TABLE IF NOT EXISTS `tsistema_produccion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tsolicitud_certificado_renovacion`
+-- Estructura de tabla para la tabla `tsolicitud`
 --
 
-CREATE TABLE IF NOT EXISTS `tsolicitud_certificado_renovacion` (
-  `idtsolicitud_certificacion_renovacion` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `tsolicitud` (
+  `nro_solicitud` int(11) NOT NULL,
   `fecha_recepcion` date NOT NULL,
   `cedula_rif_productor` varchar(15) NOT NULL,
-  `id_unidad_produccion` int(11) NOT NULL,
-  `documentos` char(100) NOT NULL,
-  `funcionario_receptor` int(11) NOT NULL,
-  `oficina_area` varchar(100) NOT NULL,
-  `num_certificado_runnopa` char(50) NOT NULL,
-  `num_registro_productor` char(50) NOT NULL,
-  `tipo_tramite` char(1) NOT NULL,
+  `id_funcionario_receptor` int(11) NOT NULL,
+  `tipo_tramite` int(11) NOT NULL,
   `estatus_solicitud` int(1) NOT NULL,
-  PRIMARY KEY (`idtsolicitud_certificacion_renovacion`),
+  PRIMARY KEY (`nro_solicitud`),
   KEY `fk_cedula_productor` (`cedula_rif_productor`),
-  KEY `fk_id_unidad_produccion008` (`id_unidad_produccion`),
-  KEY `fk_funcionario_receptor_id` (`funcionario_receptor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `fk_funcionario_receptor_id` (`id_funcionario_receptor`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tsolicitud`
+--
+
+INSERT INTO `tsolicitud` (`nro_solicitud`, `fecha_recepcion`, `cedula_rif_productor`, `id_funcionario_receptor`, `tipo_tramite`, `estatus_solicitud`) VALUES
+(2, '2017-06-25', '19902881', 3, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tsolicitud_detalle_documento`
+--
+
+CREATE TABLE IF NOT EXISTS `tsolicitud_detalle_documento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nro_solicitud` int(11) NOT NULL,
+  `id_documento` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nro_solicitud` (`nro_solicitud`),
+  KEY `id_documento` (`id_documento`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=76 ;
+
+--
+-- Volcado de datos para la tabla `tsolicitud_detalle_documento`
+--
+
+INSERT INTO `tsolicitud_detalle_documento` (`id`, `nro_solicitud`, `id_documento`) VALUES
+(62, 2, 7),
+(63, 2, 8),
+(64, 2, 6),
+(65, 2, 4),
+(66, 2, 2),
+(67, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tsolicitud_detalle_unidad_produccion`
+--
+
+CREATE TABLE IF NOT EXISTS `tsolicitud_detalle_unidad_produccion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nro_solicitud` int(11) NOT NULL,
+  `id_unidad_produccion` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `nro_solicitud` (`nro_solicitud`),
+  KEY `id_unidad_produccion` (`id_unidad_produccion`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=22 ;
+
+--
+-- Volcado de datos para la tabla `tsolicitud_detalle_unidad_produccion`
+--
+
+INSERT INTO `tsolicitud_detalle_unidad_produccion` (`id`, `nro_solicitud`, `id_unidad_produccion`) VALUES
+(19, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -749,7 +811,7 @@ CREATE TABLE IF NOT EXISTS `tunidad_produccion` (
   PRIMARY KEY (`id`),
   KEY `fk_ced_productor` (`ced_rif_productor`),
   KEY `fk_id_sector` (`id_sector`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Volcado de datos para la tabla `tunidad_produccion`
@@ -757,7 +819,8 @@ CREATE TABLE IF NOT EXISTS `tunidad_produccion` (
 
 INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_sector`, `direccion`, `utm_norte`, `utm_este`, `superficie_total`, `superficie_aprovechable`, `superficie_aprovechada`, `estatus`) VALUES
 (1, '20467294', 'LOS MALAVARES', 1, 'URB PRADOS DEL SOL', 125, 458, 12325, 12545, 21254, 1),
-(2, '20467294', 'ALGARABAN', 1, 'LOS PALMARES', 456, 456, 4566, 456, 4656, 1);
+(2, '20467294', 'ALGARABAN', 1, 'LOS PALMARES', 456, 456, 4566, 456, 4656, 1),
+(3, '19902881', 'NAPOLES', 1, 'NAPOLES', 254, 1245, 1500, 1200, 1100, 1);
 
 -- --------------------------------------------------------
 
@@ -776,6 +839,7 @@ CREATE TABLE IF NOT EXISTS `tusuario` (
   `nombre_completo` varchar(60) COLLATE utf8_spanish_ci DEFAULT NULL,
   `correo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
   `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `id_oficina` int(11) NOT NULL,
   PRIMARY KEY (`id_usuario`),
   KEY `tipo` (`tipo`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
@@ -784,20 +848,13 @@ CREATE TABLE IF NOT EXISTS `tusuario` (
 -- Volcado de datos para la tabla `tusuario`
 --
 
-INSERT INTO `tusuario` (`nombre_usu`, `clave`, `tipo`, `pregunta`, `respuesta`, `intentos`, `estatus`, `nombre_completo`, `correo`, `id_usuario`) VALUES
-('wmcarlos', 'carlos19455541', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'CARLOS VARGAS', 'LIBROSDELPROGRAMADOR@GMAIL.COM', 1),
-('ALBERTDESINGER', 'TICO20467294', 4, 'MAMA', 'LISBETH', 0, '1', 'ALBERTO DANIEL VARGAS TOVAR', 'TICO20BBOY@GMAIL.COM', 2),
-('ANALISTA', 'ANALISTA', 5, 'MAMA', 'MAMA', 0, '1', 'ANALISTA DE SISTEMAS', 'ANALISTA@GMAIL.COM', 3);
+INSERT INTO `tusuario` (`nombre_usu`, `clave`, `tipo`, `pregunta`, `respuesta`, `intentos`, `estatus`, `nombre_completo`, `correo`, `id_usuario`, `id_oficina`) VALUES
+('WMCARLOS', 'CARLOS19455541', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'ADMINISTRADOR', 'ADMINISTRADOR@EMPRESA.COM', 1, 1),
+('ANALISTA', '12345', 5, 'MAMA', 'MAMA', 0, '1', 'DANIEL PADRON', 'DANIELPADRON@GMAIL.COM', 3, 1);
 
 --
 -- Restricciones para tablas volcadas
 --
-
---
--- Filtros para la tabla `tanalisis_inspeccion`
---
-ALTER TABLE `tanalisis_inspeccion`
-  ADD CONSTRAINT `fk_id_usuario002` FOREIGN KEY (`id_usuario`) REFERENCES `tusuario` (`id_usuario`);
 
 --
 -- Filtros para la tabla `tcoordenadas_utm`
@@ -894,12 +951,6 @@ ALTER TABLE `tproductor`
   ADD CONSTRAINT `fk_id_asociacion` FOREIGN KEY (`id_asociacion`) REFERENCES `tasociacion` (`id`);
 
 --
--- Filtros para la tabla `tprogramacion_inspeccion`
---
-ALTER TABLE `tprogramacion_inspeccion`
-  ADD CONSTRAINT `fk_id_usuario003` FOREIGN KEY (`id_usuario`) REFERENCES `tusuario` (`id_usuario`);
-
---
 -- Filtros para la tabla `trol_servicio`
 --
 ALTER TABLE `trol_servicio`
@@ -925,12 +976,24 @@ ALTER TABLE `tservicio`
   ADD CONSTRAINT `tservicio_ibfk_1` FOREIGN KEY (`id_modulo`) REFERENCES `tmodulo` (`id_modulo`);
 
 --
--- Filtros para la tabla `tsolicitud_certificado_renovacion`
+-- Filtros para la tabla `tsolicitud`
 --
-ALTER TABLE `tsolicitud_certificado_renovacion`
-  ADD CONSTRAINT `fk_cedula_productor` FOREIGN KEY (`cedula_rif_productor`) REFERENCES `tproductor` (`ced_rif`),
-  ADD CONSTRAINT `fk_funcionario_receptor_id` FOREIGN KEY (`funcionario_receptor`) REFERENCES `tusuario` (`id_usuario`),
-  ADD CONSTRAINT `fk_id_unidad_produccion008` FOREIGN KEY (`id_unidad_produccion`) REFERENCES `tunidad_produccion` (`id`);
+ALTER TABLE `tsolicitud`
+  ADD CONSTRAINT `fk_cedula_productor` FOREIGN KEY (`cedula_rif_productor`) REFERENCES `tproductor` (`ced_rif`);
+
+--
+-- Filtros para la tabla `tsolicitud_detalle_documento`
+--
+ALTER TABLE `tsolicitud_detalle_documento`
+  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `tdocumento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tsolicitud_detalle_unidad_produccion`
+--
+ALTER TABLE `tsolicitud_detalle_unidad_produccion`
+  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_2` FOREIGN KEY (`id_unidad_produccion`) REFERENCES `tunidad_produccion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tunidad_produccion`
