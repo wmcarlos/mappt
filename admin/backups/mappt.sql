@@ -1,25 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.2.2
--- http://www.phpmyadmin.net
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-06-2017 a las 06:43:52
--- Versión del servidor: 5.5.27
--- Versión de PHP: 5.4.7
+-- Tiempo de generación: 27-06-2017 a las 21:30:32
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 5.6.30
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de datos: `mappt`
 --
-CREATE DATABASE `mappt` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
+CREATE DATABASE IF NOT EXISTS `mappt` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish2_ci;
 USE `mappt`;
 
 -- --------------------------------------------------------
@@ -28,12 +28,11 @@ USE `mappt`;
 -- Estructura de tabla para la tabla `tasociacion`
 --
 
-CREATE TABLE IF NOT EXISTS `tasociacion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tasociacion` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tasociacion`
@@ -49,12 +48,18 @@ INSERT INTO `tasociacion` (`id`, `nombre`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tciclo`
 --
 
-CREATE TABLE IF NOT EXISTS `tciclo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tciclo` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tciclo`
+--
+
+INSERT INTO `tciclo` (`id`, `nombre`, `estatus`) VALUES
+(1, 'CORTO O TEMPORAL', 1);
 
 -- --------------------------------------------------------
 
@@ -62,16 +67,14 @@ CREATE TABLE IF NOT EXISTS `tciclo` (
 -- Estructura de tabla para la tabla `tcoordenadas_utm`
 --
 
-CREATE TABLE IF NOT EXISTS `tcoordenadas_utm` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tcoordenadas_utm` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `norte` int(11) NOT NULL,
   `este` int(11) NOT NULL,
   `posicion` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion006` (`id_unidad_produccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -79,14 +82,11 @@ CREATE TABLE IF NOT EXISTS `tcoordenadas_utm` (
 -- Estructura de tabla para la tabla `tdetalle_fuente_agua`
 --
 
-CREATE TABLE IF NOT EXISTS `tdetalle_fuente_agua` (
-  `id_detalle_fuente_auga` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tdetalle_fuente_agua` (
+  `id_detalle_fuente_auga` int(11) NOT NULL,
   `id_fuente_agua` int(11) DEFAULT NULL,
-  `id_produccion_vegetal` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_detalle_fuente_auga`),
-  KEY `fk_id_fuenta_agua` (`id_fuente_agua`),
-  KEY `fk_id_produccion_vegetal` (`id_produccion_vegetal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  `id_produccion_vegetal` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -94,15 +94,12 @@ CREATE TABLE IF NOT EXISTS `tdetalle_fuente_agua` (
 -- Estructura de tabla para la tabla `tdetalle_implemento_maquinaria`
 --
 
-CREATE TABLE IF NOT EXISTS `tdetalle_implemento_maquinaria` (
-  `id_detalle_implemento_maquinaria` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tdetalle_implemento_maquinaria` (
+  `id_detalle_implemento_maquinaria` int(11) NOT NULL,
   `id_implemento_maquinaria` int(11) DEFAULT NULL,
   `id_unidad_produccion` int(11) DEFAULT NULL,
-  `cantidad` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_detalle_implemento_maquinaria`),
-  KEY `fk_id_maquinaria_implemento` (`id_implemento_maquinaria`),
-  KEY `fk_id_unidad_produccion0101` (`id_unidad_produccion`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  `cantidad` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -110,14 +107,11 @@ CREATE TABLE IF NOT EXISTS `tdetalle_implemento_maquinaria` (
 -- Estructura de tabla para la tabla `tdetalle_metodo_riego`
 --
 
-CREATE TABLE IF NOT EXISTS `tdetalle_metodo_riego` (
-  `id_detalle_metodo_riego` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tdetalle_metodo_riego` (
+  `id_detalle_metodo_riego` int(11) NOT NULL,
   `id_metodo_riego` int(11) DEFAULT NULL,
-  `id_produccion_vegetal` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_detalle_metodo_riego`),
-  KEY `fk_id_metodo_riego` (`id_metodo_riego`),
-  KEY `fk_id_produccion_vegetal002` (`id_produccion_vegetal`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+  `id_produccion_vegetal` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -125,13 +119,12 @@ CREATE TABLE IF NOT EXISTS `tdetalle_metodo_riego` (
 -- Estructura de tabla para la tabla `tdocumento`
 --
 
-CREATE TABLE IF NOT EXISTS `tdocumento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tdocumento` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(255) COLLATE utf8_spanish2_ci NOT NULL,
   `obligatorio` int(11) NOT NULL,
-  `estatus` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=9 ;
+  `estatus` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tdocumento`
@@ -153,12 +146,19 @@ INSERT INTO `tdocumento` (`id`, `nombre`, `obligatorio`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tespecie_ave`
 --
 
-CREATE TABLE IF NOT EXISTS `tespecie_ave` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tespecie_ave` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tespecie_ave`
+--
+
+INSERT INTO `tespecie_ave` (`id`, `nombre`, `estatus`) VALUES
+(1, 'GALLINAS', 1),
+(2, 'PAVO REAL', 1);
 
 -- --------------------------------------------------------
 
@@ -166,12 +166,11 @@ CREATE TABLE IF NOT EXISTS `tespecie_ave` (
 -- Estructura de tabla para la tabla `testado`
 --
 
-CREATE TABLE IF NOT EXISTS `testado` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `testado` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
-  `estatus` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `estatus` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `testado`
@@ -186,12 +185,19 @@ INSERT INTO `testado` (`id`, `nombre`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tfuente_agua`
 --
 
-CREATE TABLE IF NOT EXISTS `tfuente_agua` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tfuente_agua` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tfuente_agua`
+--
+
+INSERT INTO `tfuente_agua` (`id`, `nombre`, `estatus`) VALUES
+(1, 'POZO', 1),
+(2, 'RIO O QUEBRADA', 1);
 
 -- --------------------------------------------------------
 
@@ -199,12 +205,18 @@ CREATE TABLE IF NOT EXISTS `tfuente_agua` (
 -- Estructura de tabla para la tabla `tgrupo_rubro`
 --
 
-CREATE TABLE IF NOT EXISTS `tgrupo_rubro` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tgrupo_rubro` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tgrupo_rubro`
+--
+
+INSERT INTO `tgrupo_rubro` (`id`, `nombre`, `estatus`) VALUES
+(1, 'VEGETAL', 1);
 
 -- --------------------------------------------------------
 
@@ -212,13 +224,12 @@ CREATE TABLE IF NOT EXISTS `tgrupo_rubro` (
 -- Estructura de tabla para la tabla `tmaquinaria_implemento`
 --
 
-CREATE TABLE IF NOT EXISTS `tmaquinaria_implemento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tmaquinaria_implemento` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `tipo` int(1) NOT NULL DEFAULT '1',
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -226,12 +237,18 @@ CREATE TABLE IF NOT EXISTS `tmaquinaria_implemento` (
 -- Estructura de tabla para la tabla `tmetodo_riego`
 --
 
-CREATE TABLE IF NOT EXISTS `tmetodo_riego` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tmetodo_riego` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tmetodo_riego`
+--
+
+INSERT INTO `tmetodo_riego` (`id`, `nombre`, `estatus`) VALUES
+(1, 'BOMBEO MECANICO', 1);
 
 -- --------------------------------------------------------
 
@@ -239,15 +256,14 @@ CREATE TABLE IF NOT EXISTS `tmetodo_riego` (
 -- Estructura de tabla para la tabla `tmodulo`
 --
 
-CREATE TABLE IF NOT EXISTS `tmodulo` (
-  `id_modulo` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tmodulo` (
+  `id_modulo` int(11) NOT NULL,
   `nombre` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `estatus` int(1) NOT NULL,
   `posicion` int(11) DEFAULT NULL,
   `icono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `url_modulo` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id_modulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=12 ;
+  `url_modulo` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tmodulo`
@@ -267,14 +283,12 @@ INSERT INTO `tmodulo` (`id_modulo`, `nombre`, `estatus`, `posicion`, `icono`, `u
 -- Estructura de tabla para la tabla `tmunicipio`
 --
 
-CREATE TABLE IF NOT EXISTS `tmunicipio` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tmunicipio` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `id_estado` int(11) NOT NULL,
-  `estatus` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_idestado` (`id_estado`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `estatus` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tmunicipio`
@@ -289,12 +303,11 @@ INSERT INTO `tmunicipio` (`id`, `nombre`, `id_estado`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `toficina`
 --
 
-CREATE TABLE IF NOT EXISTS `toficina` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `toficina` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) COLLATE utf8_spanish2_ci NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=3 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `toficina`
@@ -310,14 +323,12 @@ INSERT INTO `toficina` (`id`, `nombre`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tparroquia`
 --
 
-CREATE TABLE IF NOT EXISTS `tparroquia` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tparroquia` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `id_municipio` int(11) NOT NULL,
-  `estatus` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_idmunicipio` (`id_municipio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `estatus` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tparroquia`
@@ -332,20 +343,16 @@ INSERT INTO `tparroquia` (`id`, `nombre`, `id_municipio`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tproduccion_apicola`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_apicola` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_apicola` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `tipo_colmena` int(1) NOT NULL DEFAULT '1',
   `cantidad` int(11) NOT NULL,
   `id_rubro` int(11) NOT NULL,
   `produccion_mensual` int(11) NOT NULL,
   `id_unidad_mendida` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion009` (`id_unidad_produccion`),
-  KEY `fk_id_rubro009` (`id_rubro`),
-  KEY `fk_id_unidad_medida002` (`id_unidad_mendida`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -353,22 +360,23 @@ CREATE TABLE IF NOT EXISTS `tproduccion_apicola` (
 -- Estructura de tabla para la tabla `tproduccion_avicola`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_avicola` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_avicola` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `id_rubro` int(11) NOT NULL,
   `id_especie_ave` int(11) NOT NULL,
   `total_aves_produccion` int(11) NOT NULL,
   `produccion_mensual` int(11) NOT NULL,
-  `produccion_diaria` int(11) NOT NULL,
   `id_unidad_medida` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion003` (`id_unidad_produccion`),
-  KEY `fk_id_rubro003` (`id_rubro`),
-  KEY `fk_id_especie_ave` (`id_especie_ave`),
-  KEY `fk_id_unidad_medida` (`id_unidad_medida`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproduccion_avicola`
+--
+
+INSERT INTO `tproduccion_avicola` (`id`, `id_unidad_produccion`, `id_rubro`, `id_especie_ave`, `total_aves_produccion`, `produccion_mensual`, `id_unidad_medida`, `estatus`) VALUES
+(1, 5, 1, 1, 22, 22, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -376,8 +384,8 @@ CREATE TABLE IF NOT EXISTS `tproduccion_avicola` (
 -- Estructura de tabla para la tabla `tproduccion_pecuaria`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_pecuaria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_pecuaria` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `id_sistema_produccion` int(11) NOT NULL,
   `id_rubro` int(11) NOT NULL,
@@ -388,12 +396,15 @@ CREATE TABLE IF NOT EXISTS `tproduccion_pecuaria` (
   `cant_animal_en_ordeneo` int(11) NOT NULL,
   `cant_leche_alddia` int(11) NOT NULL,
   `nc_beneficio` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_unidad_produccion01` (`id_unidad_produccion`),
-  KEY `fk_id_sistema_produccion` (`id_sistema_produccion`),
-  KEY `fk_id_rubro001` (`id_rubro`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproduccion_pecuaria`
+--
+
+INSERT INTO `tproduccion_pecuaria` (`id`, `id_unidad_produccion`, `id_sistema_produccion`, `id_rubro`, `nc_machos`, `nc_hermbras`, `tipo_ordeneo`, `mod_ordeneo`, `cant_animal_en_ordeneo`, `cant_leche_alddia`, `nc_beneficio`, `estatus`) VALUES
+(3, 5, 2, 1, 22, 22, 1, 1, 22, 22, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -401,8 +412,8 @@ CREATE TABLE IF NOT EXISTS `tproduccion_pecuaria` (
 -- Estructura de tabla para la tabla `tproduccion_pesquera_aquicola`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_pesquera_aquicola` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_pesquera_aquicola` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `tipo` int(11) NOT NULL,
   `id_rubro` int(11) NOT NULL,
@@ -421,12 +432,8 @@ CREATE TABLE IF NOT EXISTS `tproduccion_pesquera_aquicola` (
   `tiposdeartedepescar` text NOT NULL,
   `longituddeuab` int(11) NOT NULL,
   `produccionanual` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion005` (`id_unidad_produccion`),
-  KEY `fk_id_rubro` (`id_rubro`),
-  KEY `fk_id_tipo_pesca` (`id_tipo_pesca`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -434,17 +441,21 @@ CREATE TABLE IF NOT EXISTS `tproduccion_pesquera_aquicola` (
 -- Estructura de tabla para la tabla `tproduccion_porcino_cunicula`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_porcino_cunicula` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_porcino_cunicula` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `tipo` int(1) NOT NULL DEFAULT '1',
   `id_rubro` int(11) NOT NULL,
   `cantidad` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion007` (`id_unidad_produccion`),
-  KEY `fk_id_rubro007` (`id_rubro`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproduccion_porcino_cunicula`
+--
+
+INSERT INTO `tproduccion_porcino_cunicula` (`id`, `id_unidad_produccion`, `tipo`, `id_rubro`, `cantidad`, `estatus`) VALUES
+(2, 5, 1, 1, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -452,8 +463,8 @@ CREATE TABLE IF NOT EXISTS `tproduccion_porcino_cunicula` (
 -- Estructura de tabla para la tabla `tproduccion_vegetal`
 --
 
-CREATE TABLE IF NOT EXISTS `tproduccion_vegetal` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tproduccion_vegetal` (
+  `id` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL,
   `id_ciclo` int(11) NOT NULL,
   `ano` char(4) NOT NULL,
@@ -462,19 +473,21 @@ CREATE TABLE IF NOT EXISTS `tproduccion_vegetal` (
   `superifice_de_cosecha` int(11) NOT NULL,
   `rendimiento` int(11) NOT NULL,
   `produccion` int(11) NOT NULL,
-  `riego` int(1) NOT NULL DEFAULT '1',
+  `id_fuente_agua` int(11) NOT NULL,
+  `id_metodo_riego` int(11) NOT NULL,
   `superficiebajoriego` int(11) NOT NULL,
   `superficieregada` int(11) NOT NULL,
   `tipoambiente` int(1) NOT NULL DEFAULT '1',
-  `id_tipo_superficie` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_id_unidad_produccion002` (`id_unidad_produccion`),
-  KEY `fk_id_ciclo001` (`id_ciclo`),
-  KEY `fk_id_rubro_002` (`id_rubro`),
-  KEY `fk_id_tipo_superficie` (`id_tipo_superficie`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `fecha` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tproduccion_vegetal`
+--
+
+INSERT INTO `tproduccion_vegetal` (`id`, `id_unidad_produccion`, `id_ciclo`, `ano`, `id_rubro`, `superficie`, `superifice_de_cosecha`, `rendimiento`, `produccion`, `id_fuente_agua`, `id_metodo_riego`, `superficiebajoriego`, `superficieregada`, `tipoambiente`, `fecha`, `estatus`) VALUES
+(5, 5, 1, '2222', 1, 222, 22, 22, 22, 1, 1, 22, 22, 1, '2017-06-27 19:13:16', 1);
 
 -- --------------------------------------------------------
 
@@ -482,7 +495,7 @@ CREATE TABLE IF NOT EXISTS `tproduccion_vegetal` (
 -- Estructura de tabla para la tabla `tproductor`
 --
 
-CREATE TABLE IF NOT EXISTS `tproductor` (
+CREATE TABLE `tproductor` (
   `ced_rif` varchar(15) NOT NULL,
   `tipo` int(1) NOT NULL DEFAULT '1',
   `nom_rso` varchar(60) NOT NULL,
@@ -491,10 +504,7 @@ CREATE TABLE IF NOT EXISTS `tproductor` (
   `telefono` varchar(11) NOT NULL,
   `correo` varchar(255) NOT NULL,
   `id_asociacion` int(11) NOT NULL,
-  `estatus` int(11) DEFAULT '1',
-  PRIMARY KEY (`ced_rif`),
-  UNIQUE KEY `ced_rif` (`ced_rif`),
-  KEY `fk_id_asociacion` (`id_asociacion`)
+  `estatus` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -512,12 +522,11 @@ INSERT INTO `tproductor` (`ced_rif`, `tipo`, `nom_rso`, `id_sector`, `direccion`
 -- Estructura de tabla para la tabla `trol`
 --
 
-CREATE TABLE IF NOT EXISTS `trol` (
-  `codigo` int(1) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `trol` (
+  `codigo` int(1) NOT NULL,
   `nombre` varchar(25) COLLATE utf8_spanish_ci NOT NULL,
-  `estatus` char(1) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`codigo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=6 ;
+  `estatus` char(1) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `trol`
@@ -534,15 +543,12 @@ INSERT INTO `trol` (`codigo`, `nombre`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `trol_servicio`
 --
 
-CREATE TABLE IF NOT EXISTS `trol_servicio` (
-  `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `trol_servicio` (
+  `id_rol_servicio` int(11) NOT NULL,
   `id_rol` int(11) NOT NULL,
   `id_servicio` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL,
-  PRIMARY KEY (`id_rol_servicio`),
-  KEY `id_rol` (`id_rol`),
-  KEY `id_servicio` (`id_servicio`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=104 ;
+  `estatus` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `trol_servicio`
@@ -582,14 +588,19 @@ INSERT INTO `trol_servicio` (`id_rol_servicio`, `id_rol`, `id_servicio`, `estatu
 -- Estructura de tabla para la tabla `trubro`
 --
 
-CREATE TABLE IF NOT EXISTS `trubro` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `trubro` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
   `id_grupo_rubro` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `id_grupo_rubro` (`id_grupo_rubro`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `trubro`
+--
+
+INSERT INTO `trubro` (`id`, `nombre`, `id_grupo_rubro`, `estatus`) VALUES
+(1, 'HORTALIZAS', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -597,14 +608,12 @@ CREATE TABLE IF NOT EXISTS `trubro` (
 -- Estructura de tabla para la tabla `tsector`
 --
 
-CREATE TABLE IF NOT EXISTS `tsector` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tsector` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(60) NOT NULL,
   `id_parroquia` int(11) NOT NULL,
-  `estatus` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_parroquia` (`id_parroquia`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `estatus` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tsector`
@@ -619,17 +628,15 @@ INSERT INTO `tsector` (`id`, `nombre`, `id_parroquia`, `estatus`) VALUES
 -- Estructura de tabla para la tabla `tservicio`
 --
 
-CREATE TABLE IF NOT EXISTS `tservicio` (
-  `id_servicio` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tservicio` (
+  `id_servicio` int(11) NOT NULL,
   `id_modulo` int(11) NOT NULL,
   `nombre` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
   `url` varchar(255) COLLATE utf8_spanish_ci NOT NULL,
   `estatus` int(1) NOT NULL,
   `posicion` int(11) DEFAULT NULL,
-  `icono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`id_servicio`),
-  KEY `id_modulo` (`id_modulo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=27 ;
+  `icono` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tservicio`
@@ -669,12 +676,20 @@ INSERT INTO `tservicio` (`id_servicio`, `id_modulo`, `nombre`, `url`, `estatus`,
 -- Estructura de tabla para la tabla `tsistema_produccion`
 --
 
-CREATE TABLE IF NOT EXISTS `tsistema_produccion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tsistema_produccion` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tsistema_produccion`
+--
+
+INSERT INTO `tsistema_produccion` (`id`, `nombre`, `estatus`) VALUES
+(1, 'LECHE', 1),
+(2, 'CARNE', 1),
+(3, 'DOBLE PROPOSITO', 1);
 
 -- --------------------------------------------------------
 
@@ -682,16 +697,13 @@ CREATE TABLE IF NOT EXISTS `tsistema_produccion` (
 -- Estructura de tabla para la tabla `tsolicitud`
 --
 
-CREATE TABLE IF NOT EXISTS `tsolicitud` (
+CREATE TABLE `tsolicitud` (
   `nro_solicitud` int(11) NOT NULL,
   `fecha_recepcion` date NOT NULL,
   `cedula_rif_productor` varchar(15) NOT NULL,
   `id_funcionario_receptor` int(11) NOT NULL,
   `tipo_tramite` int(11) NOT NULL,
-  `estatus_solicitud` int(1) NOT NULL,
-  PRIMARY KEY (`nro_solicitud`),
-  KEY `fk_cedula_productor` (`cedula_rif_productor`),
-  KEY `fk_funcionario_receptor_id` (`id_funcionario_receptor`)
+  `estatus_solicitud` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -707,14 +719,11 @@ INSERT INTO `tsolicitud` (`nro_solicitud`, `fecha_recepcion`, `cedula_rif_produc
 -- Estructura de tabla para la tabla `tsolicitud_detalle_documento`
 --
 
-CREATE TABLE IF NOT EXISTS `tsolicitud_detalle_documento` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tsolicitud_detalle_documento` (
+  `id` int(11) NOT NULL,
   `nro_solicitud` int(11) NOT NULL,
-  `id_documento` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `nro_solicitud` (`nro_solicitud`),
-  KEY `id_documento` (`id_documento`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=76 ;
+  `id_documento` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tsolicitud_detalle_documento`
@@ -734,14 +743,11 @@ INSERT INTO `tsolicitud_detalle_documento` (`id`, `nro_solicitud`, `id_documento
 -- Estructura de tabla para la tabla `tsolicitud_detalle_unidad_produccion`
 --
 
-CREATE TABLE IF NOT EXISTS `tsolicitud_detalle_unidad_produccion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tsolicitud_detalle_unidad_produccion` (
+  `id` int(11) NOT NULL,
   `nro_solicitud` int(11) NOT NULL,
-  `id_unidad_produccion` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `nro_solicitud` (`nro_solicitud`),
-  KEY `id_unidad_produccion` (`id_unidad_produccion`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci AUTO_INCREMENT=22 ;
+  `id_unidad_produccion` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tsolicitud_detalle_unidad_produccion`
@@ -756,12 +762,11 @@ INSERT INTO `tsolicitud_detalle_unidad_produccion` (`id`, `nro_solicitud`, `id_u
 -- Estructura de tabla para la tabla `ttipo_pesca`
 --
 
-CREATE TABLE IF NOT EXISTS `ttipo_pesca` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ttipo_pesca` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -769,12 +774,11 @@ CREATE TABLE IF NOT EXISTS `ttipo_pesca` (
 -- Estructura de tabla para la tabla `ttipo_superficie`
 --
 
-CREATE TABLE IF NOT EXISTS `ttipo_superficie` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `ttipo_superficie` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(30) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -782,13 +786,20 @@ CREATE TABLE IF NOT EXISTS `ttipo_superficie` (
 -- Estructura de tabla para la tabla `tunidad_medida`
 --
 
-CREATE TABLE IF NOT EXISTS `tunidad_medida` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tunidad_medida` (
+  `id` int(11) NOT NULL,
   `nombre` varchar(40) NOT NULL,
   `siglas` varchar(10) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `tunidad_medida`
+--
+
+INSERT INTO `tunidad_medida` (`id`, `nombre`, `siglas`, `estatus`) VALUES
+(1, 'LITRO', 'LTS', 1),
+(2, 'KILO', 'KL', 1);
 
 -- --------------------------------------------------------
 
@@ -796,8 +807,8 @@ CREATE TABLE IF NOT EXISTS `tunidad_medida` (
 -- Estructura de tabla para la tabla `tunidad_produccion`
 --
 
-CREATE TABLE IF NOT EXISTS `tunidad_produccion` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tunidad_produccion` (
+  `id` int(11) NOT NULL,
   `ced_rif_productor` varchar(15) DEFAULT NULL,
   `nombre` varchar(60) NOT NULL,
   `id_sector` int(11) NOT NULL,
@@ -807,11 +818,8 @@ CREATE TABLE IF NOT EXISTS `tunidad_produccion` (
   `superficie_total` int(11) NOT NULL,
   `superficie_aprovechable` int(11) NOT NULL,
   `superficie_aprovechada` int(11) NOT NULL,
-  `estatus` int(1) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`),
-  KEY `fk_ced_productor` (`ced_rif_productor`),
-  KEY `fk_id_sector` (`id_sector`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  `estatus` int(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tunidad_produccion`
@@ -820,7 +828,8 @@ CREATE TABLE IF NOT EXISTS `tunidad_produccion` (
 INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_sector`, `direccion`, `utm_norte`, `utm_este`, `superficie_total`, `superficie_aprovechable`, `superficie_aprovechada`, `estatus`) VALUES
 (1, '20467294', 'LOS MALAVARES', 1, 'URB PRADOS DEL SOL', 125, 458, 12325, 12545, 21254, 1),
 (2, '20467294', 'ALGARABAN', 1, 'LOS PALMARES', 456, 456, 4566, 456, 4656, 1),
-(3, '19902881', 'NAPOLES', 1, 'NAPOLES', 254, 1245, 1500, 1200, 1100, 1);
+(3, '19902881', 'NAPOLES', 1, 'NAPOLES', 254, 1245, 1500, 1200, 1100, 1),
+(5, NULL, 'TYTY', 1, 'YHYY', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -828,7 +837,7 @@ INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_secto
 -- Estructura de tabla para la tabla `tusuario`
 --
 
-CREATE TABLE IF NOT EXISTS `tusuario` (
+CREATE TABLE `tusuario` (
   `nombre_usu` char(25) COLLATE utf8_spanish_ci NOT NULL,
   `clave` char(41) COLLATE utf8_spanish_ci NOT NULL,
   `tipo` int(1) NOT NULL,
@@ -838,11 +847,9 @@ CREATE TABLE IF NOT EXISTS `tusuario` (
   `estatus` char(1) COLLATE utf8_spanish_ci NOT NULL DEFAULT '1',
   `nombre_completo` varchar(60) COLLATE utf8_spanish_ci DEFAULT NULL,
   `correo` varchar(255) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
-  `id_oficina` int(11) NOT NULL,
-  PRIMARY KEY (`id_usuario`),
-  KEY `tipo` (`tipo`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=4 ;
+  `id_usuario` int(11) NOT NULL,
+  `id_oficina` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tusuario`
@@ -852,6 +859,467 @@ INSERT INTO `tusuario` (`nombre_usu`, `clave`, `tipo`, `pregunta`, `respuesta`, 
 ('WMCARLOS', 'CARLOS19455541', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'ADMINISTRADOR', 'ADMINISTRADOR@EMPRESA.COM', 1, 1),
 ('ANALISTA', '12345', 5, 'MAMA', 'MAMA', 0, '1', 'DANIEL PADRON', 'DANIELPADRON@GMAIL.COM', 3, 1);
 
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `tasociacion`
+--
+ALTER TABLE `tasociacion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tciclo`
+--
+ALTER TABLE `tciclo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tcoordenadas_utm`
+--
+ALTER TABLE `tcoordenadas_utm`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_unidad_produccion006` (`id_unidad_produccion`);
+
+--
+-- Indices de la tabla `tdetalle_fuente_agua`
+--
+ALTER TABLE `tdetalle_fuente_agua`
+  ADD PRIMARY KEY (`id_detalle_fuente_auga`),
+  ADD KEY `fk_id_fuenta_agua` (`id_fuente_agua`),
+  ADD KEY `fk_id_produccion_vegetal` (`id_produccion_vegetal`);
+
+--
+-- Indices de la tabla `tdetalle_implemento_maquinaria`
+--
+ALTER TABLE `tdetalle_implemento_maquinaria`
+  ADD PRIMARY KEY (`id_detalle_implemento_maquinaria`),
+  ADD KEY `fk_id_maquinaria_implemento` (`id_implemento_maquinaria`),
+  ADD KEY `fk_id_unidad_produccion0101` (`id_unidad_produccion`);
+
+--
+-- Indices de la tabla `tdetalle_metodo_riego`
+--
+ALTER TABLE `tdetalle_metodo_riego`
+  ADD PRIMARY KEY (`id_detalle_metodo_riego`),
+  ADD KEY `fk_id_metodo_riego` (`id_metodo_riego`),
+  ADD KEY `fk_id_produccion_vegetal002` (`id_produccion_vegetal`);
+
+--
+-- Indices de la tabla `tdocumento`
+--
+ALTER TABLE `tdocumento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tespecie_ave`
+--
+ALTER TABLE `tespecie_ave`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `testado`
+--
+ALTER TABLE `testado`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tfuente_agua`
+--
+ALTER TABLE `tfuente_agua`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tgrupo_rubro`
+--
+ALTER TABLE `tgrupo_rubro`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tmaquinaria_implemento`
+--
+ALTER TABLE `tmaquinaria_implemento`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tmetodo_riego`
+--
+ALTER TABLE `tmetodo_riego`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tmodulo`
+--
+ALTER TABLE `tmodulo`
+  ADD PRIMARY KEY (`id_modulo`);
+
+--
+-- Indices de la tabla `tmunicipio`
+--
+ALTER TABLE `tmunicipio`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_idestado` (`id_estado`);
+
+--
+-- Indices de la tabla `toficina`
+--
+ALTER TABLE `toficina`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tparroquia`
+--
+ALTER TABLE `tparroquia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_idmunicipio` (`id_municipio`);
+
+--
+-- Indices de la tabla `tproduccion_apicola`
+--
+ALTER TABLE `tproduccion_apicola`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_unidad_produccion009` (`id_unidad_produccion`),
+  ADD KEY `fk_id_rubro009` (`id_rubro`),
+  ADD KEY `fk_id_unidad_medida002` (`id_unidad_mendida`);
+
+--
+-- Indices de la tabla `tproduccion_avicola`
+--
+ALTER TABLE `tproduccion_avicola`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_unidad_produccion003` (`id_unidad_produccion`),
+  ADD KEY `fk_id_rubro003` (`id_rubro`),
+  ADD KEY `fk_id_especie_ave` (`id_especie_ave`),
+  ADD KEY `fk_id_unidad_medida` (`id_unidad_medida`);
+
+--
+-- Indices de la tabla `tproduccion_pecuaria`
+--
+ALTER TABLE `tproduccion_pecuaria`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_unidad_produccion01` (`id_unidad_produccion`),
+  ADD KEY `fk_id_sistema_produccion` (`id_sistema_produccion`),
+  ADD KEY `fk_id_rubro001` (`id_rubro`);
+
+--
+-- Indices de la tabla `tproduccion_pesquera_aquicola`
+--
+ALTER TABLE `tproduccion_pesquera_aquicola`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_unidad_produccion005` (`id_unidad_produccion`),
+  ADD KEY `fk_id_rubro` (`id_rubro`),
+  ADD KEY `fk_id_tipo_pesca` (`id_tipo_pesca`);
+
+--
+-- Indices de la tabla `tproduccion_porcino_cunicula`
+--
+ALTER TABLE `tproduccion_porcino_cunicula`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_id_unidad_produccion007` (`id_unidad_produccion`),
+  ADD KEY `fk_id_rubro007` (`id_rubro`);
+
+--
+-- Indices de la tabla `tproduccion_vegetal`
+--
+ALTER TABLE `tproduccion_vegetal`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id_metodo_riego` (`id_metodo_riego`),
+  ADD KEY `fk_id_unidad_produccion002` (`id_unidad_produccion`),
+  ADD KEY `fk_id_ciclo001` (`id_ciclo`),
+  ADD KEY `fk_id_rubro_002` (`id_rubro`),
+  ADD KEY `id_fuente_agua` (`id_fuente_agua`);
+
+--
+-- Indices de la tabla `tproductor`
+--
+ALTER TABLE `tproductor`
+  ADD PRIMARY KEY (`ced_rif`),
+  ADD UNIQUE KEY `ced_rif` (`ced_rif`),
+  ADD KEY `fk_id_asociacion` (`id_asociacion`);
+
+--
+-- Indices de la tabla `trol`
+--
+ALTER TABLE `trol`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indices de la tabla `trol_servicio`
+--
+ALTER TABLE `trol_servicio`
+  ADD PRIMARY KEY (`id_rol_servicio`),
+  ADD KEY `id_rol` (`id_rol`),
+  ADD KEY `id_servicio` (`id_servicio`);
+
+--
+-- Indices de la tabla `trubro`
+--
+ALTER TABLE `trubro`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_grupo_rubro` (`id_grupo_rubro`);
+
+--
+-- Indices de la tabla `tsector`
+--
+ALTER TABLE `tsector`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_parroquia` (`id_parroquia`);
+
+--
+-- Indices de la tabla `tservicio`
+--
+ALTER TABLE `tservicio`
+  ADD PRIMARY KEY (`id_servicio`),
+  ADD KEY `id_modulo` (`id_modulo`);
+
+--
+-- Indices de la tabla `tsistema_produccion`
+--
+ALTER TABLE `tsistema_produccion`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tsolicitud`
+--
+ALTER TABLE `tsolicitud`
+  ADD PRIMARY KEY (`nro_solicitud`),
+  ADD KEY `fk_cedula_productor` (`cedula_rif_productor`),
+  ADD KEY `fk_funcionario_receptor_id` (`id_funcionario_receptor`);
+
+--
+-- Indices de la tabla `tsolicitud_detalle_documento`
+--
+ALTER TABLE `tsolicitud_detalle_documento`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nro_solicitud` (`nro_solicitud`),
+  ADD KEY `id_documento` (`id_documento`);
+
+--
+-- Indices de la tabla `tsolicitud_detalle_unidad_produccion`
+--
+ALTER TABLE `tsolicitud_detalle_unidad_produccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `nro_solicitud` (`nro_solicitud`),
+  ADD KEY `id_unidad_produccion` (`id_unidad_produccion`);
+
+--
+-- Indices de la tabla `ttipo_pesca`
+--
+ALTER TABLE `ttipo_pesca`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ttipo_superficie`
+--
+ALTER TABLE `ttipo_superficie`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tunidad_medida`
+--
+ALTER TABLE `tunidad_medida`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tunidad_produccion`
+--
+ALTER TABLE `tunidad_produccion`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_ced_productor` (`ced_rif_productor`),
+  ADD KEY `fk_id_sector` (`id_sector`);
+
+--
+-- Indices de la tabla `tusuario`
+--
+ALTER TABLE `tusuario`
+  ADD PRIMARY KEY (`id_usuario`),
+  ADD KEY `tipo` (`tipo`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `tasociacion`
+--
+ALTER TABLE `tasociacion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tciclo`
+--
+ALTER TABLE `tciclo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tcoordenadas_utm`
+--
+ALTER TABLE `tcoordenadas_utm`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tdetalle_fuente_agua`
+--
+ALTER TABLE `tdetalle_fuente_agua`
+  MODIFY `id_detalle_fuente_auga` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tdetalle_implemento_maquinaria`
+--
+ALTER TABLE `tdetalle_implemento_maquinaria`
+  MODIFY `id_detalle_implemento_maquinaria` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tdetalle_metodo_riego`
+--
+ALTER TABLE `tdetalle_metodo_riego`
+  MODIFY `id_detalle_metodo_riego` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tdocumento`
+--
+ALTER TABLE `tdocumento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- AUTO_INCREMENT de la tabla `tespecie_ave`
+--
+ALTER TABLE `tespecie_ave`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `testado`
+--
+ALTER TABLE `testado`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tfuente_agua`
+--
+ALTER TABLE `tfuente_agua`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tgrupo_rubro`
+--
+ALTER TABLE `tgrupo_rubro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tmaquinaria_implemento`
+--
+ALTER TABLE `tmaquinaria_implemento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tmetodo_riego`
+--
+ALTER TABLE `tmetodo_riego`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tmodulo`
+--
+ALTER TABLE `tmodulo`
+  MODIFY `id_modulo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+--
+-- AUTO_INCREMENT de la tabla `tmunicipio`
+--
+ALTER TABLE `tmunicipio`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `toficina`
+--
+ALTER TABLE `toficina`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tparroquia`
+--
+ALTER TABLE `tparroquia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_apicola`
+--
+ALTER TABLE `tproduccion_apicola`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_avicola`
+--
+ALTER TABLE `tproduccion_avicola`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_pecuaria`
+--
+ALTER TABLE `tproduccion_pecuaria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_pesquera_aquicola`
+--
+ALTER TABLE `tproduccion_pesquera_aquicola`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_porcino_cunicula`
+--
+ALTER TABLE `tproduccion_porcino_cunicula`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tproduccion_vegetal`
+--
+ALTER TABLE `tproduccion_vegetal`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `trol`
+--
+ALTER TABLE `trol`
+  MODIFY `codigo` int(1) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT de la tabla `trol_servicio`
+--
+ALTER TABLE `trol_servicio`
+  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+--
+-- AUTO_INCREMENT de la tabla `trubro`
+--
+ALTER TABLE `trubro`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tsector`
+--
+ALTER TABLE `tsector`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT de la tabla `tservicio`
+--
+ALTER TABLE `tservicio`
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+--
+-- AUTO_INCREMENT de la tabla `tsistema_produccion`
+--
+ALTER TABLE `tsistema_produccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT de la tabla `tsolicitud_detalle_documento`
+--
+ALTER TABLE `tsolicitud_detalle_documento`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+--
+-- AUTO_INCREMENT de la tabla `tsolicitud_detalle_unidad_produccion`
+--
+ALTER TABLE `tsolicitud_detalle_unidad_produccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT de la tabla `ttipo_pesca`
+--
+ALTER TABLE `ttipo_pesca`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `ttipo_superficie`
+--
+ALTER TABLE `ttipo_superficie`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT de la tabla `tunidad_medida`
+--
+ALTER TABLE `tunidad_medida`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT de la tabla `tunidad_produccion`
+--
+ALTER TABLE `tunidad_produccion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
+-- AUTO_INCREMENT de la tabla `tusuario`
+--
+ALTER TABLE `tusuario`
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Restricciones para tablas volcadas
 --
@@ -941,7 +1409,6 @@ ALTER TABLE `tproduccion_porcino_cunicula`
 ALTER TABLE `tproduccion_vegetal`
   ADD CONSTRAINT `fk_id_ciclo001` FOREIGN KEY (`id_ciclo`) REFERENCES `tciclo` (`id`),
   ADD CONSTRAINT `fk_id_rubro_002` FOREIGN KEY (`id_rubro`) REFERENCES `trubro` (`id`),
-  ADD CONSTRAINT `fk_id_tipo_superficie` FOREIGN KEY (`id_tipo_superficie`) REFERENCES `ttipo_superficie` (`id`),
   ADD CONSTRAINT `fk_id_unidad_produccion002` FOREIGN KEY (`id_unidad_produccion`) REFERENCES `tunidad_produccion` (`id`);
 
 --
@@ -985,15 +1452,15 @@ ALTER TABLE `tsolicitud`
 -- Filtros para la tabla `tsolicitud_detalle_documento`
 --
 ALTER TABLE `tsolicitud_detalle_documento`
-  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `tdocumento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tsolicitud_detalle_documento_ibfk_2` FOREIGN KEY (`id_documento`) REFERENCES `tdocumento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tsolicitud_detalle_unidad_produccion`
 --
 ALTER TABLE `tsolicitud_detalle_unidad_produccion`
-  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_2` FOREIGN KEY (`id_unidad_produccion`) REFERENCES `tunidad_produccion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_1` FOREIGN KEY (`nro_solicitud`) REFERENCES `tsolicitud` (`nro_solicitud`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tsolicitud_detalle_unidad_produccion_ibfk_2` FOREIGN KEY (`id_unidad_produccion`) REFERENCES `tunidad_produccion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tunidad_produccion`
