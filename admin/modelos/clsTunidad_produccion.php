@@ -147,6 +147,94 @@ public function traer_codigo_unidadproduccion(){
 	return $this->arreglo();
 }
 
+public function getUPforName(){
+	$this->ejecutar("select id AS id_unidad_produccion from tunidad_produccion WHERE nombre = '$this->acNombre'");
+	if($row = $this->arreglo()){
+		$arr[] = $row;
+	}
+
+	return $arr;
+}
+
+public function insertar_vegetal($id_unidad_produccion,$id_ciclo,$ano,$id_rubro,$superficie,$superifice_de_cosecha,$rendimiento,$produccion,$id_fuente_agua,$id_metodo_riego,$superficiebajoriego,$superficieregada,$tipoambiente){
+
+	$this->ejecutar("insert into 
+				tproduccion_vegetal (id_unidad_produccion,id_ciclo,ano,id_rubro,superficie,superifice_de_cosecha,rendimiento,produccion,id_fuente_agua,id_metodo_riego,superficiebajoriego,superficieregada,tipoambiente) 
+				values ($id_unidad_produccion,$id_ciclo,'$ano',$id_rubro,$superficie,$superifice_de_cosecha,$rendimiento,$produccion,$id_fuente_agua,$id_metodo_riego,$superficiebajoriego,$superficieregada,$tipoambiente)");
+}
+
+public function insertar_pecuaria($id_unidad_produccion,$id_sistema_produccion,$id_rubro,$nc_machos,$nc_hermbras,$tipo_ordeneo,$mod_ordeneo,$cant_animal_en_ordeneo,$cant_leche_alddia,$nc_beneficio){
+
+	$this->ejecutar("insert into tproduccion_pecuaria (id_unidad_produccion,id_sistema_produccion,id_rubro,nc_machos,nc_hermbras,tipo_ordeneo,mod_ordeneo,cant_animal_en_ordeneo,cant_leche_alddia,nc_beneficio)
+		values ($id_unidad_produccion,$id_sistema_produccion,$id_rubro,$nc_machos,$nc_hermbras,$tipo_ordeneo,$mod_ordeneo,$cant_animal_en_ordeneo,$cant_leche_alddia,$nc_beneficio)");
+}
+
+public function insertar_porcino_cunicula($id_unidad_produccion,$id_rubro,$cantidad){
+	$this->ejecutar("insert into tproduccion_porcino_cunicula 
+		(id_unidad_produccion,id_rubro,cantidad) VALUES ($id_unidad_produccion,$id_rubro,$cantidad)");
+}
+
+public function insertar_avicola($id_unidad_produccion,$id_rubro,$id_especie_ave,$total_aves_produccion,$produccion_mensual,$id_unidad_medida){
+
+   $this->ejecutar("insert into tproduccion_avicola (id_unidad_produccion,id_rubro,id_especie_ave,total_aves_produccion,produccion_mensual,id_unidad_medida)
+   	values ($id_unidad_produccion,$id_rubro,$id_especie_ave,$total_aves_produccion,$produccion_mensual,$id_unidad_medida)");
+}
+
+public function getDataVegetal(){
+	$this->ejecutar("select 
+					tpv.id_ciclo,
+					tc.nombre as ciclo,
+					tpv.ano,
+					tpv.id_rubro,
+					tr.nombre as rubro,
+					tpv.superficie,
+					tpv.superifice_de_cosecha,
+					tpv.rendimiento,
+					tpv.produccion,
+					tpv.id_fuente_agua,
+					tfa.nombre as fuente_agua,
+					tpv.id_metodo_riego,
+					tmr.nombre as metodo_riego,
+					tpv.superficiebajoriego,
+					tpv.superficieregada,
+					tpv.tipoambiente,
+					(case when tpv.tipoambiente = 1 then 'Casa de Cultivo'
+					    when tpv.tipoambiente = 2 then 'Cielo Abierto'
+					 end) AS tipoambientedes
+					from tproduccion_vegetal as tpv
+					inner join tciclo as tc on (tc.id = tpv.id_ciclo)
+					inner join trubro as tr on (tr.id = tpv.id_rubro)
+					inner join tfuente_agua as tfa on (tfa.id = tpv.id_fuente_agua)
+					inner join tmetodo_riego as tmr on (tmr.id = tpv.id_metodo_riego)
+					where tpv.id_unidad_produccion = $this->acId");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+
+  		$cad .= "<tbody>";
+	  		$cad .= "<tr>";
+	  			$cad .= "<td>".$row['ano']."<input type='hidden' name='anos[]' value='".$row['ano']."'/></td>";
+	  			$cad .= "<td>".$row['ciclo']."<input type='hidden' name='ciclos[]' value='".$row['id_ciclo']."'/>";
+	  			$cad .= "<td>".$row['rubro']."<input type='hidden' name='rubros[]' value='".$row['id_rubro']."'/></td>";
+	  			$cad .= "<td>".$row['superficie']."<input type='hidden' name='superficies[]' value='".$row['superficie']."'/></td>";
+	  			$cad .= "<td>".$row['superficie_cosecha']."<input type='hidden' name='superficie_cosechas[]' value='".$row['superficie_cosecha']."'/></td>";
+	  			$cad .= "<td>".$row['rendimiento']."<input type='hidden' name='rendimientos[]' value='".$row['rendimiento']."'/></td>";
+	  		$cad .= "</tr>";
+
+	  		$cad .= "<tr>";
+	  			$cad .= "<td>".$row['produccion']."<input type='hidden' name='producciones[]' value='".$row['produccion']."'/></td>";
+	  			$cad .= "<td>".$row['fuente_agua']."<input type='hidden' name='fuente_aguas[]' value='".$row['id_fuente_agua']."'/></td>";
+	  			$cad .= "<td>".$row['metodo_riego']."<input type='hidden' name='metodo_riegos[]' value='".$row['id_metodo_riego']."'1/></td>";
+	  			$cad .= "<td>".$row['superficiebajoriego']."<input type='hidden' name='sbajoriegos[]' value='".$row['superficiebajoriego']."'/></td>";
+	  			$cad .= "<td>".$row['superficieregada']."<input type='hidden' name='sregadas[]' value='".$row['superficieregada']."'/></td>";
+	  			$cad .= "<td>".$row['tipoambientedes']."<input type='hidden' name='tipo_ambientes[]' value='".$row['tipoambiente']."'/><button type='button' onclick='delete_detail(this)'>X</button></td>";
+	  		$cad .= "</tr>";
+	  	$cad .= "</tbody>";
+	}
+
+	return $cad;
+}
 
 
 //fin clase
