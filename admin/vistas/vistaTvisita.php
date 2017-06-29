@@ -44,6 +44,12 @@ function cargar()
 		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTaplicarvisita.php'");
 	}
 
+	if(operacion == 'buscar' && desde == 'analista'){
+		$(".btn-incluir, .btn-buscar, .btn-modificar, .btn-eliminar, .btn-guardar").hide();
+
+		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTlistaanalisis.php'");
+	}
+
 
 
 	mensajes(operacion,listo);

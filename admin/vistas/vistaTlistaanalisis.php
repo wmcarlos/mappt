@@ -6,7 +6,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-	$id = 'no';
+$id = 'no';
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -27,12 +27,22 @@ function cargar()
 
 	<?php 
 
-		if($_GET['aplicado'] == "si"){
-			print "alert('Visita Aplicada con Exito!!!');";
+		if($_GET['aprobado'] == "si"){
+			print "alert('Registro Aprobado con Exito!!!');";
+		}else if ($_GET['aprobado'] == "no"){
+			print "alert('Registro Desaprobado con Exito!!!');";
 		}
 
 	?>
 
+}
+
+function verificar(event){
+	if(confirm("Estas seguro de Realizar este Proceso")){
+		
+	}else{
+		event.preventDefault();
+	}
 }
 </script>
 </head>
@@ -41,8 +51,6 @@ function cargar()
 <?php @include('antes_form.php'); ?>
 
 <div id='mensajes_sistema'></div><br />
-<center>Todos los campos con <span class='rojo'>*</span> son Obligatorios</center>
-</br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame' style="width: 97%;">
 	<h1>Lista de Solicitudes</h1>
@@ -59,7 +67,7 @@ function cargar()
 			<td>Estatus</td>
 			<td>-</td>
 		</tr>
-		<?php print $solicitudesTecnico; ?>
+		<?php print $solicitudesAnalistas; ?>
 	</table>
 </div>
 

@@ -100,6 +100,11 @@ public function modificar_desde_tecnico()
 
 return $this->ejecutar("update tvisita set estatus = 2, comentario = '$this->acComentario' where(id = '$this->acId')");
 }
+
+public function modificar_desde_analista($st)
+{
+	return $this->ejecutar("update tvisita set estatus = $st where(id = '$this->acId')");
+}
  
  
 //funcion eliminar        

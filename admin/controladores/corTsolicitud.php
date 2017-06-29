@@ -31,6 +31,8 @@ $solicitudes = $lobjTsolicitud->getSolicitudes();
 
 $solicitudesTecnico = $lobjTsolicitud->getSolicitudesTecnico($_SESSION['codigo']);
 
+$solicitudesAnalistas = $lobjTsolicitud->getSolicitudesAnalista();
+
 
 switch($lcOperacion){
 

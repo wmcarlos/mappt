@@ -284,7 +284,7 @@ return $this->ejecutar("delete from tsolicitud where(nro_solicitud = '$this->acN
 }
 
 public function getSolicitudes(){
-	$this->ejecutar("select * from v_solicitud order by fecha_recepcion DESC");
+	$this->ejecutar("select * from v_solicitud group by nro_solicitud order by fecha_recepcion DESC");
 
 	$cad = "";
 
@@ -310,7 +310,7 @@ public function getSolicitudes(){
 }
 
 public function getSolicitudesTecnico($id_tecnico){
-	$this->ejecutar("select * from v_solicitud WHERE id_tecnico = $id_tecnico and estatus = 'Asignada' order by fecha_recepcion DESC");
+	$this->ejecutar("select * from v_solicitud WHERE id_tecnico = $id_tecnico and estatus = 'Asignada' group by nro_solicitud order by fecha_recepcion DESC");
 
 	$cad = "";
 
@@ -326,6 +326,32 @@ public function getSolicitudesTecnico($id_tecnico){
 			$cad.="<td>".$row['estado']."</td>";
 			$cad.="<td>".$row['estatus']."</td>";
 			$cad.="<td><a href='vistaTvisita.php?txtoperacion=buscar&txtid=".$row['id_visita']."&desde=tecnico'>Ver</a></td>";
+		$cad.="</tr>";
+	}
+	return $cad;
+}
+
+public function getSolicitudesAnalista(){
+	$this->ejecutar("select * from v_solicitud WHERE estatus = 'Realizada' group by nro_solicitud order by fecha_recepcion DESC");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row['nro_solicitud']."</td>";
+			$cad.="<td>".$row['cedula']."</td>";
+			$cad.="<td>".$row['productor']."</td>";
+			$cad.="<td>".$row['unidad_produccion']."</td>";
+			$cad.="<td>".$row['sector']."</td>";
+			$cad.="<td>".$row['parroquia']."</td>";
+			$cad.="<td>".$row['municipio']."</td>";
+			$cad.="<td>".$row['estado']."</td>";
+			$cad.="<td>".$row['estatus']."</td>";
+			$cad.="<td>
+					<a href='vistaTvisita.php?txtoperacion=buscar&txtid=".$row['id_visita']."&desde=analista'>Ver</a>
+					<a href='vistaTvisita.php?txtoperacion=aprobar&txtid=".$row['id_visita']."&desde=analista' onclick='verificar(event)'>Aprobar</a>
+					<a href='vistaTvisita.php?txtoperacion=desaprobar&txtid=".$row['id_visita']."&desde=analista' onclick='verificar(event)'>Rechazar</a>
+				  </td>";
 		$cad.="</tr>";
 	}
 	return $cad;

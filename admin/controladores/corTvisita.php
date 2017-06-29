@@ -25,8 +25,6 @@ switch($lcOperacion){
 			$lobjTvisita->incluir();
 			if($desde == 'coordinador'){
 				print "<script> location.href='vistaTasignacion.php?asignado=si'; </script>";
-			}else if ($desde == 'tecnico'){
-				print "<script> location.href='vistaTaplicarvisita.php?aplicado=si'; </script>";
 			}
 			
 		}
@@ -58,15 +56,16 @@ switch($lcOperacion){
 			print "<script> location.href='vistaTaplicarvisita.php?modificado=si'; </script>";
 		}
 	break;
-	
-	case "eliminar":
-	
-		if($lobjTvisita->eliminar()>=1){   
-		$lcListo = 1;	
-		}else{
-		$lcListo = 0;
-		}
-		
+
+
+	case 'aprobar':
+			$lobjTvisita->modificar_desde_analista(3);
+			print "<script> location.href='vistaTlistaanalisis.php?aprobado=si'; </script>";
+	break;
+
+	case 'desaprobar':
+			$lobjTvisita->modificar_desde_analista(1);
+			print "<script> location.href='vistaTlistaanalisis.php?aprobado=no'; </script>";
 	break;
 }
 
