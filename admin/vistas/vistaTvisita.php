@@ -20,6 +20,32 @@ function cargar()
 {
 	var operacion = '<?php print($operacion);?>';
 	var listo = '<?php print($listo);?>';
+	var desde = '<?php print ($_GET['desde']); ?>';
+
+	if(operacion == "Nuevo" && desde == "coordinador"){
+		Incluir('no');
+
+		$(".btn-incluir, .btn-buscar, .btn-modificar, .btn-eliminar").hide();
+
+		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTasignacion.php'");
+	}
+
+	if(operacion == 'buscar' && desde == 'coordinador'){
+		Modificar();
+		$(".btn-incluir, .btn-buscar, .btn-modificar, .btn-eliminar").hide();
+
+		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTasignacion.php'");
+	}
+
+	if(operacion == 'buscar' && desde == 'tecnico'){
+		Modificar();
+		$(".btn-incluir, .btn-buscar, .btn-modificar, .btn-eliminar").hide();
+
+		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTaplicarvisita.php'");
+	}
+
+
+
 	mensajes(operacion,listo);
 	cargar_select(operacion,listo);
 }
@@ -39,7 +65,7 @@ function cargar()
 </br>
 <form name='form1' id='form1' autocomplete='off' method='post'/>
 <div class='cont_frame'>
-<h1>Visita</h1>
+<h1>Programar Visita</h1>
 <table border='1' class='datos' align='center'>
 <tr style='display:none;'>
 <td align='right'><span class='rojo'>*</span> id:</td>
@@ -47,21 +73,30 @@ function cargar()
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Solicitud:</td>
-<td><select name='txtid_solicitud' disabled='disabled' id='txtid_solicitud' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td>
+<select name='txtid_solicitud' disabled='disabled' id='txtid_solicitud' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("v_solicitud","nro_solicitud","concat(nro_solicitud,' - ',productor,' - ',unidad_produccion)",$lcId_solicitud); ?>
+</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Tecnico:</td>
-<td><select name='txtid_tecnico' disabled='disabled' id='txtid_tecnico' class='validate[required]'><option value=''>Seleccione</option></select></td>
+<td><select name='txtid_tecnico' disabled='disabled' id='txtid_tecnico' class='validate[required]'>
+<option value=''>Seleccione</option>
+<?php print $objFunciones->crear_combo("tusuario","id_usuario","nombre_completo",$lcId_tecnico); ?>
+</select></td>
 </tr>
 <tr>
 <td align='right'><span class='rojo'>*</span> Fecha:</td>
 <td><input type='text' disabled='disabled' name='txtfecha' value='<?php print($lcFecha);?>' id='txtfecha' class='validate[required] fecha_formateada'/></td>
 </tr>
+<?php if($_GET['desde'] != "coordinador"){ ?>
 <tr>
 <td align='right'><span class='rojo'>*</span> Comentario:</td>
 <td><textarea name='txtcomentario' maxlength='' disabled='disabled' id='txtcomentario' class='validate[required]'><?php print($lcComentario);?></textarea></td>
 </tr>
-
+<?php } ?>
+<input type='hidden' name='txtdesde' value='<?php print $_GET['desde']; ?>'>
 <input type='hidden' name='txtoperacion' value='des'>
 <input type='hidden' name='txtvar_tem' value='<?php print($lcId); ?>'>
 </table>

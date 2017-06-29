@@ -10,6 +10,9 @@ $lobjTvisita->acComentario=$_POST['txtcomentario'];
 $lcVarTem = $_POST["txtvar_tem"];
 $lcOperacion=$_REQUEST["txtoperacion"];
 
+$lcId_solicitud = $_GET["txtid_solicitud"];
+
+$desde = $_POST['txtdesde'];
 
 switch($lcOperacion){
 
@@ -19,7 +22,13 @@ switch($lcOperacion){
 			$lcListo = 0;
 		}else{
 			$lcListo = 1;
-			$lobjTvisita->incluir();  
+			$lobjTvisita->incluir();
+			if($desde == 'coordinador'){
+				print "<script> location.href='vistaTasignacion.php?asignado=si'; </script>";
+			}else if ($desde == 'tecnico'){
+				print "<script> location.href='vistaTaplicarvisita.php?aplicado=si'; </script>";
+			}
+			
 		}
 	
 	break;
@@ -28,10 +37,10 @@ switch($lcOperacion){
 	
 		if($lobjTvisita->buscar()){
 			$lcId=$lobjTvisita->acId;
-$lcId_solicitud=$lobjTvisita->acId_solicitud;
-$lcId_tecnico=$lobjTvisita->acId_tecnico;
-$lcFecha=$lobjTvisita->acFecha;
-$lcComentario=$lobjTvisita->acComentario; 
+			$lcId_solicitud=$lobjTvisita->acId_solicitud;
+			$lcId_tecnico=$lobjTvisita->acId_tecnico;
+			$lcFecha=$lobjTvisita->acFecha;
+			$lcComentario=$lobjTvisita->acComentario; 
 			$lcListo = 1;
 		}else{
 			$lcListo = 0;
@@ -40,13 +49,14 @@ $lcComentario=$lobjTvisita->acComentario;
 	break;
 	
 	case "modificar":
-	
-		if($lobjTvisita->modificar($lcVarTem)>=1){
-		$lcListo = 1;
-		}else{
-		$lcListo = 0;
+
+		if($desde == 'coordinador'){
+			$lobjTvisita->modificar($lcVarTem);
+			print "<script> location.href='vistaTasignacion.php?modificado=si'; </script>";
+		}else if ($desde == 'tecnico'){
+			$lobjTvisita->modificar_desde_tecnico();
+			print "<script> location.href='vistaTaplicarvisita.php?modificado=si'; </script>";
 		}
-	
 	break;
 	
 	case "eliminar":

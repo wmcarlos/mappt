@@ -24,7 +24,12 @@ $lcId_funcionario_receptor = $_SESSION['codigo'];
 $productores = $lobjTsolicitud->getProductores();
 
 $lcFecha_recepcion = date("d-m-Y");
+
 $lcNro_solicitud = $objFunciones->ultimo_id_plus1("tsolicitud","nro_solicitud");
+
+$solicitudes = $lobjTsolicitud->getSolicitudes();
+
+$solicitudesTecnico = $lobjTsolicitud->getSolicitudesTecnico($_SESSION['codigo']);
 
 
 switch($lcOperacion){

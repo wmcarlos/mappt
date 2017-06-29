@@ -27,7 +27,7 @@ public function __destruct() { }
 public function buscar()
 {
 $llEnc=false;
-$this->ejecutar("select * from tvisita where(id = '$this->acId')");
+$this->ejecutar("select id, id_solicitud, id_tecnico, date_format(fecha, '%d/%m/%Y') as fecha, comentario from tvisita where(id = '$this->acId')");
 if($laRow=$this->arreglo())
 {		
 $this->acId=$laRow['id'];
@@ -55,20 +55,20 @@ $inicio = "</br>
 		   <table class='tabla_datos_busqueda datos'>
            <tr>
 			   <td style='font-weight:bold; font-size:20px;'>id</td>
-<td style='font-weight:bold; font-size:20px;'>id_solicitud</td>
-<td style='font-weight:bold; font-size:20px;'>id_tecnico</td>
-<td style='font-weight:bold; font-size:20px;'>fecha</td>
-<td style='font-weight:bold; font-size:20px;'>comentario</td>
+				<td style='font-weight:bold; font-size:20px;'>id_solicitud</td>
+				<td style='font-weight:bold; font-size:20px;'>id_tecnico</td>
+				<td style='font-weight:bold; font-size:20px;'>fecha</td>
+				<td style='font-weight:bold; font-size:20px;'>comentario</td>
 			   <td style='font-weight:bold; font-size:20px;'>Accion</td>
 		  </tr>";
 		  
 $final = "</table>";
 $llEnc=$llEnc."<tr>
 					<td>".$this->acId."</td>
-<td>".$this->acId_solicitud."</td>
-<td>".$this->acId_tecnico."</td>
-<td>".$this->acFecha."</td>
-<td>".$this->acComentario."</td>
+					<td>".$this->acId_solicitud."</td>
+					<td>".$this->acId_tecnico."</td>
+					<td>".$this->acFecha."</td>
+					<td>".$this->acComentario."</td>
 					<td><a href='?txtid=".$laRow['id']."&txtoperacion=buscar'>Seleccione</a></td>
 				</tr>";
 }
@@ -78,6 +78,9 @@ return $inicio.$llEnc.$final;
 //funcion inlcuir
 public function incluir()
 {
+ $expl = explode("/", $this->acFecha);
+ $this->acFecha = $expl[2]."/".$expl[1]."/".$expl[0];
+
 return $this->ejecutar("insert into tvisita(id,id_solicitud,id_tecnico,fecha,comentario)values('$this->acId','$this->acId_solicitud','$this->acId_tecnico','$this->acFecha','$this->acComentario')");
 }
         
@@ -86,7 +89,16 @@ return $this->ejecutar("insert into tvisita(id,id_solicitud,id_tecnico,fecha,com
 //funcion modificar
 public function modificar($lcVarTem)
 {
+$expl = explode("/", $this->acFecha);
+ $this->acFecha = $expl[2]."/".$expl[1]."/".$expl[0];
+
 return $this->ejecutar("update tvisita set id = '$this->acId', id_solicitud = '$this->acId_solicitud', id_tecnico = '$this->acId_tecnico', fecha = '$this->acFecha', comentario = '$this->acComentario' where(id = '$this->acId')");
+}
+
+public function modificar_desde_tecnico()
+{
+
+return $this->ejecutar("update tvisita set estatus = 2, comentario = '$this->acComentario' where(id = '$this->acId')");
 }
  
  
