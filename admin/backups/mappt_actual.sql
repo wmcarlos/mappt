@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2017 a las 20:42:57
+-- Tiempo de generación: 04-07-2017 a las 18:55:14
 -- Versión del servidor: 10.1.21-MariaDB
 -- Versión de PHP: 5.6.30
 
@@ -272,7 +272,8 @@ INSERT INTO `tmodulo` (`id_modulo`, `nombre`, `estatus`, `posicion`, `icono`, `u
 (7, 'SEGURIDAD', 1, 5, '', ''),
 (8, 'LOCALIZACION', 0, 2, '', ''),
 (9, 'MAESTROS', 0, 3, '', ''),
-(10, 'TRANSACCION', 0, 5, '', '');
+(10, 'TRANSACCION', 0, 5, '', ''),
+(11, 'REPORTES', 0, 15, '', '');
 
 -- --------------------------------------------------------
 
@@ -555,34 +556,40 @@ CREATE TABLE `trol_servicio` (
 
 INSERT INTO `trol_servicio` (`id_rol_servicio`, `id_rol`, `id_servicio`, `estatus`) VALUES
 (105, 4, 28, 0),
-(106, 3, 3, 0),
-(107, 3, 9, 0),
-(108, 3, 1, 0),
-(109, 3, 23, 0),
-(110, 3, 5, 0),
-(111, 3, 6, 0),
-(112, 3, 4, 0),
-(113, 3, 10, 0),
-(114, 3, 2, 0),
-(115, 3, 11, 0),
-(116, 3, 7, 0),
-(117, 3, 8, 0),
-(118, 3, 12, 0),
-(119, 3, 13, 0),
-(120, 3, 14, 0),
-(121, 3, 15, 0),
-(122, 3, 16, 0),
-(123, 3, 17, 0),
-(124, 3, 18, 0),
-(125, 3, 19, 0),
-(126, 3, 20, 0),
-(127, 3, 21, 0),
-(128, 3, 22, 0),
 (129, 5, 27, 0),
 (130, 6, 23, 0),
 (131, 6, 16, 0),
 (132, 6, 22, 0),
-(133, 7, 29, 0);
+(155, 3, 30, 0),
+(156, 3, 3, 0),
+(157, 3, 9, 0),
+(158, 3, 1, 0),
+(159, 3, 23, 0),
+(160, 3, 5, 0),
+(161, 3, 6, 0),
+(162, 3, 31, 0),
+(163, 3, 4, 0),
+(164, 3, 10, 0),
+(165, 3, 2, 0),
+(166, 3, 11, 0),
+(167, 3, 7, 0),
+(168, 3, 32, 0),
+(169, 3, 8, 0),
+(170, 3, 33, 0),
+(171, 3, 12, 0),
+(172, 3, 13, 0),
+(173, 3, 15, 0),
+(174, 3, 16, 0),
+(175, 3, 17, 0),
+(176, 3, 18, 0),
+(177, 3, 20, 0),
+(178, 3, 21, 0),
+(179, 3, 22, 0),
+(180, 7, 30, 0),
+(181, 7, 31, 0),
+(182, 7, 32, 0),
+(183, 7, 33, 0),
+(184, 7, 29, 0);
 
 -- --------------------------------------------------------
 
@@ -670,7 +677,11 @@ INSERT INTO `tservicio` (`id_servicio`, `id_modulo`, `nombre`, `url`, `estatus`,
 (23, 10, 'SOLICITUD', 'vistatsolicitud.php', 0, 1, ''),
 (27, 10, 'ASIGNAR VISITA', 'vistaTasignacion.php', 0, 2, ''),
 (28, 10, 'APLICAR VISITA', 'vistaTaplicarvisita.php', 0, 3, ''),
-(29, 10, 'ANALISTA', 'vistaTlistaanalisis.php', 0, 7, '');
+(29, 10, 'ANALISTA', 'vistaTlistaanalisis.php', 0, 7, ''),
+(30, 11, 'HISTORICO SOLICITUD POR PRODUC', 'parametros_reporte_historico_solicitudes.php', 0, 1, ''),
+(31, 11, 'SOLICITUDES POR ESTATUS', 'parametros_reporte_solicitudes_por_estatus.php', 0, 2, ''),
+(32, 11, 'SOLICITUDES POR TECNICO', 'parametros_reporte_solicitudes_tecnico.php', 0, 3, ''),
+(33, 11, 'SOLICITUDES POR VISITAS DE TEC', 'parametros_reporte_solicitudes_visita.php', 0, 4, '');
 
 -- --------------------------------------------------------
 
@@ -708,6 +719,14 @@ CREATE TABLE `tsolicitud` (
   `estatus_solicitud` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `tsolicitud`
+--
+
+INSERT INTO `tsolicitud` (`nro_solicitud`, `fecha_recepcion`, `cedula_rif_productor`, `id_funcionario_receptor`, `tipo_tramite`, `estatus_solicitud`) VALUES
+(1, '2017-07-04', '19902881', 6, 1, 0),
+(2, '2017-07-04', '19455541', 6, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -720,6 +739,28 @@ CREATE TABLE `tsolicitud_detalle_documento` (
   `id_documento` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
+--
+-- Volcado de datos para la tabla `tsolicitud_detalle_documento`
+--
+
+INSERT INTO `tsolicitud_detalle_documento` (`id`, `nro_solicitud`, `id_documento`) VALUES
+(100, 1, 7),
+(101, 1, 8),
+(102, 1, 6),
+(103, 1, 4),
+(104, 1, 2),
+(105, 1, 3),
+(106, 1, 1),
+(107, 1, 5),
+(108, 2, 7),
+(109, 2, 8),
+(110, 2, 6),
+(111, 2, 4),
+(112, 2, 2),
+(113, 2, 3),
+(114, 2, 1),
+(115, 2, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -731,6 +772,14 @@ CREATE TABLE `tsolicitud_detalle_unidad_produccion` (
   `nro_solicitud` int(11) NOT NULL,
   `id_unidad_produccion` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tsolicitud_detalle_unidad_produccion`
+--
+
+INSERT INTO `tsolicitud_detalle_unidad_produccion` (`id`, `nro_solicitud`, `id_unidad_produccion`) VALUES
+(26, 1, 3),
+(27, 2, 5);
 
 -- --------------------------------------------------------
 
@@ -805,7 +854,7 @@ INSERT INTO `tunidad_produccion` (`id`, `ced_rif_productor`, `nombre`, `id_secto
 (1, '20467294', 'LOS MALAVARES', 1, 'URB PRADOS DEL SOL', 125, 458, 12325, 12545, 21254, 1),
 (2, '20467294', 'ALGARABAN', 1, 'LOS PALMARES', 456, 456, 4566, 456, 4656, 1),
 (3, '19902881', 'NAPOLES', 1, 'NAPOLES', 254, 1245, 1500, 1200, 1100, 1),
-(5, NULL, 'TYTY', 1, 'YHYY', 1, 1, 1, 1, 1, 1);
+(5, '19455541', 'ARAGUANEY', 1, 'YHYY', 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -832,7 +881,7 @@ CREATE TABLE `tusuario` (
 --
 
 INSERT INTO `tusuario` (`nombre_usu`, `clave`, `tipo`, `pregunta`, `respuesta`, `intentos`, `estatus`, `nombre_completo`, `correo`, `id_usuario`, `id_oficina`) VALUES
-('WMCARLOS', 'CARLOS19455541', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'ADMINISTRADOR', 'ADMINISTRADOR@EMPRESA.COM', 1, 1),
+('ADMINISTRADOR', '12345', 3, 'NOMBRE DE MI PRIMERA MASCOTA', 'MANCHITA', 0, '1', 'ADMINISTRADOR', 'ADMINISTRADOR@EMPRESA.COM', 1, 1),
 ('COORDINADOR1', '12345', 5, 'COLOR', 'AZUL', 0, '1', 'COORDINADOR 1', 'COORDINADOR1@GMAIL.COM', 3, 1),
 ('TECNICO1', '12345', 4, 'COLOR', 'VERDE', 0, '1', 'TECNICO 1', 'TECNICO1@GMAIL.COM', 4, 1),
 ('TECNICO2', '12345', 4, 'COLOR', 'ROSA', 0, '1', 'TECNICO 2', 'TECNICO2@GMAIL.COM', 5, 1),
@@ -853,6 +902,13 @@ CREATE TABLE `tvisita` (
   `comentario` text COLLATE utf8_spanish2_ci NOT NULL,
   `estatus` int(11) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tvisita`
+--
+
+INSERT INTO `tvisita` (`id`, `id_solicitud`, `id_tecnico`, `fecha`, `comentario`, `estatus`) VALUES
+(9, 1, 4, '2017-07-05', 'TODO BIEN', 2);
 
 -- --------------------------------------------------------
 
@@ -1215,7 +1271,7 @@ ALTER TABLE `tespecie_ave`
 -- AUTO_INCREMENT de la tabla `testado`
 --
 ALTER TABLE `testado`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT de la tabla `tfuente_agua`
 --
@@ -1295,7 +1351,7 @@ ALTER TABLE `trol`
 -- AUTO_INCREMENT de la tabla `trol_servicio`
 --
 ALTER TABLE `trol_servicio`
-  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id_rol_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
 --
 -- AUTO_INCREMENT de la tabla `trubro`
 --
@@ -1310,7 +1366,7 @@ ALTER TABLE `tsector`
 -- AUTO_INCREMENT de la tabla `tservicio`
 --
 ALTER TABLE `tservicio`
-  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_servicio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT de la tabla `tsistema_produccion`
 --
@@ -1320,12 +1376,12 @@ ALTER TABLE `tsistema_produccion`
 -- AUTO_INCREMENT de la tabla `tsolicitud_detalle_documento`
 --
 ALTER TABLE `tsolicitud_detalle_documento`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 --
 -- AUTO_INCREMENT de la tabla `tsolicitud_detalle_unidad_produccion`
 --
 ALTER TABLE `tsolicitud_detalle_unidad_produccion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT de la tabla `ttipo_pesca`
 --
@@ -1355,7 +1411,7 @@ ALTER TABLE `tusuario`
 -- AUTO_INCREMENT de la tabla `tvisita`
 --
 ALTER TABLE `tvisita`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Restricciones para tablas volcadas
 --

@@ -47,5 +47,3 @@ reportes
 
 9-* en la maestra de ciclo debe colocarse el detalle de los rubros por ciclo,
 de tal forma que en la solicitud al selecionar el ciclo se llene el combo rubro (Esta Repetida)
-
- 
