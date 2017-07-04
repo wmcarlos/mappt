@@ -328,9 +328,10 @@ if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 -->
 <?php @include('despues_form.php'); ?>
   <script>
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
+  $(document).ready(function(){
+  	 $( "#tabs" ).tabs();
+  });
+   	
 
   function add_vegetal(){
 

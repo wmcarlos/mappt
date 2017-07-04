@@ -4,7 +4,6 @@ class clsFunciones extends clsDatos{
 public $librerias_generales = '<link href="css/form_detalle.css" rel="stylesheet" type="text/css" />
 			<link href="css/validationEngine.jquery.css" rel="stylesheet" type="text/css" />
 			<link rel="stylesheet" href="plugins/jqueryui/jquery-ui.min.css">
-			<link rel="stylesheet" href="plugins/al_transaccion/estilo.css">
 			<!--Css-->
 			<script src="js/jquery.js"></script>
 			<script src="js/jquery.validationEngine-es.js"></script>
@@ -27,10 +26,7 @@ public $librerias_generales = '<link href="css/form_detalle.css" rel="stylesheet
 			<script src="js/mensajes.js"></script>
 			<script src="js/centro.js"></script>
 			<script src="js/validacionGeneral.js"></script>
-			 <script src="plugins/al_transaccion/al_transaccion.js"></script>
-
-			<!--JS-->
-			';
+			<!--JS-->';
 
 public $cuadro_busqueda = '<div id="mascara"></div><div id="contenedor_resultados_busqueda"><form method="post" name="form2"><table class="datos" width="100%"><tr><th colspan="2">Busqueda<input type="button" title="Cerrar Ventana" style="float:right; padding:5px; font-size:14px;" salir="" class="cerrar_resultados" name="btn_cerrar" value="X" /></th></tr><tr><td colspan="2" align="center"><input type="text" class="txtbuscador" style="padding:5px;" placeholder="Ingresa una palabra Clave Para Tu Busqueda" style="height:20px; padding:5px;" name="txtbuscador" id="txtbuscador_tabla" size="50" /></td></tr></table><div class="datos_busqueda"></div></form></div>';
 
