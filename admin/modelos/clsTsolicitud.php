@@ -357,5 +357,92 @@ public function getSolicitudesAnalista(){
 	return $cad;
 }
 
+public function getReportHistorico($cedula){
+	$this->ejecutar("select * from v_solicitud WHERE cedula = '$cedula'");
+	$cad = "";
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row['nro_solicitud']."</td>";
+			$cad.="<td>".$row['cedula']."</td>";
+			$cad.="<td>".$row['productor']."</td>";
+			$cad.="<td>".$row['unidad_produccion']."</td>";
+			$cad.="<td>".$row['estado']."</td>";
+			$cad.="<td>".$row['municipio']."</td>";
+			$cad.="<td>".$row['parroquia']."</td>";
+			$cad.="<td>".$row['sector']."</td>";
+		$cad.="</tr>";
+	}
+
+	return $cad;
+}
+
+public function getReportTecnico($id_tecnico){
+	$this->ejecutar("select * from v_solicitud WHERE id_tecnico = $id_tecnico");
+	$cad = "";
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row['nro_solicitud']."</td>";
+			$cad.="<td>".$row['cedula']."</td>";
+			$cad.="<td>".$row['productor']."</td>";
+			$cad.="<td>".$row['unidad_produccion']."</td>";
+			$cad.="<td>".$row['estado']."</td>";
+			$cad.="<td>".$row['municipio']."</td>";
+			$cad.="<td>".$row['parroquia']."</td>";
+			$cad.="<td>".$row['sector']."</td>";
+		$cad.="</tr>";
+	}
+
+	return $cad;
+}
+
+public function getReportEstatus($estatus){
+	$this->ejecutar("select 
+					v_solicitud.*,
+					COALESCE(tu.nombre_completo,' ') AS tecnico
+					from v_solicitud
+					left join tusuario as tu on (tu.id_usuario = id_tecnico)
+					WHERE v_solicitud.estatus = '$estatus'");
+
+	$cad = "";
+
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row['nro_solicitud']."</td>";
+			$cad.="<td>".$row['cedula']."</td>";
+			$cad.="<td>".$row['productor']."</td>";
+			$cad.="<td>".$row['unidad_produccion']."</td>";
+			$cad.="<td>".$row['estado']."</td>";
+			$cad.="<td>".$row['municipio']."</td>";
+			$cad.="<td>".$row['parroquia']."</td>";
+			$cad.="<td>".$row['sector']."</td>";
+			$cad.="<td>".$row['estatus']."</td>";
+			$cad.="<td>".$row['tecnico']."</td>";
+		$cad.="</tr>";
+	}
+
+	return $cad;
+}
+
+public function getReportVisita($id_tecnico){
+
+	$this->ejecutar("select * from v_solicitud WHERE id_tecnico = $id_tecnico and estatus = 'Realizada'");
+
+	$cad = "";
+	while($row = $this->arreglo()){
+		$cad.="<tr>";
+			$cad.="<td>".$row['nro_solicitud']."</td>";
+			$cad.="<td>".$row['cedula']."</td>";
+			$cad.="<td>".$row['productor']."</td>";
+			$cad.="<td>".$row['unidad_produccion']."</td>";
+			$cad.="<td>".$row['estado']."</td>";
+			$cad.="<td>".$row['municipio']."</td>";
+			$cad.="<td>".$row['parroquia']."</td>";
+			$cad.="<td>".$row['sector']."</td>";
+		$cad.="</tr>";
+	}
+
+	return $cad;
+}
+
 //fin clase
 }?>

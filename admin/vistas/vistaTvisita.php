@@ -6,7 +6,7 @@ $operacion = $lcOperacion;
 $listo = $lcListo;
 if(($operacion!='buscar' && $listo!=1) || ($operacion!='buscar' && $listo==1))
 {
-$id = $objFunciones->ultimo_id_plus1('tvisita','id');
+	$id = $objFunciones->ultimo_id_plus1('tvisita','id');
 }
 ?>
 <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -50,8 +50,6 @@ function cargar()
 		$("input[name='btncancelar']").attr("onclick","javascript:location.href='vistaTlistaanalisis.php'");
 	}
 
-
-
 	mensajes(operacion,listo);
 	cargar_select(operacion,listo);
 }
@@ -89,7 +87,7 @@ function cargar()
 <td align='right'><span class='rojo'>*</span> Tecnico:</td>
 <td><select name='txtid_tecnico' disabled='disabled' id='txtid_tecnico' class='validate[required]'>
 <option value=''>Seleccione</option>
-<?php print $objFunciones->crear_combo("tusuario","id_usuario","nombre_completo",$lcId_tecnico); ?>
+<?php print $objFunciones->crear_combo("tusuario where tipo = 4","id_usuario","nombre_completo",$lcId_tecnico); ?>
 </select></td>
 </tr>
 <tr>
